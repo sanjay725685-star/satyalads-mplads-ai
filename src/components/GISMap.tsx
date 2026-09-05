@@ -6,11 +6,8 @@ import {
   ShieldAlert, 
   AlertTriangle, 
   CheckCircle2, 
-  Maximize2, 
   Satellite, 
-  ExternalLink,
-  Info,
-  Sliders,
+  ArrowUpRight,
   Filter
 } from 'lucide-react';
 import { Constituency, WorkItem } from '../types';
@@ -38,35 +35,70 @@ export const GISMap: React.FC<GISMapProps> = ({
   const [showCollisionBuffers, setShowCollisionBuffers] = useState(true);
   const [showScStZones, setShowScStZones] = useState(true);
   const [filterRisk, setFilterRisk] = useState<string>('ALL');
+  const [mapError, setMapError] = useState<string | null>(null);
 
   // Initialize Leaflet Map
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    // Clean up if already exists
+    // 1. Safely remove existing instance
     if (mapInstanceRef.current) {
-      mapInstanceRef.current.remove();
+      try {
+        mapInstanceRef.current.remove();
+      } catch (e) {
+        console.warn('Map removal warning:', e);
+      }
+      mapInstanceRef.current = null;
     }
 
-    const map = L.map(mapContainerRef.current, {
-      center: [constituency.centerLat, constituency.centerLng],
-      zoom: 12,
-      zoomControl: true,
-      attributionControl: false
-    });
+    // 2. CRUCIAL: Clear any lingering Leaflet ID on the DOM container to prevent "Map container is already initialized" crash
+    if ((mapContainerRef.current as any)._leaflet_id) {
+      (mapContainerRef.current as any)._leaflet_id = null;
+    }
 
-    // Dark CartoDB Tiles for high-tech look
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd',
-    }).addTo(map);
+    try {
+      const centerLat = constituency.centerLat || 25.3176;
+      const centerLng = constituency.centerLng || 82.9739;
 
-    markersLayerRef.current = L.layerGroup().addTo(map);
-    buffersLayerRef.current = L.layerGroup().addTo(map);
-    mapInstanceRef.current = map;
+      const map = L.map(mapContainerRef.current, {
+        center: [centerLat, centerLng],
+        zoom: 12,
+        zoomControl: true,
+        attributionControl: false
+      });
+
+      // Dark CartoDB Tiles
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd',
+      }).addTo(map);
+
+      markersLayerRef.current = L.layerGroup().addTo(map);
+      buffersLayerRef.current = L.layerGroup().addTo(map);
+      mapInstanceRef.current = map;
+
+      // Invalidate size after rendering to adjust container height/width
+      setTimeout(() => {
+        try {
+          map.invalidateSize();
+        } catch (e) {}
+      }, 250);
+
+    } catch (err: any) {
+      console.error('Leaflet Map Init Error:', err);
+      setMapError(err?.message || 'Failed to initialize GIS Map');
+    }
 
     return () => {
-      map.remove();
+      if (mapInstanceRef.current) {
+        try {
+          mapInstanceRef.current.remove();
+        } catch (e) {}
+        mapInstanceRef.current = null;
+      }
+      if (mapContainerRef.current && (mapContainerRef.current as any)._leaflet_id) {
+        (mapContainerRef.current as any)._leaflet_id = null;
+      }
     };
   }, [constituency.id]);
 
@@ -74,95 +106,100 @@ export const GISMap: React.FC<GISMapProps> = ({
   useEffect(() => {
     if (!mapInstanceRef.current || !markersLayerRef.current || !buffersLayerRef.current) return;
 
-    markersLayerRef.current.clearLayers();
-    buffersLayerRef.current.clearLayers();
+    try {
+      markersLayerRef.current.clearLayers();
+      buffersLayerRef.current.clearLayers();
 
-    const filtered = works.filter((w) => {
-      if (filterRisk === 'ALL') return true;
-      return w.riskLevel === filterRisk;
-    });
+      const filtered = works.filter((w) => {
+        if (filterRisk === 'ALL') return true;
+        return w.riskLevel === filterRisk;
+      });
 
-    filtered.forEach((work) => {
-      const isCritical = work.riskLevel === 'CRITICAL';
-      const isHigh = work.riskLevel === 'HIGH';
-      const isLow = work.riskLevel === 'LOW';
+      filtered.forEach((work) => {
+        if (typeof work.lat !== 'number' || typeof work.lng !== 'number') return;
 
-      const color = isCritical ? '#EF4444' : isHigh ? '#F97316' : '#10B981';
+        const isCritical = work.riskLevel === 'CRITICAL';
+        const isHigh = work.riskLevel === 'HIGH';
 
-      // Custom HTML Marker Pin
-      const customIcon = L.divIcon({
-        className: 'custom-map-pin',
-        html: `
-          <div style="
-            background: ${color};
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-weight: 800;
-            font-size: 11px;
-            font-family: monospace;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 14px ${color};
-            cursor: pointer;
-            transform: translate(-50%, -50%);
-          ">
-            ${work.wiriScore}
+        const color = isCritical ? '#EF4444' : isHigh ? '#F97316' : '#10B981';
+
+        // Custom HTML Marker Pin
+        const customIcon = L.divIcon({
+          className: 'custom-map-pin',
+          html: `
+            <div style="
+              background: ${color};
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #000;
+              font-weight: 800;
+              font-size: 11px;
+              font-family: monospace;
+              border: 2px solid #ffffff;
+              box-shadow: 0 0 14px ${color};
+              cursor: pointer;
+              transform: translate(-50%, -50%);
+            ">
+              ${work.wiriScore}
+            </div>
+          `,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+
+        const marker = L.marker([work.lat, work.lng], { icon: customIcon });
+
+        marker.on('click', () => {
+          onSelectWork(work);
+        });
+
+        marker.bindPopup(`
+          <div style="padding: 6px; font-family: sans-serif;">
+            <div style="font-size: 10px; color: #38BDF8; font-family: monospace; font-weight: bold;">${work.code}</div>
+            <div style="font-size: 13px; font-weight: bold; color: #fff; margin: 4px 0;">${work.title}</div>
+            <div style="font-size: 11px; color: #94A3B8;">Budget: <strong>₹${work.sanctionedAmountLakhs} L</strong> | WIRI: <strong style="color:${color}">${work.wiriScore}</strong></div>
+            <div style="font-size: 10px; color: #CBD5E1; margin-top: 4px;">IA: ${work.implementingAgency}</div>
           </div>
-        `,
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
+        `);
+
+        markersLayerRef.current?.addLayer(marker);
+
+        // Add 50m spatial collision buffer circle for double-dipping alert works
+        if (showCollisionBuffers && (isCritical || isHigh)) {
+          const circle = L.circle([work.lat, work.lng], {
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.15,
+            radius: 120, // visual buffer
+            weight: 1.5,
+            dashArray: '4, 6'
+          });
+          buffersLayerRef.current?.addLayer(circle);
+        }
+
+        // Add SC/ST Mandated Zone indicator
+        if (showScStZones && work.demographicZone !== 'GENERAL') {
+          const zoneCircle = L.circle([work.lat, work.lng], {
+            color: '#38BDF8',
+            fillColor: '#38BDF8',
+            fillOpacity: 0.08,
+            radius: 200,
+            weight: 1
+          });
+          buffersLayerRef.current?.addLayer(zoneCircle);
+        }
       });
 
-      const marker = L.marker([work.lat, work.lng], { icon: customIcon });
-
-      marker.on('click', () => {
-        onSelectWork(work);
-      });
-
-      marker.bindPopup(`
-        <div style="padding: 6px; font-family: sans-serif;">
-          <div style="font-size: 10px; color: #38BDF8; font-family: monospace; font-weight: bold;">${work.code}</div>
-          <div style="font-size: 13px; font-weight: bold; color: #fff; margin: 4px 0;">${work.title}</div>
-          <div style="font-size: 11px; color: #94A3B8;">Budget: <strong>₹${work.sanctionedAmountLakhs} L</strong> | WIRI: <strong style="color:${color}">${work.wiriScore}</strong></div>
-          <div style="font-size: 10px; color: #CBD5E1; margin-top: 4px;">IA: ${work.implementingAgency}</div>
-        </div>
-      `);
-
-      markersLayerRef.current?.addLayer(marker);
-
-      // Add 50m spatial collision buffer circle for double-dipping alert works
-      if (showCollisionBuffers && (isCritical || isHigh)) {
-        const circle = L.circle([work.lat, work.lng], {
-          color: color,
-          fillColor: color,
-          fillOpacity: 0.15,
-          radius: 120, // visual buffer
-          weight: 1.5,
-          dashArray: '4, 6'
-        });
-        buffersLayerRef.current?.addLayer(circle);
+      // Pan to selected work safely if valid
+      if (selectedWork && typeof selectedWork.lat === 'number' && typeof selectedWork.lng === 'number') {
+        mapInstanceRef.current.setView([selectedWork.lat, selectedWork.lng], 14, { animate: true });
       }
-
-      // Add SC/ST Mandated Zone indicator
-      if (showScStZones && work.demographicZone !== 'GENERAL') {
-        const zoneCircle = L.circle([work.lat, work.lng], {
-          color: '#38BDF8',
-          fillColor: '#38BDF8',
-          fillOpacity: 0.08,
-          radius: 200,
-          weight: 1
-        });
-        buffersLayerRef.current?.addLayer(zoneCircle);
-      }
-    });
-
-    // Pan to selected work if exists
-    if (selectedWork) {
-      mapInstanceRef.current.setView([selectedWork.lat, selectedWork.lng], 14, { animate: true });
+    } catch (e) {
+      console.error('Error updating map markers:', e);
     }
   }, [works, filterRisk, showCollisionBuffers, showScStZones, selectedWork]);
 
@@ -231,7 +268,20 @@ export const GISMap: React.FC<GISMapProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map Canvas */}
         <div className="lg:col-span-2 bg-[#0A192F] border border-[#1E3A5F] rounded-2xl overflow-hidden shadow-2xl relative h-[580px]">
-          <div ref={mapContainerRef} className="w-full h-full z-0" />
+          {mapError ? (
+            <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-rose-400 space-y-2">
+              <AlertTriangle className="w-10 h-10 text-rose-500" />
+              <p className="text-sm font-bold">{mapError}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="px-3 py-1.5 bg-sky-500 text-white text-xs font-bold rounded-lg"
+              >
+                Reload Map
+              </button>
+            </div>
+          ) : (
+            <div ref={mapContainerRef} className="w-full h-full z-0" />
+          )}
           
           {/* Map Legend Overlay */}
           <div className="absolute bottom-4 left-4 bg-[#0A192F]/95 backdrop-blur-md border border-[#1E3A5F] p-3 rounded-xl z-[400] text-xs space-y-2 shadow-xl">
