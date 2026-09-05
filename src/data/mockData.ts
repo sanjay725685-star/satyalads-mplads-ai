@@ -496,7 +496,6 @@ export const SATELLITE_SCANS: Record<string, SatelliteScan> = {
   'SAT-001': {
     id: 'SAT-001',
     workId: 'W001',
-    // Realistic SVG visual mockups simulating satellite optical / SAR and ground imagery
     sanctionDateImage: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80', // Unpaved dirt ground
     completionDateImage: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80', // Still dirt ground (GHOST WORK)
     sarBackscatterChangeDb: 0.04, // No structural radar change
@@ -506,15 +505,29 @@ export const SATELLITE_SCANS: Record<string, SatelliteScan> = {
     verificationVerdict: 'GHOST_WORK_SUSPECTED',
     groundPhotoUrl: 'https://images.unsplash.com/photo-1578885136359-16c8bd4d3a8e?w=800&auto=format&fit=crop&q=80',
     groundPhotoExif: {
-      cameraModel: 'iPhone 13 Pro (Forged metadata)',
+      cameraModel: 'Synthetic Diffusion Model (Fake Metadata Injected)',
       timestamp: '2024-10-12 14:22:18 IST',
       gpsLat: 25.2650,
       gpsLng: 82.9120,
-      gpsDeviationMeters: 41200, // Actually taken 41 km away in Mirzapur!
+      gpsDeviationMeters: 41200,
       isSpoofed: true,
-      errorLevelAnalysisScore: 88, // Tampered lighting/overlay
+      errorLevelAnalysisScore: 88,
       perceptualHashMatchFound: true,
-      duplicateMatchedWorkCode: 'MPLADS/2022-23/UP-MIR-0054'
+      duplicateMatchedWorkCode: 'MPLADS/2022-23/UP-MIR-0054',
+      // Point 1 from User Notebook: AI-Generated Photo Detector
+      isAiGeneratedPhoto: true,
+      aiGenerationConfidencePercent: 98.4,
+      aiGeneratorToolDetected: 'Midjourney v6 & Latent Diffusion Spectral Artifacts',
+      alertSentToVigilanceMembers: true,
+      // Point 2 from User Notebook: Half-Done vs Complete
+      physicalStageDetectedPercent: 5.0,
+      claimedStagePercent: 100.0,
+      missingComponents: [
+        'Entire 1.2 km Pavement Missing on Ground',
+        'Side Drainage Channels Absent',
+        'Culvert Retaining Wall Not Constructed'
+      ],
+      completionVerdict: 'PREMATURE_COMPLETION_CLAIM'
     }
   },
   'SAT-002': {
@@ -537,7 +550,21 @@ export const SATELLITE_SCANS: Record<string, SatelliteScan> = {
       isSpoofed: false,
       errorLevelAnalysisScore: 24,
       perceptualHashMatchFound: true,
-      duplicateMatchedWorkCode: 'PM-KUSUM/2023/UP-VAR-K091'
+      duplicateMatchedWorkCode: 'PM-KUSUM/2023/UP-VAR-K091',
+      // Point 1 from User Notebook: Real Photo (not AI)
+      isAiGeneratedPhoto: false,
+      aiGenerationConfidencePercent: 3.1,
+      alertSentToVigilanceMembers: true,
+      // Point 2 from User Notebook: Water Tank Project Half-Done Scanner
+      physicalStageDetectedPercent: 40.0, // 40% HALF-DONE
+      claimedStagePercent: 100.0,
+      missingComponents: [
+        'Water Tank Upper RCC Dome Unfinished',
+        'Inlet / Outlet Distribution Pipelines Not Connected',
+        'Internal RO Membrane Filter Absent',
+        'External Waterproof Plaster Incomplete'
+      ],
+      completionVerdict: 'HALF_DONE_STALLED'
     }
   },
   'SAT-003': {

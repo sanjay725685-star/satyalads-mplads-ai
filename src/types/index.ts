@@ -49,6 +49,8 @@ export interface AnomalyFlag {
     | 'DPR_PRICE_INFLATION'
     | 'NON_PERMISSIBLE_ASSET'
     | 'PHOTO_METADATA_TAMPERING'
+    | 'AI_GENERATED_PHOTO_DETECTED'
+    | 'HALF_DONE_PREMATURE_COMPLETION'
     | 'FUND_PARKING_STALL';
   severity: 'WARNING' | 'CRITICAL';
   title: string;
@@ -98,6 +100,16 @@ export interface SatelliteScan {
     errorLevelAnalysisScore: number; // 0 - 100 (high = edited/tampered)
     perceptualHashMatchFound: boolean;
     duplicateMatchedWorkCode?: string;
+    // Feature 1: AI-Generated / Deepfake Photo Detection
+    isAiGeneratedPhoto?: boolean;
+    aiGenerationConfidencePercent?: number; // e.g. 98.4%
+    aiGeneratorToolDetected?: string; // e.g. "Stable Diffusion / Midjourney Diffusion Artifacts"
+    alertSentToVigilanceMembers?: boolean;
+    // Feature 2: Half-Done / Partial Construction Vision Scanner
+    physicalStageDetectedPercent?: number; // e.g. 40%
+    claimedStagePercent?: number; // e.g. 100%
+    missingComponents?: string[]; // e.g. ["Water Tank Dome Missing", "Pipeline Not Connected"]
+    completionVerdict?: 'COMPLETELY_DONE' | 'HALF_DONE_STALLED' | 'PREMATURE_COMPLETION_CLAIM';
   };
 }
 
