@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#020C1B] text-slate-100 font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A192F;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E3A5F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38BDF8;
+}
+
+/* Radar & Glowing Effects */
+.radar-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+}
+
+.glow-red {
+  box-shadow: 0 0 20px -5px rgba(239, 68, 68, 0.4);
+}
+
+.glow-sky {
+  box-shadow: 0 0 20px -5px rgba(56, 189, 248, 0.3);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3);
+}
+
+/* Leaflet Dark Customization */
+.leaflet-container {
+  background-color: #0A192F !important;
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0F233D !important;
+  color: #F1F5F9 !important;
+  border: 1px solid #1E3A5F !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: #0F233D !important;
+  border: 1px solid #1E3A5F !important;
+}
