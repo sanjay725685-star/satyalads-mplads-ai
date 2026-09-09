@@ -247,15 +247,12 @@ export type Language =
   | 'as'   // অসমীয়া (Assamese)
   | 'mai'  // मैथिली (Maithili)
   | 'bho'  // भोजपुरी (Bhojpuri)
-  | 'sa'   // संस्कृतम् (Sanskrit)
   | 'ks'   // कॉशुर (Kashmiri)
-  | 'ne'   // नेपाली (Nepali)
   | 'kok'  // कोंकणी (Konkani)
   | 'sd'   // सिंधी (Sindhi)
   | 'doi'  // डोगरी (Dogri)
   | 'mni'  // মৈতৈলোন্ (Manipuri)
-  | 'brx'  // बड़ो (Bodo)
-  | 'sat'; // ᱥᱟᱱᱛᱟᱲᱤ (Santali)
+  | 'brx'; // बड़ो (Bodo)
 
 
 export interface DetectionFlag {

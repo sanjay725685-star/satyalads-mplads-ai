@@ -131,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div>
                       <div className="text-xs font-bold text-white flex items-center gap-1.5">
                         <span>Digital India Bhashini AI</span>
-                        <span className="text-[8px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono font-bold">24 Languages</span>
+                        <span className="text-[8px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono font-bold">{INDIAN_LANGUAGES.length} Languages</span>
                       </div>
                       <div className="text-[9px] text-slate-400">Constitution 8th Schedule Official Languages</div>
                     </div>

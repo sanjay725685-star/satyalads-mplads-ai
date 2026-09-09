@@ -33,16 +33,11 @@ export const INDIAN_LANGUAGES: LanguageOption[] = [
   { code: 'or', name: 'Odia', nativeName: 'ଓଡ଼ିଆ', region: 'Odisha' },
   { code: 'bho', name: 'Bhojpuri', nativeName: 'भोजपुरी', region: 'Bihar, Eastern UP, Jharkhand' },
   { code: 'mai', name: 'Maithili', nativeName: 'मैथिली', region: 'Bihar, Jharkhand' },
-  { code: 'sat', name: 'Santali', nativeName: 'ᱥᱟᱱᱛᱟᱲᱤ', region: 'Jharkhand, West Bengal, Odisha' },
 
   // North-Eastern & Himalayan
   { code: 'as', name: 'Assamese', nativeName: 'অসমীয়া', region: 'Assam' },
   { code: 'mni', name: 'Manipuri (Meitei)', nativeName: 'মৈতৈলোন্', region: 'Manipur' },
-  { code: 'brx', name: 'Bodo', nativeName: 'बड़ो', region: 'Assam, Meghalaya' },
-  { code: 'ne', name: 'Nepali', nativeName: 'नेपाली', region: 'Sikkim, West Bengal (Darjeeling)' },
-
-  // Classical
-  { code: 'sa', name: 'Sanskrit', nativeName: 'संस्कृतम्', region: 'Pan-India Classical' },
+  { code: 'brx', name: 'Bodo', nativeName: 'बड़ो', region: 'Assam, Meghalaya' }
 ];
 
 export interface NavTranslations {
@@ -271,20 +266,6 @@ export const NAV_TRANSLATIONS: Record<Language, NavTranslations> = {
     gov_badge: 'भारत सरकार • MoSPI',
     role_label: 'लेखा परीक्षक'
   },
-  sa: {
-    dashboard: 'फलकम् (Dashboard)',
-    projects: 'परियोजना निर्देशिका',
-    gis_map: 'भूस्थानिक मानचित्रम्',
-    capture_photo: 'स्थानचित्र ग्रहणम्',
-    before_after: 'तुलना फलकम्',
-    cartels: 'व्यापारिक संघजालम्',
-    satellite: 'उपग्रह रडार',
-    transparency: 'सार्वजनिक स्वच्छता',
-    run_rescan: 'एआई पुनर्परीक्षणम्',
-    scanning: 'परीक्षणं प्रचलति...',
-    gov_badge: 'भारतसर्वकारः • MoSPI',
-    role_label: 'लेखापरीक्षकः'
-  },
   ks: {
     dashboard: 'ڈیش بورڈ',
     projects: 'منصوبہ فہرست',
@@ -298,20 +279,6 @@ export const NAV_TRANSLATIONS: Record<Language, NavTranslations> = {
     scanning: 'جانچ چلیوان چھ...',
     gov_badge: 'حکومت ہند • MoSPI',
     role_label: 'آڈیٹر'
-  },
-  ne: {
-    dashboard: 'ड्यासबोर्ड',
-    projects: 'आयोजना निर्देशिका',
-    gis_map: 'जीआईएस नक्सा',
-    capture_photo: 'साइट फोटो खिच्नुहोस्',
-    before_after: 'तुलना स्लाइडर',
-    cartels: 'कार्टेल सञ्जाल',
-    satellite: 'उपग्रह रडार',
-    transparency: 'सार्वजनिक पारदर्शिता',
-    run_rescan: 'AI पुन: जाँच गर्नुहोस्',
-    scanning: 'जाँच भइरहेको छ...',
-    gov_badge: 'भारत सरकार • MoSPI',
-    role_label: 'लेखा परीक्षक'
   },
   kok: {
     dashboard: 'डॅशबोर्ड',
@@ -382,20 +349,6 @@ export const NAV_TRANSLATIONS: Record<Language, NavTranslations> = {
     scanning: 'नायगिरनाय सोलिगासिनो...',
     gov_badge: 'भारत सरकार • MoSPI',
     role_label: 'अडिटार'
-  },
-  sat: {
-    dashboard: 'ᱰᱮᱥᱵᱳᱨᱰ',
-    projects: 'ᱯᱨᱚᱡᱮᱠᱴ ᱛᱟᱹᱞᱠᱟᱹ',
-    gis_map: 'ᱡᱤᱟᱭᱤᱮᱥ ᱱᱚᱠᱥᱟ',
-    capture_photo: 'ᱪᱤᱛᱟᱹᱨ ᱦᱟᱛᱟᱣ ᱢᱮ',
-    before_after: 'ᱛᱩᱞᱟᱹᱡᱚᱠᱷᱟ ᱥᱞᱟᱭᱰᱟᱨ',
-    cartels: 'ᱠᱟᱨᱴᱮᱞ ᱱᱮᱴᱣᱟᱨᱠ',
-    satellite: 'ᱥᱟᱴᱮᱞᱟᱭᱤᱴ ᱨᱟᱰᱟᱨ',
-    transparency: 'ᱨᱟᱡᱽ ᱥᱟᱯᱷᱟ',
-    run_rescan: 'AI ᱟᱨᱦᱚᱸ ᱧᱮᱞ ᱵᱤᱰᱟᱹᱣ',
-    scanning: 'ᱧᱮᱞ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ...',
-    gov_badge: 'ᱥᱤᱧᱚᱛ ᱥᱚᱨᱠᱟᱨ • MoSPI',
-    role_label: 'ᱚᱰᱤᱴᱟᱨ'
   }
 };
 
