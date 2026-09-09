@@ -8,7 +8,7 @@ interface LandingPageProps {
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
 
   return (
     <div className="min-h-screen bg-[#071326] text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-black">

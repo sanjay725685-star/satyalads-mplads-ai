@@ -8,7 +8,7 @@ interface PublicTransparencyViewProps {
 }
 
 export const PublicTransparencyView: React.FC<PublicTransparencyViewProps> = ({ lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
   const [summary, setSummary] = useState<any>(null);
   const [projects, setProjects] = useState<ProjectRecord[]>([]);
   const [search, setSearch] = useState('');

@@ -9,7 +9,7 @@ interface ProjectListViewProps {
 }
 
 export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProject, lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
   const [projects, setProjects] = useState<ProjectRecord[]>([]);
   const [loading, setLoading] = useState(true);
 

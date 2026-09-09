@@ -231,7 +231,32 @@ export interface WIRIBreakdown {
 // --- SATYALADS FULL-STACK 320-PROJECT AUDIT SENTINEL TYPES ---
 export type WorkflowStatus = 'UNDER_REVIEW' | 'FLAGGED' | 'ESCALATED' | 'CLEARED';
 export type UserRole = 'auditor' | 'nodal_officer' | 'admin';
-export type Language = 'en' | 'hi';
+export type Language = 
+  | 'en'   // English
+  | 'hi'   // हिन्दी (Hindi)
+  | 'bn'   // বাংলা (Bengali)
+  | 'te'   // తెలుగు (Telugu)
+  | 'mr'   // मराठी (Marathi)
+  | 'ta'   // தமிழ் (Tamil)
+  | 'ur'   // اردو (Urdu)
+  | 'gu'   // ગુજરાતી (Gujarati)
+  | 'kn'   // ಕನ್ನಡ (Kannada)
+  | 'ml'   // മലയാളം (Malayalam)
+  | 'or'   // ଓଡ଼ିଆ (Odia)
+  | 'pa'   // ਪੰਜਾਬੀ (Punjabi)
+  | 'as'   // অসমীয়া (Assamese)
+  | 'mai'  // मैथिली (Maithili)
+  | 'bho'  // भोजपुरी (Bhojpuri)
+  | 'sa'   // संस्कृतम् (Sanskrit)
+  | 'ks'   // कॉशुर (Kashmiri)
+  | 'ne'   // नेपाली (Nepali)
+  | 'kok'  // कोंकणी (Konkani)
+  | 'sd'   // सिंधी (Sindhi)
+  | 'doi'  // डोगरी (Dogri)
+  | 'mni'  // মৈতৈলোন্ (Manipuri)
+  | 'brx'  // बड़ो (Bodo)
+  | 'sat'; // ᱥᱟᱱᱛᱟᱲᱤ (Santali)
+
 
 export interface DetectionFlag {
   module: string;

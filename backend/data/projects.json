@@ -558,16 +558,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Thar Civil Infra Projects, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -620,18 +620,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -816,18 +816,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -1129,18 +1129,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       },
@@ -1540,17 +1540,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kaveri Urban Developers' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Kaveri Urban Developers' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -2115,17 +2115,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -2241,17 +2241,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Apex South Infra Projects' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Kaveri Urban Developers. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Apex South Infra Projects' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Deccan Engineering Consortium. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -2303,18 +2303,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Kashi Infratech Pvt Ltd. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -2447,17 +2447,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Apex South Infra Projects' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Kaveri Urban Developers. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Apex South Infra Projects' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Deccan Engineering Consortium. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -2550,17 +2550,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -2849,18 +2849,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -3231,18 +3231,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -3345,16 +3345,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -3952,18 +3952,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -4342,17 +4342,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -4506,17 +4506,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kaveri Urban Developers' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Kaveri Urban Developers' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -5217,16 +5217,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -5566,17 +5566,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -5628,17 +5628,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -6153,17 +6153,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -6277,18 +6277,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       },
@@ -6442,17 +6442,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -7149,18 +7149,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -7633,17 +7633,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Pataliputra Heavy Builders, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Magadh Roadlines & Constructions, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -7879,17 +7879,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Pataliputra Heavy Builders, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Magadh Roadlines & Constructions, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -8238,16 +8238,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -8598,17 +8598,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kaveri Urban Developers' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Kaveri Urban Developers' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -9052,18 +9052,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -9237,17 +9237,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Apex South Infra Projects' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Kaveri Urban Developers. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Apex South Infra Projects' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Deccan Engineering Consortium. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -9299,16 +9299,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Thar Civil Infra Projects, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -10735,17 +10735,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Magadh Roadlines & Constructions' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -10797,18 +10797,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -11281,18 +11281,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       },
@@ -11382,17 +11382,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Pataliputra Heavy Builders, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Bihar Vikas Engineering Co' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Magadh Roadlines & Constructions, Pataliputra Heavy Builders. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -11485,17 +11485,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -11588,17 +11588,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -12288,18 +12288,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -12432,18 +12432,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Ganga Valley Buildcon LLP, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Kashi Infratech Pvt Ltd' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       },
@@ -12709,17 +12709,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55422), Address (7 Dak Bunglow Rd, Patna)",
+        "description": "Contractor 'Pataliputra Heavy Builders' shares PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna) with Bihar Vikas Engineering Co, Magadh Roadlines & Constructions. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (ABCPR8812D), GSTIN (10ABCPR8812D2Z2), Phone (+91 94310 55421), Address (7 Dak Bunglow Rd, Patna)",
         "cartel_members": [
           "Bihar Vikas Engineering Co",
-          "Pataliputra Heavy Builders",
-          "Magadh Roadlines & Constructions"
+          "Magadh Roadlines & Constructions",
+          "Pataliputra Heavy Builders"
         ],
         "shared_attributes": [
           "PAN (ABCPR8812D)",
           "GSTIN (10ABCPR8812D2Z2)",
-          "Phone (+91 94310 55422)",
+          "Phone (+91 94310 55421)",
           "Address (7 Dak Bunglow Rd, Patna)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -12832,17 +12832,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kaveri Urban Developers' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Kaveri Urban Developers' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -13070,16 +13070,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Thar Civil Infra Projects, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -13255,16 +13255,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Thar Civil Infra Projects' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Thar Civil Infra Projects' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Marwar Earthmovers & Bitumen Ltd. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -13492,18 +13492,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -13739,16 +13739,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Pink City Infracon Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -13842,18 +13842,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Purvanchal Civil Engineering Works' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Ganga Valley Buildcon LLP. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -14143,17 +14143,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -14296,18 +14296,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Kashi Infratech Pvt Ltd. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -14713,16 +14713,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Thar Civil Infra Projects, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Marwar Earthmovers & Bitumen Ltd' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Thar Civil Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -15115,16 +15115,16 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Thar Civil Infra Projects' shares PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Marwar Earthmovers & Bitumen Ltd, Pink City Infracon Ltd. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AAJPT3321N), GSTIN (08AAJPT3321N1ZA), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
+        "description": "Contractor 'Thar Civil Infra Projects' shares PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur) with Pink City Infracon Ltd, Marwar Earthmovers & Bitumen Ltd. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (CAJPT3321R), GSTIN (08CAJPT3321R1ZC), Phone (+91 98290 88712), Address (15 MI Road, Pink City Center, Jaipur)",
         "cartel_members": [
+          "Pink City Infracon Ltd",
           "Marwar Earthmovers & Bitumen Ltd",
-          "Thar Civil Infra Projects",
-          "Pink City Infracon Ltd"
+          "Thar Civil Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (AAJPT3321N)",
-          "GSTIN (08AAJPT3321N1ZA)",
+          "PAN (CAJPT3321R)",
+          "GSTIN (08CAJPT3321R1ZC)",
           "Phone (+91 98290 88712)",
           "Address (15 MI Road, Pink City Center, Jaipur)"
         ],
@@ -15177,17 +15177,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Kaveri Urban Developers' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Kaveri Urban Developers' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Deccan Engineering Consortium, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
@@ -15353,18 +15353,18 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi) with Kashi Infratech Pvt Ltd, Purvanchal Civil Engineering Works. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-14 Sigra Commercial Complex, Varanasi)",
+        "description": "Contractor 'Ganga Valley Buildcon LLP' shares PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi) with Purvanchal Civil Engineering Works, Kashi Infratech Pvt Ltd. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (AABCV9921K), GSTIN (09AABCV9921K2Z4), Phone (+91 94150 23891), Address (B-12 Sigra Commercial Complex, Varanasi)",
         "cartel_members": [
+          "Purvanchal Civil Engineering Works",
           "Kashi Infratech Pvt Ltd",
-          "Ganga Valley Buildcon LLP",
-          "Purvanchal Civil Engineering Works"
+          "Ganga Valley Buildcon LLP"
         ],
         "shared_attributes": [
           "PAN (AABCV9921K)",
           "GSTIN (09AABCV9921K2Z4)",
           "Phone (+91 94150 23891)",
-          "Address (B-14 Sigra Commercial Complex, Varanasi)"
+          "Address (B-12 Sigra Commercial Complex, Varanasi)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"
       }
@@ -15755,17 +15755,17 @@
         "severity": "CRITICAL",
         "confidence": 0.96,
         "title": "Contractor Bidding Cartel / Common Ownership Ring",
-        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
-        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (BCRPD4412Q), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11929), Address (42 Indiranagar 100ft Rd, Bangalore)",
+        "description": "Contractor 'Deccan Engineering Consortium' shares PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore) with Kaveri Urban Developers, Apex South Infra Projects. Represents a single entity bidding under distinct corporate names.",
+        "metric_cited": "Graph Cluster Size: 3 entities | Shared: PAN (DFRPD4412X), GSTIN (29AACPD4412M1Z2), Phone (+91 98450 11928), Address (42 Indiranagar 100ft Rd, Bangalore)",
         "cartel_members": [
-          "Deccan Engineering Consortium",
           "Kaveri Urban Developers",
+          "Deccan Engineering Consortium",
           "Apex South Infra Projects"
         ],
         "shared_attributes": [
-          "PAN (BCRPD4412Q)",
+          "PAN (DFRPD4412X)",
           "GSTIN (29AACPD4412M1Z2)",
-          "Phone (+91 98450 11929)",
+          "Phone (+91 98450 11928)",
           "Address (42 Indiranagar 100ft Rd, Bangalore)"
         ],
         "gfr_citation": "Competition Act 2002 Section 3(3) / GFR Rule 153 (Anti-Cartelization Clause)"

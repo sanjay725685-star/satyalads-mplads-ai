@@ -11,7 +11,7 @@ interface ProjectDetailViewProps {
 }
 
 export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, onBack, onOpenReport, lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
   const [currentStatus, setCurrentStatus] = useState<WorkflowStatus>(project.workflow_status);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 

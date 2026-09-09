@@ -7,7 +7,7 @@ interface BeforeAfterSliderViewProps {
 }
 
 export const BeforeAfterSliderView: React.FC<BeforeAfterSliderViewProps> = ({ lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
   const [sliderPos, setSliderPos] = useState<number>(50);
   const [spectralMode, setSpectralMode] = useState<'OPTICAL' | 'SAR_RADAR' | 'NDBI_HEATMAP'>('OPTICAL');
 

@@ -9,7 +9,7 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, lang }) => {
-  const isHi = lang === 'hi';
+  const isHi = lang !== 'en';
   const [selectedRole, setSelectedRole] = useState<UserRole>('auditor');
   const [username, setUsername] = useState('auditor_varanasi');
   const [password, setPassword] = useState('••••••••••••');
