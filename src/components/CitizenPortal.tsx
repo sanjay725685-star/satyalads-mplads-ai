@@ -12,7 +12,6 @@ import {
   Star,
   Smartphone,
   Info,
-  Upload,
   RotateCcw,
   X,
   Crosshair,
@@ -52,7 +51,7 @@ export const CitizenPortal: React.FC = () => {
     setCameraError(null);
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error('Camera API not available in this browser. Opening file upload...');
+        throw new Error('Camera API not available in this browser environment.');
       }
 
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -70,13 +69,9 @@ export const CitizenPortal: React.FC = () => {
         }
       }, 150);
     } catch (err: any) {
-      console.warn('Camera access issue, opening file selector fallback:', err);
-      setCameraError('Camera access not permitted or device unavailable. Please pick a file or sample.');
+      console.warn('Camera access issue:', err);
+      setCameraError('Camera access not permitted or device unavailable. Please allow camera permissions or click Sample Photo.');
       setIsCameraOpen(false);
-      // Trigger file selector as seamless fallback
-      if (fileInputRef.current) {
-        fileInputRef.current.click();
-      }
     }
   };
 
@@ -343,30 +338,22 @@ export const CitizenPortal: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Direct Action Buttons: Camera / Upload / Sample */}
-                  <div className="grid grid-cols-3 gap-1.5">
+                  {/* Direct Action Buttons: Live Camera / Sample Photo */}
+                  <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={startCamera}
-                      className="py-1.5 px-2 rounded-lg bg-[#020C1B] hover:bg-[#1E3A5F]/50 border border-[#1E3A5F] text-slate-300 hover:text-white flex items-center justify-center gap-1.5 text-[10px] font-medium transition-all cursor-pointer"
+                      className="py-2 px-3 rounded-lg bg-[#020C1B] hover:bg-[#1E3A5F]/50 border border-[#1E3A5F] text-slate-300 hover:text-white flex items-center justify-center gap-1.5 text-xs font-medium transition-all cursor-pointer"
                     >
-                      <Camera className="w-3.5 h-3.5 text-emerald-400" />
+                      <Camera className="w-4 h-4 text-emerald-400" />
                       <span>Live Camera</span>
                     </button>
                     <button
                       type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="py-1.5 px-2 rounded-lg bg-[#020C1B] hover:bg-[#1E3A5F]/50 border border-[#1E3A5F] text-slate-300 hover:text-white flex items-center justify-center gap-1.5 text-[10px] font-medium transition-all cursor-pointer"
-                    >
-                      <Upload className="w-3.5 h-3.5 text-sky-400" />
-                      <span>Upload File</span>
-                    </button>
-                    <button
-                      type="button"
                       onClick={loadSamplePhoto}
-                      className="py-1.5 px-2 rounded-lg bg-[#020C1B] hover:bg-[#1E3A5F]/50 border border-[#1E3A5F] text-slate-300 hover:text-white flex items-center justify-center gap-1.5 text-[10px] font-medium transition-all cursor-pointer"
+                      className="py-2 px-3 rounded-lg bg-[#020C1B] hover:bg-[#1E3A5F]/50 border border-[#1E3A5F] text-slate-300 hover:text-white flex items-center justify-center gap-1.5 text-xs font-medium transition-all cursor-pointer"
                     >
-                      <ImageIcon className="w-3.5 h-3.5 text-amber-400" />
+                      <ImageIcon className="w-4 h-4 text-amber-400" />
                       <span>Sample Photo</span>
                     </button>
                   </div>
