@@ -14,7 +14,13 @@ import {
   Satellite, 
   ExternalLink,
   Search,
-  Filter
+  Filter,
+  MapPin,
+  Globe,
+  Building,
+  Landmark,
+  ChevronRight,
+  BarChart3
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -32,7 +38,9 @@ import {
   PolarRadiusAxis, 
   Radar 
 } from 'recharts';
-import { Constituency, WorkItem, RiskLevel } from '../types';
+import { Constituency, WorkItem, RiskLevel, Language } from '../types';
+import { CONSTITUENCIES } from '../data/mockData';
+import { ALL_STATES, getConstituenciesByState } from '../utils/projectAdapter';
 
 interface OverviewDashboardProps {
   constituency: Constituency;
@@ -40,6 +48,11 @@ interface OverviewDashboardProps {
   onSelectWork: (work: WorkItem) => void;
   onNavigateTab: (tab: string) => void;
   onTriggerScan?: () => void;
+  allConstituencies?: Constituency[];
+  onSelectConstituency?: (constituency: Constituency) => void;
+  isAllIndiaView?: boolean;
+  onToggleAllIndia?: (allIndia: boolean) => void;
+  lang?: Language;
 }
 
 export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
@@ -47,11 +60,19 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   works,
   onSelectWork,
   onNavigateTab,
-  onTriggerScan
+  onTriggerScan,
+  allConstituencies = CONSTITUENCIES,
+  onSelectConstituency,
+  isAllIndiaView = false,
+  onToggleAllIndia,
+  lang = 'en'
 }) => {
+  const isHi = lang !== 'en';
   const [searchTerm, setSearchTerm] = useState('');
   const [riskFilter, setRiskFilter] = useState<string>('ALL');
+  const [selectedStateFilter, setSelectedStateFilter] = useState<string>(isAllIndiaView ? '' : constituency.state);
 
+  // Filter works by search and risk
   const filteredWorks = works.filter((w) => {
     const matchesSearch = 
       w.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -72,66 +93,266 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
     .filter(w => w.riskLevel === 'CRITICAL' || w.riskLevel === 'HIGH')
     .reduce((sum, w) => sum + w.sanctionedAmountLakhs, 0);
 
-  // Category breakdown for chart
-  const categoryData = [
-    { name: 'Roads', total: 85, flagged: 85 },
-    { name: 'Water', total: 152, flagged: 152 },
-    { name: 'Community', total: 68, flagged: 0 },
-    { name: 'Private/Trust', total: 55, flagged: 55 },
-    { name: 'Education', total: 95, flagged: 95 },
-    { name: 'Sanitation', total: 145, flagged: 145 },
+  // Compute dynamic category breakdown for chart
+  const categoriesList = [
+    'Roads & Bridges',
+    'Drinking Water',
+    'Community Infrastructure',
+    'Sanitation',
+    'Education & Schools',
+    'Healthcare'
   ];
-
-  const riskPieData = [
-    { name: 'Critical Risk', value: criticalCount, color: '#DC2626' },
-    { name: 'High Risk', value: highCount, color: '#EA580C' },
-    { name: 'Moderate', value: mediumCount, color: '#D97706' },
-    { name: 'Low / Compliant', value: lowCount, color: '#16A34A' },
-  ];
+  const categoryData = categoriesList.map(cat => {
+    const inCat = works.filter(w => w.category === cat);
+    const total = inCat.reduce((sum, w) => sum + w.sanctionedAmountLakhs, 0);
+    const flagged = inCat.filter(w => w.riskLevel === 'CRITICAL' || w.riskLevel === 'HIGH')
+      .reduce((sum, w) => sum + w.sanctionedAmountLakhs, 0);
+    return {
+      name: cat.replace('& Bridges', '').replace('& Schools', '').replace('Infrastructure', ''),
+      total: Math.round(total) || 20,
+      flagged: Math.round(flagged)
+    };
+  });
 
   const radarData = [
-    { subject: 'Space Satellite CV', score: 88, fullMark: 100 },
-    { subject: 'Cartel Detection', score: 92, fullMark: 100 },
-    { subject: 'DPR Rate Match', score: 76, fullMark: 100 },
-    { subject: 'Spatial Collision', score: 95, fullMark: 100 },
-    { subject: 'Photo Forensics', score: 84, fullMark: 100 },
-    { subject: 'Statutory Quota', score: 70, fullMark: 100 },
+    { subject: isHi ? 'उपग्रह सीवी' : 'Space Satellite CV', score: 88, fullMark: 100 },
+    { subject: isHi ? 'कार्टेल सिंडिकेट' : 'Cartel Detection', score: 92, fullMark: 100 },
+    { subject: isHi ? 'डीपीआर दर' : 'DPR Rate Match', score: 76, fullMark: 100 },
+    { subject: isHi ? 'स्थानिक टकराव' : 'Spatial Collision', score: 95, fullMark: 100 },
+    { subject: isHi ? 'फोटो फोरेंसिक' : 'Photo Forensics', score: 84, fullMark: 100 },
+    { subject: isHi ? 'कोटा अनुपालन' : 'Statutory Quota', score: 70, fullMark: 100 },
   ];
+
+  // Quick select key constituencies
+  const quickPills = [
+    { label: 'All India (320)', isAll: true, id: '' },
+    { label: 'Varanasi (UP)', id: 'VARANASI', state: 'Uttar Pradesh' },
+    { label: 'Baramati (MH)', id: 'BARAMATI', state: 'Maharashtra' },
+    { label: 'Bangalore South (KA)', id: 'BLR_SOUTH', state: 'Karnataka' },
+    { label: 'Wayanad (KL)', id: 'WAYANAD', state: 'Kerala' },
+    { label: 'Patna Sahib (BR)', id: 'PATNA_SAHIB', state: 'Bihar' },
+    { label: 'Gandhinagar (GJ)', id: 'GANDHINAGAR', state: 'Gujarat' },
+    { label: 'Jaipur (RJ)', id: 'JAIPUR', state: 'Rajasthan' },
+    { label: 'Kolkata North (WB)', id: 'KOLKATA_NORTH', state: 'West Bengal' },
+    { label: 'Guwahati (AS)', id: 'GUWAHATI', state: 'Assam' },
+    { label: 'Srinagar (J&K)', id: 'SRINAGAR', state: 'Jammu & Kashmir' },
+    { label: 'New Delhi (DL)', id: 'NEW_DELHI', state: 'Delhi (NCT)' },
+    { label: 'Hyderabad (TG)', id: 'HYDERABAD', state: 'Telangana' },
+    { label: 'Bhopal (MP)', id: 'BHOPAL', state: 'Madhya Pradesh' },
+  ];
+
+  const handleStateChange = (newState: string) => {
+    setSelectedStateFilter(newState);
+    if (!newState || newState === 'ALL') {
+      if (onToggleAllIndia) onToggleAllIndia(true);
+    } else {
+      if (onToggleAllIndia) onToggleAllIndia(false);
+      const stateConsts = getConstituenciesByState(newState);
+      if (stateConsts.length > 0 && onSelectConstituency) {
+        onSelectConstituency(stateConsts[0]);
+      }
+    }
+  };
+
+  const handleConstituencyChange = (cId: string) => {
+    const target = allConstituencies.find(c => c.id === cId);
+    if (target && onSelectConstituency) {
+      if (onToggleAllIndia) onToggleAllIndia(false);
+      setSelectedStateFilter(target.state);
+      onSelectConstituency(target);
+    }
+  };
+
+  // Filter constituencies options based on selectedStateFilter
+  const availableConstituencies = selectedStateFilter 
+    ? getConstituenciesByState(selectedStateFilter) 
+    : allConstituencies;
 
   return (
     <div className="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
-      {/* 1. Constituency Hero Header (Official Government Style) */}
+      {/* 0. Official Parliamentary & State Jurisdiction Selector Banner */}
+      <div className="bg-[#002244] border-2 border-[#FF9933] rounded-md p-4 text-white shadow-md relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-blue-900/30 to-transparent pointer-events-none" />
+        
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF9933] animate-pulse" />
+              <span className="text-[11px] font-bold text-[#FF9933] uppercase tracking-wider font-mono">
+                {isHi ? 'भारत सरकार • राष्ट्रीय एमपीलैड्स सतर्कता ग्रिड' : 'GOVERNMENT OF INDIA • NATIONAL MPLADS AUDIT GRID'}
+              </span>
+              <span className="text-slate-400 text-xs hidden sm:inline">•</span>
+              <span className="text-xs text-slate-300 font-mono hidden sm:inline">
+                {isHi ? '13 राज्य • 25 निर्वाचन क्षेत्र • 320 परियोजनाएं' : '13 States & UTs • 25 LS Constituencies • 320 Projects'}
+              </span>
+            </div>
+            <h2 className="text-lg md:text-xl font-black font-serif tracking-tight flex items-center gap-2">
+              <Landmark className="w-5 h-5 text-amber-300" />
+              <span>
+                {isHi ? 'संसदीय निर्वाचन क्षेत्र एवं राज्य चयनकर्ता' : 'State & Parliamentary Constituency Selector'}
+              </span>
+            </h2>
+            <p className="text-xs text-slate-300 max-w-2xl">
+              {isHi 
+                ? 'भारत के किसी भी राज्य या लोकसभा क्षेत्र का चयन करें और स्थानीय परियोजनाओं का एआई फ्रॉड डिटेक्शन, उपग्रह सत्यापन और कार्टेल विश्लेषण देखें।'
+                : 'Switch between any of the 13 Indian States / UTs and 25 Lok Sabha seats to inspect regional project delivery, satellite CV scans, and contractor rings.'}
+            </p>
+          </div>
+
+          {/* Dropdown Controls Toolbar */}
+          <div className="flex flex-wrap items-center gap-3 bg-[#001A33] p-3 rounded border border-slate-700">
+            {/* State / UT Dropdown */}
+            <div className="flex flex-col">
+              <label className="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1 flex items-center gap-1">
+                <Globe className="w-3 h-3" />
+                {isHi ? 'राज्य / संघ राज्य क्षेत्र' : '1. Select State / UT'}
+              </label>
+              <select
+                value={isAllIndiaView ? '' : (selectedStateFilter || constituency.state)}
+                onChange={(e) => handleStateChange(e.target.value)}
+                className="bg-[#002244] border border-amber-400/60 rounded px-2.5 py-1.5 text-xs text-white font-medium focus:outline-none focus:border-amber-400 cursor-pointer min-w-[170px]"
+              >
+                <option value="">{isHi ? '🇮🇳 अखिल भारतीय (समस्त 13 राज्य)' : '🇮🇳 All India (All 13 States)'}</option>
+                {ALL_STATES.map((st) => (
+                  <option key={st} value={st}>
+                    {st} ({getConstituenciesByState(st).length} Seats)
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Parliamentary Constituency Dropdown */}
+            <div className="flex flex-col">
+              <label className="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1 flex items-center gap-1">
+                <MapPin className="w-3 h-3" />
+                {isHi ? 'संसदीय निर्वाचन क्षेत्र' : '2. Select Lok Sabha Seat'}
+              </label>
+              <select
+                disabled={isAllIndiaView}
+                value={isAllIndiaView ? '' : constituency.id}
+                onChange={(e) => handleConstituencyChange(e.target.value)}
+                className={`bg-[#002244] border border-amber-400/60 rounded px-2.5 py-1.5 text-xs text-white font-medium focus:outline-none focus:border-amber-400 cursor-pointer min-w-[220px] ${
+                  isAllIndiaView ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                {isAllIndiaView && (
+                  <option value="">{isHi ? 'राष्ट्रीय परिप्रेक्ष्य सक्रिय' : 'National All-India Mode Active'}</option>
+                )}
+                {availableConstituencies.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name} ({c.state}) — {c.mpName} ({c.party})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* All-India Toggle Button */}
+            <div className="flex flex-col justify-end">
+              <span className="text-[10px] text-slate-400 mb-1 opacity-0">Action</span>
+              <button
+                type="button"
+                onClick={() => {
+                  if (onToggleAllIndia) {
+                    onToggleAllIndia(!isAllIndiaView);
+                  }
+                }}
+                className={`px-3 py-1.5 rounded text-xs font-bold transition-all flex items-center gap-1.5 border cursor-pointer ${
+                  isAllIndiaView 
+                    ? 'bg-[#FF9933] text-[#002244] border-white shadow-sm' 
+                    : 'bg-white/10 hover:bg-white/20 text-white border-white/30'
+                }`}
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>{isAllIndiaView ? (isHi ? 'क्षेत्रीय दृश्य में जाएं' : 'Switch to Seat View') : (isHi ? 'अखिल भारतीय दृश्य' : 'All-India Mode')}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Access Constituency Badges */}
+        <div className="mt-3 pt-3 border-t border-slate-700/80 flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+          <span className="text-[11px] text-amber-300/80 font-bold uppercase whitespace-nowrap flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-amber-300" />
+            {isHi ? 'त्वरित चयन:' : 'Quick Select:'}
+          </span>
+          <div className="flex items-center gap-1.5 flex-nowrap">
+            {quickPills.map((pill) => {
+              const isActive = pill.isAll ? isAllIndiaView : (!isAllIndiaView && constituency.id === pill.id);
+              return (
+                <button
+                  key={pill.label}
+                  type="button"
+                  onClick={() => {
+                    if (pill.isAll) {
+                      if (onToggleAllIndia) onToggleAllIndia(true);
+                    } else {
+                      handleConstituencyChange(pill.id);
+                    }
+                  }}
+                  className={`px-2.5 py-1 rounded text-[11px] font-semibold whitespace-nowrap transition-all cursor-pointer border ${
+                    isActive
+                      ? 'bg-[#FF9933] text-[#002244] border-white font-bold shadow-xs'
+                      : 'bg-white/5 hover:bg-white/15 text-slate-200 border-white/20'
+                  }`}
+                >
+                  {pill.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 1. Hero Header (Official Government Style) */}
       <div className="bg-white border border-slate-300 rounded-md p-6 shadow-xs relative">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center space-x-2 mb-2">
               <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-[#002244] border border-amber-300">
-                {constituency.mpHouse} • {constituency.termYears}
+                {isAllIndiaView ? 'Parliament of India • 18th Lok Sabha' : `${constituency.mpHouse} • ${constituency.termYears}`}
               </span>
               <span className="text-xs text-slate-500 font-mono">
-                {constituency.state} State Jurisdiction
+                {isAllIndiaView ? 'Central Vigilance Grid • All 13 States & UTs' : `${constituency.state} State Jurisdiction`}
               </span>
             </div>
             <h1 className="text-2xl md:text-3xl font-black text-[#002244] tracking-tight font-serif flex items-center gap-3">
-              <span>{constituency.name} Parliamentary Constituency</span>
+              <span>
+                {isAllIndiaView 
+                  ? 'All-India National MPLADS Integrity Overview' 
+                  : `${constituency.name} Parliamentary Constituency`}
+              </span>
             </h1>
             <p className="text-xs text-slate-600 mt-1">
-              Hon'ble Member of Parliament: <strong className="text-[#0B3D91]">{constituency.mpName}</strong> ({constituency.party})
+              {isAllIndiaView ? (
+                <span>
+                  National Aggregate Monitor: <strong className="text-[#0B3D91]">25 Lok Sabha Constituencies</strong> across 13 States | 320 Active Filings
+                </span>
+              ) : (
+                <span>
+                  Hon'ble Member of Parliament: <strong className="text-[#0B3D91]">{constituency.mpName}</strong> ({constituency.party})
+                </span>
+              )}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
             <div className="bg-slate-50 border border-slate-300 px-4 py-2 rounded text-center">
               <span className="text-[10px] uppercase font-bold text-slate-600 block">Total Entitlement</span>
-              <span className="text-lg font-bold text-[#002244] font-mono">₹{constituency.totalEntitlementCr} Cr</span>
+              <span className="text-lg font-bold text-[#002244] font-mono">
+                ₹{isAllIndiaView ? '625.00' : constituency.totalEntitlementCr} Cr
+              </span>
             </div>
             <div className="bg-emerald-50 border border-emerald-300 px-4 py-2 rounded text-center">
               <span className="text-[10px] uppercase font-bold text-emerald-800 block">Expenditure</span>
-              <span className="text-lg font-bold text-emerald-700 font-mono">₹{constituency.totalExpenditureCr} Cr</span>
+              <span className="text-lg font-bold text-emerald-700 font-mono">
+                ₹{isAllIndiaView ? '458.20' : constituency.totalExpenditureCr} Cr
+              </span>
             </div>
             <div className="bg-red-50 border border-red-300 px-4 py-2 rounded text-center">
               <span className="text-[10px] uppercase font-bold text-red-800 block">At-Risk Funds</span>
-              <span className="text-lg font-bold text-red-700 font-mono">₹{(totalFlaggedFunds / 100).toFixed(2)} Cr</span>
+              <span className="text-lg font-bold text-red-700 font-mono">
+                ₹{(totalFlaggedFunds / 100).toFixed(2)} Cr
+              </span>
             </div>
           </div>
         </div>
@@ -168,6 +389,63 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
         )}
       </div>
 
+      {/* 2.5 All-India State Matrix Grid (Only Shown in All-India Mode) */}
+      {isAllIndiaView && (
+        <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <div>
+              <h2 className="text-base font-bold text-[#002244] font-serif flex items-center gap-2">
+                <Globe className="w-4 h-4 text-[#0B3D91]" />
+                <span>All-India State Vigilance Matrix (13 States & UTs)</span>
+              </h2>
+              <p className="text-xs text-slate-500">
+                Click any State card to drill down into its local Parliamentary Constituencies and projects
+              </p>
+            </div>
+            <span className="text-xs font-mono font-bold text-[#0B3D91] bg-blue-50 px-2.5 py-1 rounded border border-blue-200">
+              25 Constituencies • 320 Projects Monitored
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {ALL_STATES.map((stateName) => {
+              const stateConsts = getConstituenciesByState(stateName);
+              const isSelected = selectedStateFilter === stateName;
+              return (
+                <div
+                  key={stateName}
+                  onClick={() => handleStateChange(stateName)}
+                  className={`p-3 rounded border transition-all cursor-pointer hover:shadow-md ${
+                    isSelected
+                      ? 'bg-blue-50 border-[#0B3D91] ring-1 ring-[#0B3D91]'
+                      : 'bg-slate-50 hover:bg-white border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-[#002244]">{stateName}</span>
+                    <span className="text-[10px] font-mono font-bold bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded">
+                      {stateConsts.length} {stateConsts.length === 1 ? 'Seat' : 'Seats'}
+                    </span>
+                  </div>
+                  <div className="mt-2 space-y-1">
+                    {stateConsts.map(sc => (
+                      <div key={sc.id} className="text-[11px] text-slate-600 flex items-center justify-between">
+                        <span className="truncate">{sc.name}</span>
+                        <span className="font-mono text-[10px] text-[#0B3D91] font-semibold">{sc.party}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-2 pt-2 border-t border-slate-200 flex items-center justify-between text-[10px] text-[#0B3D91] font-bold">
+                    <span>Audit Jurisdiction</span>
+                    <ChevronRight className="w-3 h-3" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* 3. KPI 4-Card Grid (Official Government Cards) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Critical Anomalies */}
@@ -199,103 +477,68 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
             <span className="text-2xl font-bold text-[#002244] font-mono">
               {works.filter(w => w.satelliteScanId).length} / {works.length}
             </span>
-            <span className="text-xs text-[#0B3D91] ml-2 font-semibold">Scanned</span>
+            <span className="text-xs text-emerald-600 ml-2 font-semibold">Dual-Sensor Pass</span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Sentinel-2 Optical & Sentinel-1 SAR radar cross-verified.
+            Verified via Sentinel-1 SAR backscatter & Sentinel-2 optical imagery.
           </p>
         </div>
 
-        {/* Card 3: Cartel & Collusion Links */}
-        <div className="bg-white border-t-4 border-t-[#FF9933] border border-slate-300 rounded-md p-4 shadow-xs">
+        {/* Card 3: Cartel Rings */}
+        <div className="bg-white border-t-4 border-t-amber-500 border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#002244] uppercase tracking-wide">Cartel Rings Detected</span>
-            <div className="p-1.5 rounded bg-amber-100 text-amber-800">
+            <span className="text-xs font-bold text-amber-800 uppercase tracking-wide">Contractor Cartels</span>
+            <div className="p-1.5 rounded bg-amber-100 text-amber-700">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <span className="text-2xl font-bold text-[#002244] font-mono">1 Major Ring</span>
-            <span className="text-xs text-slate-600 ml-2 font-semibold">(3 Co-bidders)</span>
+            <span className="text-2xl font-bold text-[#002244] font-mono">
+              {isAllIndiaView ? '5 Rings' : '2 Rings'}
+            </span>
+            <span className="text-xs text-amber-700 ml-2 font-semibold">(Shared GSTIN / PAN)</span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            Shared PAN & registered address across 14 tenders.
+            Bid-rigging detected across tenders under GFR Rule 144.
           </p>
         </div>
 
-        {/* Card 4: Statutory SC/ST Quota */}
-        <div className="bg-white border-t-4 border-t-[#138808] border border-slate-300 rounded-md p-4 shadow-xs">
+        {/* Card 4: Statutory Quota Compliance */}
+        <div className="bg-white border-t-4 border-t-emerald-600 border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">SC / ST Statutory Quota</span>
+            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">SC / ST Quota Mandate</span>
             <div className="p-1.5 rounded bg-emerald-100 text-emerald-700">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2">
-            <span className="text-2xl font-bold text-[#002244] font-mono">
-              {constituency.scAllocationPercent}%
+          <div className="mt-2 flex items-baseline gap-2">
+            <span className="text-lg font-bold text-[#002244] font-mono">
+              SC: {constituency.scAllocationPercent}%
             </span>
-            <span className="text-xs text-emerald-700 ml-2 font-semibold">SC (Target 15%)</span>
+            <span className="text-xs text-slate-400">|</span>
+            <span className="text-lg font-bold text-[#002244] font-mono">
+              ST: {constituency.stAllocationPercent}%
+            </span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            ST Quota at {constituency.stAllocationPercent}% (Statutory Target: 7.5%).
+            Statutory Target: ≥15% SC (Para 2.5) & ≥7.5% ST (Para 2.6).
           </p>
         </div>
       </div>
 
-      {/* 4. Analytics Charts Row (Official White Cards) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Risk Distribution Chart */}
-        <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-2">
-              <h3 className="font-bold text-xs text-[#002244] uppercase tracking-wider flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-[#0B3D91]" />
-                Work Integrity Risk Profile (WIRI)
-              </h3>
-            </div>
-            <div className="h-52">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={riskPieData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={50}
-                    outerRadius={80}
-                    paddingAngle={4}
-                    dataKey="value"
-                  >
-                    {riskPieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#CBD5E1', borderRadius: '4px', color: '#1A1A1A', fontSize: '11px' }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-slate-200">
-            {riskPieData.map((item, idx) => (
-              <div key={idx} className="flex items-center space-x-2">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></span>
-                <span className="text-slate-600 text-[11px]">{item.name}:</span>
-                <span className="font-bold text-[#002244] font-mono text-[11px]">{item.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* AI Detection Capabilities Radar */}
+      {/* 4. Visual Analytics: Radar Score & Category Breakdown */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Radar Chart */}
         <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-2">
               <h3 className="font-bold text-xs text-[#002244] uppercase tracking-wider flex items-center gap-2">
                 <Activity className="w-4 h-4 text-[#0B3D91]" />
-                Multi-Modal AI Engine Accuracy
+                Multi-Modal AI Vigilance Diagnostic Vectors
               </h3>
+              <span className="text-[10px] font-mono font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
+                6-Vector Ensemble
+              </span>
             </div>
             <div className="h-52">
               <ResponsiveContainer width="100%" height="100%">
@@ -355,7 +598,9 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
               <span>Priority Vigilance Triage & Audit Roster</span>
             </h2>
             <p className="text-xs text-slate-500">
-              Ranked by composite Work Integrity Risk Index (WIRI Score)
+              {isAllIndiaView 
+                ? 'Showing top works across all 13 states ranked by Work Integrity Risk Index'
+                : `Showing works for ${constituency.name} (${constituency.state}) ranked by composite WIRI Score`}
             </p>
           </div>
 
@@ -406,7 +651,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 bg-white">
-              {filteredWorks.map((work) => {
+              {filteredWorks.slice(0, 30).map((work) => {
                 const isCritical = work.riskLevel === 'CRITICAL';
                 const isHigh = work.riskLevel === 'HIGH';
 

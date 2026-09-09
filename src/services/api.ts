@@ -65,6 +65,7 @@ export const api = {
   async getProjects(params?: {
     category?: string;
     state?: string;
+    constituency?: string;
     risk_band?: string;
     contractor?: string;
     search?: string;
@@ -77,6 +78,7 @@ export const api = {
         const q = new URLSearchParams();
         if (params?.category) q.append('category', params.category);
         if (params?.state) q.append('state', params.state);
+        if (params?.constituency) q.append('constituency', params.constituency);
         if (params?.risk_band) q.append('risk_band', params.risk_band);
         if (params?.contractor) q.append('contractor', params.contractor);
         if (params?.search) q.append('search', params.search);
@@ -98,6 +100,14 @@ export const api = {
     let list = [...memoryProjects];
     if (params?.category) list = list.filter(p => p.category === params.category);
     if (params?.state) list = list.filter(p => p.state === params.state);
+    if (params?.constituency) {
+      const c = params.constituency.toLowerCase();
+      list = list.filter(p => 
+        (p.constituency_name && p.constituency_name.toLowerCase() === c) ||
+        (p.constituency_id && p.constituency_id.toLowerCase() === c) ||
+        (p.constituency_name && p.constituency_name.toLowerCase().includes(c))
+      );
+    }
     if (params?.risk_band) list = list.filter(p => p.risk_band === params.risk_band);
     if (params?.contractor) list = list.filter(p => p.contractor_name.toLowerCase().includes(params.contractor!.toLowerCase()));
     if (params?.search) {

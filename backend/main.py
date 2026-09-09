@@ -208,6 +208,7 @@ def login(creds: LoginRequest):
 def get_projects(
     category: Optional[str] = None,
     state: Optional[str] = None,
+    constituency: Optional[str] = None,
     risk_band: Optional[str] = None,
     contractor: Optional[str] = None,
     search: Optional[str] = None,
@@ -223,6 +224,9 @@ def get_projects(
         filtered = [p for p in filtered if p.get("category") == category]
     if state:
         filtered = [p for p in filtered if p.get("state") == state]
+    if constituency:
+        c_search = constituency.lower()
+        filtered = [p for p in filtered if c_search in p.get("constituency_name", "").lower() or c_search in p.get("constituency_id", "").lower()]
     if risk_band:
         filtered = [p for p in filtered if p.get("risk_band") == risk_band.upper()]
     if contractor:

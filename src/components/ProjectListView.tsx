@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, AlertTriangle, ArrowUpDown, ChevronRight, ShieldAlert, FileText, CheckCircle2, Building, MapPin } from 'lucide-react';
 import { ProjectRecord, Language } from '../types';
+import { ALL_STATES, getConstituenciesByState } from '../utils/projectAdapter';
+import { CONSTITUENCIES } from '../data/mockData';
 import { api } from '../services/api';
 
 interface ProjectListViewProps {
@@ -17,6 +19,7 @@ export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProjec
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedState, setSelectedState] = useState('');
+  const [selectedConstituency, setSelectedConstituency] = useState('');
   const [selectedRiskBand, setSelectedRiskBand] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
   const [page, setPage] = useState(1);
@@ -30,6 +33,7 @@ export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProjec
         search: search || undefined,
         category: selectedCategory || undefined,
         state: selectedState || undefined,
+        constituency: selectedConstituency || undefined,
         risk_band: selectedRiskBand || undefined,
         page,
         limit: 25
@@ -50,7 +54,7 @@ export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProjec
 
   useEffect(() => {
     fetchProjects();
-  }, [search, selectedCategory, selectedState, selectedRiskBand, selectedStatus, page]);
+  }, [search, selectedCategory, selectedState, selectedConstituency, selectedRiskBand, selectedStatus, page]);
 
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6">
@@ -79,19 +83,64 @@ export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProjec
 
       {/* 2. Official Filter Bar */}
       <div className="bg-white border border-slate-300 p-4 rounded-md shadow-xs space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-xs">
-          {/* Search Input */}
-          <div className="relative lg:col-span-2">
-            <input
-              type="text"
-              placeholder={isHi ? 'शीर्षक, वर्क कोड या निर्वाचन क्षेत्र खोजें...' : 'Search title, work code, constituency...'}
-              value={search}
-              onChange={e => { setSearch(e.target.value); setPage(1); }}
-              className="w-full bg-slate-50 border border-slate-300 rounded pl-8 pr-3 py-1.5 text-slate-900 text-xs outline-none focus:bg-white focus:border-[#0B3D91]"
-            />
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+        {/* Row 1: State & Constituency Jurisdictions */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs bg-slate-50 p-2.5 rounded border border-slate-200">
+          {/* State / UT Selector */}
+          <div>
+            <label className="block text-[10px] font-bold text-[#002244] uppercase mb-1">
+              {isHi ? 'राज्य / केंद्र शासित प्रदेश' : 'State / UT Jurisdiction'}
+            </label>
+            <select
+              value={selectedState}
+              onChange={e => { setSelectedState(e.target.value); setSelectedConstituency(''); setPage(1); }}
+              className="w-full bg-white border border-slate-300 rounded px-2.5 py-1.5 text-slate-800 text-xs outline-none focus:border-[#0B3D91] font-medium"
+            >
+              <option value="">{isHi ? 'सभी 13 राज्य (राष्ट्रीय दृश्य)' : 'All 13 States (National View)'}</option>
+              {ALL_STATES.map(st => (
+                <option key={st} value={st}>{st}</option>
+              ))}
+            </select>
           </div>
 
+          {/* Parliamentary Constituency Selector */}
+          <div>
+            <label className="block text-[10px] font-bold text-[#002244] uppercase mb-1">
+              {isHi ? 'संसदीय निर्वाचन क्षेत्र' : 'Parliamentary Constituency'}
+            </label>
+            <select
+              value={selectedConstituency}
+              onChange={e => { setSelectedConstituency(e.target.value); setPage(1); }}
+              className="w-full bg-white border border-slate-300 rounded px-2.5 py-1.5 text-slate-800 text-xs outline-none focus:border-[#0B3D91] font-medium"
+            >
+              <option value="">{isHi ? 'सभी निर्वाचन क्षेत्र (25 सीटें)' : 'All Constituencies (25 LS Seats)'}</option>
+              {(selectedState ? getConstituenciesByState(selectedState) : CONSTITUENCIES).map(c => (
+                <option key={c.id} value={c.name}>
+                  {c.name} ({c.state}) — {c.mpName}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Search Input */}
+          <div className="lg:col-span-2">
+            <label className="block text-[10px] font-bold text-[#002244] uppercase mb-1">
+              {isHi ? 'कीवर्ड खोज (शीर्षक, वर्क कोड)' : 'Keyword / Contractor Search'}
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder={isHi ? 'शीर्षक, वर्क कोड या ठेकेदार खोजें...' : 'Search title, work code, contractor...'}
+                value={search}
+                onChange={e => { setSearch(e.target.value); setPage(1); }}
+                className="w-full bg-white border border-slate-300 rounded pl-8 pr-3 py-1.5 text-slate-900 text-xs outline-none focus:border-[#0B3D91]"
+              />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2" />
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: Category, Risk Band, Workflow Status & Reset */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
           {/* Category Dropdown */}
           <select
             value={selectedCategory}
@@ -132,6 +181,23 @@ export const ProjectListView: React.FC<ProjectListViewProps> = ({ onSelectProjec
             <option value="ESCALATED">ESCALATED</option>
             <option value="CLEARED">CLEARED</option>
           </select>
+
+          {/* Reset Filters Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedState('');
+              setSelectedConstituency('');
+              setSelectedCategory('');
+              setSelectedRiskBand('');
+              setSelectedStatus('');
+              setSearch('');
+              setPage(1);
+            }}
+            className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded text-xs border border-slate-300 transition-colors"
+          >
+            {isHi ? 'फ़िल्टर साफ़ करें' : 'Reset All Filters'}
+          </button>
         </div>
       </div>
 

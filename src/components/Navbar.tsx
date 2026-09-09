@@ -21,7 +21,7 @@ import {
   QrCode,
   Cpu
 } from 'lucide-react';
-import { Language, UserRole } from '../types';
+import { Language, UserRole, Constituency } from '../types';
 import { INDIAN_LANGUAGES, getNavTranslations } from '../utils/languages';
 
 interface NavbarProps {
@@ -40,6 +40,8 @@ interface NavbarProps {
   setFontSize?: (size: 'sm' | 'base' | 'lg') => void;
   onOpenAIDetectionExplainer?: () => void;
   onOpenQRHandoff?: () => void;
+  selectedConstituency?: Constituency;
+  onSelectConstituency?: (c: Constituency) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -57,7 +59,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   fontSize = 'base',
   setFontSize,
   onOpenAIDetectionExplainer,
-  onOpenQRHandoff
+  onOpenQRHandoff,
+  selectedConstituency,
+  onSelectConstituency
 }) => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [langSearch, setLangSearch] = useState('');
@@ -127,6 +131,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right: Accessibility Toolbar & Language Dropdown */}
           <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* Active Parliamentary Jurisdiction Pill */}
+            {selectedConstituency && (
+              <button
+                type="button"
+                onClick={() => setActiveTab('dashboard')}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#001A33] hover:bg-blue-900/60 border border-amber-400/40 text-[11px] text-amber-300 transition-colors cursor-pointer"
+                title="Active Jurisdiction — Click to open Dashboard"
+              >
+                <MapPin className="w-3 h-3 text-amber-400" />
+                <span className="font-bold">{selectedConstituency.name}</span>
+                <span className="text-slate-300 text-[10px]">({selectedConstituency.state})</span>
+              </button>
+            )}
+
             {/* Skip to Main Content Link */}
             <a 
               href="#main-content" 

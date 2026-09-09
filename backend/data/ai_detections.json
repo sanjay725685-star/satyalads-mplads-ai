@@ -1,5 +1,23 @@
 [
   {
+    "id": "AIDEC-1788970990-PATNA_SAHIB-W0080",
+    "work_code": "PATNA_SAHIB-W0080",
+    "timestamp": "2026-09-09T21:53:10.098810",
+    "photo_sha256": "none",
+    "risk_level": "CRITICAL",
+    "confidence": 0.88,
+    "defect_tags": [
+      "Location Boundary Deviation"
+    ],
+    "justification": "High-contrast concrete grain and aggregate binder detected with 91% structural confidence. | Photo GPS deviation (232912.1m) exceeds the mandatory 20m e-SAKSHI perimeter threshold.",
+    "stages_summary": {
+      "cv_status": "COMPLIANT",
+      "ssim_status": "SYNCHRONIZED",
+      "geotag_status": "FLAGGED",
+      "duplicate_status": "UNIQUE"
+    }
+  },
+  {
     "id": "AIDEC-1788970648-PATNA_SAHIB-W0080",
     "work_code": "PATNA_SAHIB-W0080",
     "timestamp": "2026-09-09T21:47:28.570426",

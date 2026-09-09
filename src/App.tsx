@@ -17,6 +17,7 @@ import { PublicTransparencyView } from './components/PublicTransparencyView';
 import { CartelGraph } from './components/CartelGraph';
 import { SatelliteInspector } from './components/SatelliteInspector';
 import { CONSTITUENCIES, WORK_ITEMS } from './data/mockData';
+import { ALL_320_WORK_ITEMS, getWorksForConstituency } from './utils/projectAdapter';
 import { Constituency, WorkItem, ProjectRecord, UserSession, UserRole, Language, NotificationItem } from './types';
 import { api } from './services/api';
 import { Sparkles, X, AlertTriangle, CheckCircle2 } from 'lucide-react';
@@ -90,6 +91,15 @@ export const App: React.FC = () => {
   // Legacy state for compatibility with existing GISMap & SatelliteInspector
   const [selectedConstituency, setSelectedConstituency] = useState<Constituency>(CONSTITUENCIES[0]);
   const [selectedWork, setSelectedWork] = useState<WorkItem | null>(WORK_ITEMS[0]);
+  const [isAllIndiaView, setIsAllIndiaView] = useState<boolean>(false);
+
+  const activeWorks = React.useMemo(() => {
+    if (isAllIndiaView) return ALL_320_WORK_ITEMS;
+    const cWorks = getWorksForConstituency(selectedConstituency.id);
+    if (cWorks.length > 0) return cWorks;
+    const filtered = ALL_320_WORK_ITEMS.filter(w => w.constituencyId === selectedConstituency.id);
+    return filtered.length > 0 ? filtered : WORK_ITEMS;
+  }, [selectedConstituency.id, isAllIndiaView]);
 
   useEffect(() => {
     api.getNotifications().then(res => setNotifications(res.notifications));
@@ -227,6 +237,11 @@ export const App: React.FC = () => {
           setQrWorkCode(selectedProject ? selectedProject.work_code : 'MPLADS/2024-25/UP-VAR-0104');
           setIsQRModalOpen(true);
         }}
+        selectedConstituency={selectedConstituency}
+        onSelectConstituency={(c) => {
+          setSelectedConstituency(c);
+          setIsAllIndiaView(false);
+        }}
       />
 
       {/* Live AI Scan Notification Banner */}
@@ -286,13 +301,23 @@ export const App: React.FC = () => {
         {activeTab === 'dashboard' && (
           <OverviewDashboard
             constituency={selectedConstituency}
-            works={WORK_ITEMS}
+            works={activeWorks}
             onSelectWork={(w) => {
               setSelectedWork(w);
               setActiveTab('gis_map');
             }}
             onNavigateTab={setActiveTab}
             onTriggerScan={handleTriggerScan}
+            allConstituencies={CONSTITUENCIES}
+            onSelectConstituency={(c) => {
+              setSelectedConstituency(c);
+              setIsAllIndiaView(false);
+              const works = getWorksForConstituency(c.id);
+              if (works.length > 0) setSelectedWork(works[0]);
+            }}
+            isAllIndiaView={isAllIndiaView}
+            onToggleAllIndia={(val) => setIsAllIndiaView(val)}
+            lang={lang}
           />
         )}
 
@@ -315,7 +340,7 @@ export const App: React.FC = () => {
         {activeTab === 'gis_map' && (
           <GISMap
             constituency={selectedConstituency}
-            works={WORK_ITEMS}
+            works={activeWorks.length > 0 ? activeWorks : WORK_ITEMS}
             selectedWork={selectedWork}
             onSelectWork={(w) => setSelectedWork(w)}
             onNavigateTab={setActiveTab}

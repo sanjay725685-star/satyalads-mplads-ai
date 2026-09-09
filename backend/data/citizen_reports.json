@@ -1,5 +1,27 @@
 [
   {
+    "id": "CR-003",
+    "workId": "MPLADS-2024-25-PATNA_SAHIB-0080",
+    "workTitle": "Establishment of Community RO Drinking Water Plant at Kankarbagh",
+    "citizenName": "Ramesh Chandra Ground Auditor",
+    "phoneMasked": "+91 94150 XXXXX",
+    "submissionDate": "Just Now",
+    "lat": 25.2655,
+    "lng": 82.9126,
+    "distanceFromAssetMeters": 232912.1,
+    "photoUrl": "/site_photos/mobile_json_1788970989.jpg",
+    "voiceNoteTranscript": "Road has not been laid. Entire stretch is mud and boulders.",
+    "language": "Hindi / English",
+    "aiDefectTags": [
+      "Location Boundary Deviation"
+    ],
+    "aiExplanation": "High-contrast concrete grain and aggregate binder detected with 91% structural confidence. | Photo GPS deviation (232912.1m) exceeds the mandatory 20m e-SAKSHI perimeter threshold.",
+    "aiConfidence": 0.88,
+    "citizenRating": 1,
+    "status": "INVESTIGATION_ORDERED",
+    "deviceInfo": "Mobile Web Citizen Client"
+  },
+  {
     "id": "CR-001",
     "workId": "W001",
     "workTitle": "Construction of CC Road from Rohania Canal to PHC",
