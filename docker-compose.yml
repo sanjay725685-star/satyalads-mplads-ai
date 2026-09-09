@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: satyalads_db
+    environment:
+      POSTGRES_DB: satya_lads
+      POSTGRES_USER: satya_admin
+      POSTGRES_PASSWORD: SatyaSecure2026Password!
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - satyalads_net
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: satyalads_backend
+    environment:
+      DATABASE_URL: postgresql://satya_admin:SatyaSecure2026Password!@db:5432/satya_lads
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped
+    networks:
+      - satyalads_net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: satyalads_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - satyalads_net
+
+volumes:
+  pgdata:
+
+networks:
+  satyalads_net:
+    driver: bridge

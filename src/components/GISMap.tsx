@@ -192,6 +192,67 @@ export const GISMap: React.FC<GISMapProps> = ({
           });
           buffersLayerRef.current?.addLayer(zoneCircle);
         }
+
+        // Plot Photo EXIF location mismatch with dashed connecting line (Module 5 Headline Feature)
+        const photoLat = (work as any).photo_exif_lat;
+        const photoLng = (work as any).photo_exif_lng;
+        if (photoLat && photoLng && (isCritical || isHigh)) {
+          const dLat = photoLat - work.lat;
+          const dLng = photoLng - work.lng;
+          const approxDistM = Math.round(Math.sqrt(dLat * dLat + dLng * dLng) * 111000);
+
+          if (approxDistM > 500) {
+            // Photo Location Marker (Red Camera Pin)
+            const photoIcon = L.divIcon({
+              className: 'custom-photo-marker',
+              html: `
+                <div style="
+                  background: #ef4444;
+                  width: 24px;
+                  height: 24px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #fff;
+                  font-size: 10px;
+                  border: 2px solid #ffffff;
+                  box-shadow: 0 0 12px #ef4444;
+                  cursor: pointer;
+                  transform: translate(-50%, -50%);
+                ">
+                  📷
+                </div>
+              `,
+              iconSize: [24, 24],
+              iconAnchor: [12, 12]
+            });
+
+            const photoMarker = L.marker([photoLat, photoLng], { icon: photoIcon });
+            photoMarker.bindPopup(`
+              <div style="padding: 6px; font-family: sans-serif; font-size: 11px;">
+                <div style="font-weight: bold; color: #ef4444;">⚠️ Photo EXIF Location Mismatch</div>
+                <div style="color: #fff; margin: 3px 0;">Photo taken ${approxDistM}m away from claimed site!</div>
+                <div style="color: #94a3b8; font-family: monospace;">GPS: ${photoLat.toFixed(4)}°N, ${photoLng.toFixed(4)}°E</div>
+              </div>
+            `);
+            markersLayerRef.current?.addLayer(photoMarker);
+
+            // Red Dashed Line connecting Claimed Site and Photo Location
+            const dashedLine = L.polyline([[work.lat, work.lng], [photoLat, photoLng]], {
+              color: '#ef4444',
+              weight: 2.5,
+              dashArray: '6, 8',
+              opacity: 0.85
+            });
+            dashedLine.bindPopup(`
+              <div style="font-size: 11px; font-family: sans-serif; color: #ef4444; font-weight: bold;">
+                ⚠️ Geotag Discrepancy: ${approxDistM} meters
+              </div>
+            `);
+            buffersLayerRef.current?.addLayer(dashedLine);
+          }
+        }
       });
 
       // Pan to selected work safely if valid

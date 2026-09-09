@@ -226,3 +226,113 @@ export interface WIRIBreakdown {
   };
   auditRecommendations: string[];
 }
+
+
+// --- SATYALADS FULL-STACK 320-PROJECT AUDIT SENTINEL TYPES ---
+export type WorkflowStatus = 'UNDER_REVIEW' | 'FLAGGED' | 'ESCALATED' | 'CLEARED';
+export type UserRole = 'auditor' | 'nodal_officer' | 'admin';
+export type Language = 'en' | 'hi';
+
+export interface DetectionFlag {
+  module: string;
+  type?: string;
+  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  confidence: number;
+  title: string;
+  description: string;
+  metric_cited: string;
+  conflicting_work_id?: string;
+  conflicting_work_code?: string;
+  distance_meters?: number;
+  photo_coordinates?: { lat: number; lng: number };
+  claimed_coordinates?: { lat: number; lng: number };
+  gfr_citation?: string;
+  z_score?: number;
+  category_median_lakhs?: number;
+  cartel_members?: string[];
+  shared_attributes?: string[];
+  [key: string]: any;
+}
+
+export interface PhotoVerification {
+  project_id?: string;
+  has_gps: boolean;
+  photo_lat: number | null;
+  photo_lng: number | null;
+  photo_timestamp: string | null;
+  distance_meters: number | null;
+  is_verified: boolean;
+  flags: DetectionFlag[];
+  [key: string]: any;
+}
+
+export interface ProjectRecord {
+  id: string;
+  work_code: string;
+  title: string;
+  category: string;
+  constituency_id: string;
+  constituency_name: string;
+  state: string;
+  district: string;
+  mp_name: string;
+  sanctioned_cost_lakhs: number;
+  expenditure_lakhs: number;
+  latitude: number;
+  longitude: number;
+  sanction_date: string;
+  target_completion_date: string;
+  contractor_name: string;
+  contractor_pan: string;
+  contractor_gstin: string;
+  contractor_phone: string;
+  contractor_address: string;
+  site_photo_url: string;
+  photo_exif_lat?: number | null;
+  photo_exif_lng?: number | null;
+  photo_exif_timestamp?: string | null;
+  workflow_status: WorkflowStatus;
+  seed_type?: string;
+  risk_score: number;
+  risk_band: RiskLevel;
+  flags: DetectionFlag[];
+  photo_verification?: PhotoVerification;
+  [key: string]: any;
+}
+
+export interface DashboardStats {
+  total_projects: number;
+  total_sanctioned_cr: number;
+  total_flagged_projects: number;
+  flagged_risk_cr: number;
+  roi_saved_metric: string;
+  risk_distribution: { band: string; count: number; color: string }[];
+  category_breakdown: {
+    category: string;
+    total: number;
+    flagged: number;
+    clean: number;
+    total_cost_lakhs: number;
+  }[];
+  [key: string]: any;
+}
+
+export interface NotificationItem {
+  id: string;
+  project_id: string;
+  work_code: string;
+  title: string;
+  category: string;
+  severity: string;
+  description: string;
+  timestamp: string;
+  [key: string]: any;
+}
+
+export interface UserSession {
+  username: string;
+  role: UserRole;
+  title: string;
+  state_jurisdiction: string;
+  token: string;
+}

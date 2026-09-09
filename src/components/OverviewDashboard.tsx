@@ -39,13 +39,15 @@ interface OverviewDashboardProps {
   works: WorkItem[];
   onSelectWork: (work: WorkItem) => void;
   onNavigateTab: (tab: string) => void;
+  onTriggerScan?: () => void;
 }
 
 export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   constituency,
   works,
   onSelectWork,
-  onNavigateTab
+  onNavigateTab,
+  onTriggerScan
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [riskFilter, setRiskFilter] = useState<string>('ALL');

@@ -26,3 +26,13 @@ dist-ssr
 
 # Temporary scripts
 create_desktop_shortcut.ps1
+proj.html
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+.pytest_cache/
+.env
+
