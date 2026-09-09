@@ -61,11 +61,22 @@ export const App: React.FC = () => {
   const [isAIExplainerOpen, setIsAIExplainerOpen] = useState<boolean>(false);
   const [aiExplainerWorkCode, setAiExplainerWorkCode] = useState<string>('MPLADS/2024-25/UP-VAR-0104');
 
-  // Handle URL hash changes
+  // Handle URL hash and feature routes changes
   useEffect(() => {
     const handleUrlChange = () => {
       setDirectCaptureCode(parseDirectCaptureCode());
+      
+      // Check feature deep routes
+      const p = window.location.pathname;
+      if (p.includes('/features/detection-engine')) {
+        window.location.hash = '#detection-engine';
+      } else if (p.includes('/features/geotag-verification')) {
+        window.location.hash = '#geotag-verification';
+      } else if (p.includes('/compliance/gfr-2017')) {
+        window.location.hash = '#gfr-citations';
+      }
     };
+    handleUrlChange();
     window.addEventListener('popstate', handleUrlChange);
     window.addEventListener('hashchange', handleUrlChange);
     return () => {
