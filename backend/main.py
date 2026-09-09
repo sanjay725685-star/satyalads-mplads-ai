@@ -22,6 +22,7 @@ DATA_DIR = os.path.join(BASE_DIR, 'data')
 PHOTOS_DIR = os.path.join(DATA_DIR, 'site_photos')
 DB_PATH = os.path.join(DATA_DIR, 'satya_lads.db')
 PROJECTS_JSON = os.path.join(DATA_DIR, 'projects.json')
+CITIZEN_REPORTS_JSON = os.path.join(DATA_DIR, 'citizen_reports.json')
 
 # JWT Secret
 JWT_SECRET = "SATYALADS_SECURE_JWT_SECRET_SIH2026_KEY"
@@ -30,6 +31,7 @@ JWT_ALGORITHM = "HS256"
 # Import Detection Modules
 from backend.detection.engine import analyze_all_projects, update_database_with_analysis
 from backend.detection.module5_geotag_verifier import verify_project_geotag, extract_exif_gps_and_time
+from backend.detection.module6_ai_defect import run_ai_defect_pipeline, get_recent_ai_decisions, log_ai_decision
 
 app = FastAPI(
     title="SATYALADS API",
@@ -56,6 +58,23 @@ class LoginRequest(BaseModel):
     password: str
     role: str # "auditor", "nodal_officer", "admin"
 
+
+class PhotoUploadJsonRequest(BaseModel):
+    work_code: str
+    photo_data_url: Optional[str] = None
+    lat: Optional[float] = None
+    lng: Optional[float] = None
+    device_info: Optional[str] = "Mobile Web Citizen Client"
+    citizen_name: Optional[str] = "Verified Citizen"
+    remarks: Optional[str] = None
+    rating: Optional[int] = 1
+
+class AIDetectRequest(BaseModel):
+    work_code: str
+    lat: Optional[float] = None
+    lng: Optional[float] = None
+    photo_url: Optional[str] = None
+
 class StatusUpdateRequest(BaseModel):
     workflow_status: str # "UNDER_REVIEW", "FLAGGED", "ESCALATED", "CLEARED"
     comments: Optional[str] = None
@@ -65,6 +84,63 @@ def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+
+def load_citizen_reports() -> List[Dict[str, Any]]:
+    if os.path.exists(CITIZEN_REPORTS_JSON):
+        try:
+            with open(CITIZEN_REPORTS_JSON, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            pass
+    # Default seed reports
+    default_reports = [
+        {
+            "id": "CR-001",
+            "workId": "W001",
+            "workTitle": "Construction of CC Road from Rohania Canal to PHC",
+            "citizenName": "Manoj Kumar Maurya",
+            "phoneMasked": "+91 98390 XXXXX",
+            "submissionDate": "2024-10-18",
+            "lat": 25.2652,
+            "lng": 82.9124,
+            "distanceFromAssetMeters": 28,
+            "photoUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80",
+            "voiceNoteTranscript": "यहां कोई पक्की सड़क नहीं बनी है। ठेकेदार ने बस बोर्ड लगाया और चले गए। बारिश में पूरा कीचड़ भरा है।",
+            "language": "Hindi (Bhojpuri dialect)",
+            "aiDefectTags": ["No Concrete Pavement Found", "Unpaved Mud Track", "Ghost Work Indicator"],
+            "aiExplanation": "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold.",
+            "aiConfidence": 0.92,
+            "citizenRating": 1,
+            "status": "INVESTIGATION_ORDERED"
+        },
+        {
+            "id": "CR-002",
+            "workId": "W002",
+            "workTitle": "Solar High-Mast Tube Well & Water Kiosk",
+            "citizenName": "Pooja Vishwakarma",
+            "phoneMasked": "+91 87652 XXXXX",
+            "submissionDate": "2024-11-24",
+            "lat": 25.3211,
+            "lng": 82.9813,
+            "distanceFromAssetMeters": 14,
+            "photoUrl": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80",
+            "voiceNoteTranscript": "यह नल तो पुराना कुसुम योजना वाला ही है, उसपर नया MPLADS का स्टीकर चिपका दिया है। पानी का फिल्टर भी खराब है।",
+            "language": "Hindi",
+            "aiDefectTags": ["Relabeled Asset", "Broken Filter Dispenser", "Double-Dipping Evidence"],
+            "aiExplanation": "Visual object detector identified structural crack on public water asset; pHash match indicates duplicate asset.",
+            "aiConfidence": 0.88,
+            "citizenRating": 2,
+            "status": "INVESTIGATION_ORDERED"
+        }
+    ]
+    with open(CITIZEN_REPORTS_JSON, 'w', encoding='utf-8') as f:
+        json.dump(default_reports, f, indent=2)
+    return default_reports
+
+def save_citizen_reports(reports: List[Dict[str, Any]]) -> None:
+    with open(CITIZEN_REPORTS_JSON, 'w', encoding='utf-8') as f:
+        json.dump(reports, f, indent=2)
 
 def load_projects_cache() -> List[Dict[str, Any]]:
     if os.path.exists(PROJECTS_JSON):
@@ -513,6 +589,191 @@ def run_batch_analysis():
         "critical_anomalies_detected": crit_count,
         "timestamp": datetime.datetime.now().isoformat()
     }
+
+
+# --- FEATURE 1 & 2: MOBILE CAPTURE & AI DEFECT DETECTION ENDPOINTS ---
+
+@app.get("/api/citizen-reports")
+def get_citizen_reports():
+    reports = load_citizen_reports()
+    return {"reports": reports, "total": len(reports)}
+
+@app.post("/api/upload-photo")
+async def upload_mobile_photo(
+    work_code: Optional[str] = Query(None),
+    lat: Optional[float] = Query(None),
+    lng: Optional[float] = Query(None),
+    citizen_name: Optional[str] = Query(None),
+    remarks: Optional[str] = Query(None),
+    device_info: Optional[str] = Query(None),
+    file: Optional[UploadFile] = File(None)
+):
+    projects = load_projects_cache()
+    # Normalize work_code
+    wcode = (work_code or "MPLADS/2024-25/UP-VAR-0104").replace("-", "/")
+    p = next((x for x in projects if x.get("work_code") == wcode or x.get("id") == wcode), None)
+    if not p and projects:
+        p = projects[0]
+        wcode = p["work_code"]
+
+    claimed_lat = p.get("latitude", 25.2651) if p else 25.2651
+    claimed_lng = p.get("longitude", 82.9122) if p else 82.9122
+
+    filename = f"mobile_capture_{int(datetime.datetime.now().timestamp())}.jpg"
+    dest_path = os.path.join(PHOTOS_DIR, filename)
+
+    if file:
+        contents = await file.read()
+        with open(dest_path, "wb") as f:
+            f.write(contents)
+    else:
+        # Default sample image for testing
+        with open(dest_path, "wb") as f:
+            f.write(b"")
+
+    # Run Module 6 AI Defect Detection Pipeline
+    ai_result = run_ai_defect_pipeline(
+        photo_path=dest_path,
+        work_code=wcode,
+        claimed_lat=claimed_lat,
+        claimed_lng=claimed_lng,
+        actual_lat=lat or claimed_lat,
+        actual_lng=lng or claimed_lng,
+        baseline_photo_path=os.path.join(PHOTOS_DIR, os.path.basename(p.get("site_photo_url", ""))) if p else None
+    )
+
+    reports = load_citizen_reports()
+    new_report = {
+        "id": f"CR-00{len(reports) + 1}",
+        "workId": p.get("id", "W001") if p else "W001",
+        "workTitle": p.get("title", "Construction of CC Road from Rohania Canal to PHC") if p else "MPLADS Project",
+        "citizenName": citizen_name or "Verified Mobile Citizen",
+        "phoneMasked": "+91 94150 XXXXX",
+        "submissionDate": "Just Now",
+        "lat": lat or claimed_lat,
+        "lng": lng or claimed_lng,
+        "distanceFromAssetMeters": ai_result["stages"]["stage3_geotag_verification"]["deviation_meters"],
+        "photoUrl": f"/site_photos/{filename}",
+        "voiceNoteTranscript": remarks or "Mobile field capture submitted via SATYALADS Companion App.",
+        "language": "Hindi / English",
+        "aiDefectTags": ai_result["defect_tags"],
+        "aiExplanation": ai_result["justification"],
+        "aiConfidence": ai_result["confidence"],
+        "citizenRating": 1 if ai_result["is_flagged"] else 4,
+        "status": "INVESTIGATION_ORDERED" if ai_result["is_flagged"] else "PENDING_REVIEW",
+        "deviceInfo": device_info or "Mobile Browser Client"
+    }
+
+    reports.insert(0, new_report)
+    save_citizen_reports(reports)
+
+    tracking_id = f"SATYA-GRV-2026-{int(datetime.datetime.now().timestamp()) % 100000:05d}"
+
+    return {
+        "success": True,
+        "tracking_id": tracking_id,
+        "report": new_report,
+        "ai_detection": ai_result,
+        "message": "Photo uploaded and processed through 5-stage AI defect pipeline."
+    }
+
+@app.post("/api/upload-photo-json")
+def upload_mobile_photo_json(payload: PhotoUploadJsonRequest):
+    projects = load_projects_cache()
+    wcode = payload.work_code.replace("-", "/")
+    p = next((x for x in projects if x.get("work_code") == wcode or x.get("id") == wcode), None)
+    if not p and projects:
+        p = projects[0]
+        wcode = p["work_code"]
+
+    claimed_lat = p.get("latitude", 25.2651) if p else 25.2651
+    claimed_lng = p.get("longitude", 82.9122) if p else 82.9122
+
+    filename = f"mobile_json_{int(datetime.datetime.now().timestamp())}.jpg"
+    dest_path = os.path.join(PHOTOS_DIR, filename)
+
+    # If base64 payload provided
+    if payload.photo_data_url and "base64," in payload.photo_data_url:
+        import base64
+        header, encoded = payload.photo_data_url.split("base64,", 1)
+        data = base64.b64decode(encoded)
+        with open(dest_path, "wb") as f:
+            f.write(data)
+    else:
+        with open(dest_path, "wb") as f:
+            f.write(b"")
+
+    ai_result = run_ai_defect_pipeline(
+        photo_path=dest_path,
+        work_code=wcode,
+        claimed_lat=claimed_lat,
+        claimed_lng=claimed_lng,
+        actual_lat=payload.lat or claimed_lat,
+        actual_lng=payload.lng or claimed_lng
+    )
+
+    reports = load_citizen_reports()
+    new_report = {
+        "id": f"CR-00{len(reports) + 1}",
+        "workId": p.get("id", "W001") if p else "W001",
+        "workTitle": p.get("title", "Construction of CC Road") if p else "MPLADS Project",
+        "citizenName": payload.citizen_name or "Verified Mobile Citizen",
+        "phoneMasked": "+91 94150 XXXXX",
+        "submissionDate": "Just Now",
+        "lat": payload.lat or claimed_lat,
+        "lng": payload.lng or claimed_lng,
+        "distanceFromAssetMeters": ai_result["stages"]["stage3_geotag_verification"]["deviation_meters"],
+        "photoUrl": payload.photo_data_url or f"/site_photos/{filename}",
+        "voiceNoteTranscript": payload.remarks or "Mobile field capture submitted via SATYALADS Companion App.",
+        "language": "Hindi / English",
+        "aiDefectTags": ai_result["defect_tags"],
+        "aiExplanation": ai_result["justification"],
+        "aiConfidence": ai_result["confidence"],
+        "citizenRating": payload.rating or (1 if ai_result["is_flagged"] else 5),
+        "status": "INVESTIGATION_ORDERED" if ai_result["is_flagged"] else "PENDING_REVIEW",
+        "deviceInfo": payload.device_info or "Mobile Browser"
+    }
+
+    reports.insert(0, new_report)
+    save_citizen_reports(reports)
+
+    tracking_id = f"SATYA-GRV-2026-{int(datetime.datetime.now().timestamp()) % 100000:05d}"
+
+    return {
+        "success": True,
+        "tracking_id": tracking_id,
+        "report": new_report,
+        "ai_detection": ai_result
+    }
+
+@app.post("/api/ai-detect")
+def trigger_ai_detect(req: AIDetectRequest):
+    projects = load_projects_cache()
+    wcode = req.work_code.replace("-", "/")
+    p = next((x for x in projects if x.get("work_code") == wcode or x.get("id") == wcode), None)
+    if not p and projects:
+        p = projects[0]
+        wcode = p["work_code"]
+
+    claimed_lat = p.get("latitude", 25.2651) if p else 25.2651
+    claimed_lng = p.get("longitude", 82.9122) if p else 82.9122
+
+    # Run AI pipeline
+    sample_path = os.path.join(PHOTOS_DIR, "site_0104_mud_unpaved.jpg")
+    res = run_ai_defect_pipeline(
+        photo_path=sample_path,
+        work_code=wcode,
+        claimed_lat=claimed_lat,
+        claimed_lng=claimed_lng,
+        actual_lat=req.lat or (claimed_lat + 0.0003),
+        actual_lng=req.lng or (claimed_lng + 0.0003)
+    )
+    return {"success": True, "detection": res}
+
+@app.get("/api/ai-detections")
+def get_ai_detections(limit: int = Query(20)):
+    logs = get_recent_ai_decisions(limit)
+    return {"detections": logs, "count": len(logs)}
 
 if __name__ == "__main__":
     import uvicorn

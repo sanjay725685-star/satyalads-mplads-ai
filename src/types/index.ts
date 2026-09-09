@@ -208,6 +208,9 @@ export interface CitizenReport {
   voiceNoteTranscript?: string;
   language: string;
   aiDefectTags: string[];
+  aiExplanation?: string;
+  aiConfidence?: number;
+  deviceInfo?: string;
   citizenRating: 1 | 2 | 3 | 4 | 5;
   status: 'PENDING_REVIEW' | 'INVESTIGATION_ORDERED' | 'DISMISSED';
 }
@@ -357,4 +360,56 @@ export interface UserSession {
   title: string;
   state_jurisdiction: string;
   token: string;
+}
+
+
+export interface AIDetectionStage {
+  model?: string;
+  algorithm?: string;
+  rule?: string;
+  detected_classes?: string[];
+  confidence?: number;
+  structural_similarity_index?: number;
+  threshold?: number;
+  claimed_coords?: [number, number];
+  photo_coords?: [number, number];
+  deviation_meters?: number;
+  threshold_meters?: number;
+  hash?: string;
+  duplicate_found?: boolean;
+  conflicting_work_code?: string | null;
+  status: 'FLAGGED' | 'COMPLIANT' | 'SYNCHRONIZED' | 'VERIFIED' | 'UNIQUE';
+}
+
+export interface AIDetectionResult {
+  work_code: string;
+  timestamp: string;
+  is_flagged: boolean;
+  risk_level: 'CRITICAL' | 'HIGH' | 'LOW';
+  confidence: number;
+  defect_tags: string[];
+  justification: string;
+  stages: {
+    stage1_cv_classification: AIDetectionStage;
+    stage2_before_after: AIDetectionStage;
+    stage3_geotag_verification: AIDetectionStage;
+    stage4_duplicate_detection: AIDetectionStage;
+  };
+}
+
+export interface AIDecisionLog {
+  id: string;
+  work_code: string;
+  timestamp: string;
+  photo_sha256: string;
+  risk_level: string;
+  confidence: number;
+  defect_tags: string[];
+  justification: string;
+  stages_summary: {
+    cv_status: string;
+    ssim_status: string;
+    geotag_status: string;
+    duplicate_status: string;
+  };
 }

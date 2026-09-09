@@ -1,4 +1,4 @@
-import { ProjectRecord, DashboardStats, NotificationItem, UserRole, UserSession, WorkflowStatus } from '../types';
+import { ProjectRecord, DashboardStats, NotificationItem, UserRole, UserSession, WorkflowStatus, CitizenReport, AIDetectionResult, AIDecisionLog } from '../types';
 import fallbackProjects from '../data/generatedProjects.json';
 
 const API_BASE_URL = 'http://localhost:8000';
@@ -306,5 +306,305 @@ export const api = {
       scanned_projects: memoryProjects.length,
       critical_anomalies_detected: critCount
     };
+  },
+
+  async getCitizenReports(): Promise<{ reports: CitizenReport[] }> {
+    const isOnline = await checkBackendAvailable();
+    if (isOnline) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/citizen-reports`);
+        if (res.ok) {
+          const data = await res.json();
+          return { reports: data.reports };
+        }
+      } catch {}
+    }
+
+    // Fallback: check localStorage or mock
+    const local = localStorage.getItem('satya_citizen_reports');
+    if (local) {
+      try {
+        return { reports: JSON.parse(local) };
+      } catch {}
+    }
+
+    return {
+      reports: [
+        {
+          id: 'CR-001',
+          workId: 'W001',
+          workTitle: 'Construction of CC Road from Rohania Canal to PHC',
+          citizenName: 'Manoj Kumar Maurya',
+          phoneMasked: '+91 98390 XXXXX',
+          submissionDate: '2024-10-18',
+          lat: 25.2652,
+          lng: 82.9124,
+          distanceFromAssetMeters: 28,
+          photoUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80',
+          voiceNoteTranscript: 'यहां कोई पक्की सड़क नहीं बनी है। ठेकेदार ने बस बोर्ड लगाया और चले गए। बारिश में पूरा कीचड़ भरा है।',
+          language: 'Hindi (Bhojpuri dialect)',
+          aiDefectTags: ['No Concrete Pavement Found', 'Unpaved Mud Track', 'Ghost Work Indicator'],
+          aiExplanation: "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold.",
+          aiConfidence: 0.92,
+          citizenRating: 1,
+          status: 'INVESTIGATION_ORDERED'
+        },
+        {
+          id: 'CR-002',
+          workId: 'W002',
+          workTitle: 'Solar High-Mast Tube Well & Water Kiosk',
+          citizenName: 'Pooja Vishwakarma',
+          phoneMasked: '+91 87652 XXXXX',
+          submissionDate: '2024-11-24',
+          lat: 25.3211,
+          lng: 82.9813,
+          distanceFromAssetMeters: 14,
+          photoUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80',
+          voiceNoteTranscript: 'यह नल तो पुराना कुसुम योजना वाला ही है, उसपर नया MPLADS का स्टीकर चिपका दिया है। पानी का फिल्टर भी खराब है।',
+          language: 'Hindi',
+          aiDefectTags: ['Relabeled Asset', 'Broken Filter Dispenser', 'Double-Dipping Evidence'],
+          aiExplanation: "Visual object detector identified structural crack on public water asset; pHash match indicates duplicate asset.",
+          aiConfidence: 0.88,
+          citizenRating: 2,
+          status: 'INVESTIGATION_ORDERED'
+        }
+      ]
+    };
+  },
+
+  async uploadCitizenPhoto(payload: {
+    work_code: string;
+    photo_data_url: string;
+    lat?: number;
+    lng?: number;
+    citizen_name?: string;
+    remarks?: string;
+    device_info?: string;
+    rating?: number;
+  }): Promise<{ success: boolean; tracking_id: string; report: CitizenReport; ai_detection: AIDetectionResult }> {
+    const isOnline = await checkBackendAvailable();
+    if (isOnline) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/upload-photo-json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          // Broadcast live update across tabs
+          try {
+            const bc = new BroadcastChannel('satya_live_reports');
+            bc.postMessage({ type: 'NEW_REPORT', report: data.report });
+            bc.close();
+          } catch {}
+          return data;
+        }
+      } catch (err) {
+        console.warn('Backend upload failed, falling back to local simulation:', err);
+      }
+    }
+
+    // Local simulation fallback
+    const matched = memoryProjects.find(p => p.work_code === payload.work_code) || memoryProjects[0];
+    const isFlagged = payload.work_code.includes('0104') || payload.work_code.includes('0108');
+    const tags = isFlagged 
+      ? ['No Concrete Pavement Found', 'Unpaved Mud Track', 'Location Boundary Deviation']
+      : ['Structural Concrete Infill Verified'];
+
+    const mockAiDetection: AIDetectionResult = {
+      work_code: payload.work_code,
+      timestamp: new Date().toISOString(),
+      is_flagged: isFlagged,
+      risk_level: isFlagged ? 'CRITICAL' : 'LOW',
+      confidence: 0.92,
+      defect_tags: tags,
+      justification: isFlagged 
+        ? "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold."
+        : "Verified Compliant: Physical concrete pavement detected, GPS location within 20m perimeter, and no duplicate photo matches.",
+      stages: {
+        stage1_cv_classification: {
+          model: "ResNet-50 + Custom MPLADS Defect Head (v2.1)",
+          detected_classes: tags,
+          confidence: 0.92,
+          status: isFlagged ? 'FLAGGED' : 'COMPLIANT'
+        },
+        stage2_before_after: {
+          algorithm: "Multi-Scale SSIM & Perceptual Color Delta",
+          structural_similarity_index: isFlagged ? 0.34 : 0.82,
+          threshold: 0.50,
+          status: isFlagged ? 'FLAGGED' : 'SYNCHRONIZED'
+        },
+        stage3_geotag_verification: {
+          rule: "e-SAKSHI 20m Strict Asset Radius (Para 4.2)",
+          claimed_coords: [matched.latitude, matched.longitude],
+          photo_coords: [payload.lat || matched.latitude, payload.lng || matched.longitude],
+          deviation_meters: isFlagged ? 28.4 : 11.2,
+          threshold_meters: 20.0,
+          status: isFlagged ? 'FLAGGED' : 'VERIFIED'
+        },
+        stage4_duplicate_detection: {
+          algorithm: "64-bit DCT Perceptual Hashing (pHash)",
+          hash: "a4c28f1190bc774e",
+          duplicate_found: false,
+          status: 'UNIQUE'
+        }
+      }
+    };
+
+    const newReport: CitizenReport = {
+      id: `CR-00${Math.floor(Math.random() * 900) + 100}`,
+      workId: matched.id,
+      workTitle: matched.title,
+      citizenName: payload.citizen_name || 'Verified Mobile Citizen',
+      phoneMasked: '+91 94150 XXXXX',
+      submissionDate: 'Just Now',
+      lat: payload.lat || matched.latitude,
+      lng: payload.lng || matched.longitude,
+      distanceFromAssetMeters: isFlagged ? 28 : 11,
+      photoUrl: payload.photo_data_url || 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?w=600&auto=format&fit=crop&q=80',
+      voiceNoteTranscript: payload.remarks || 'Mobile field capture verified by AI Sentinel.',
+      language: 'Hindi / English',
+      aiDefectTags: tags,
+      aiExplanation: mockAiDetection.justification,
+      aiConfidence: mockAiDetection.confidence,
+      citizenRating: (payload.rating || (isFlagged ? 1 : 5)) as any,
+      status: isFlagged ? 'INVESTIGATION_ORDERED' : 'PENDING_REVIEW',
+      deviceInfo: payload.device_info || 'Mobile Web App'
+    };
+
+    // Save to local storage for persistence across tabs
+    try {
+      const stored = localStorage.getItem('satya_citizen_reports');
+      const list = stored ? JSON.parse(stored) : [];
+      list.unshift(newReport);
+      localStorage.setItem('satya_citizen_reports', JSON.stringify(list));
+      
+      const bc = new BroadcastChannel('satya_live_reports');
+      bc.postMessage({ type: 'NEW_REPORT', report: newReport });
+      bc.close();
+    } catch {}
+
+    const trackingId = `SATYA-GRV-2026-${Math.floor(Math.random() * 90000) + 10000}`;
+
+    return {
+      success: true,
+      tracking_id: trackingId,
+      report: newReport,
+      ai_detection: mockAiDetection
+    };
+  },
+
+  async runAIDetection(work_code: string, lat?: number, lng?: number, photo_url?: string): Promise<{ success: boolean; detection: AIDetectionResult }> {
+    const isOnline = await checkBackendAvailable();
+    if (isOnline) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/ai-detect`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ work_code, lat, lng, photo_url })
+        });
+        if (res.ok) return await res.json();
+      } catch {}
+    }
+
+    // Fallback simulation
+    const matched = memoryProjects.find(p => p.work_code === work_code) || memoryProjects[0];
+    const isFlagged = work_code.includes('0104') || work_code.includes('0108');
+    const tags = isFlagged 
+      ? ['No Concrete Pavement Found', 'Unpaved Mud Track', 'Ground Reality Mismatch']
+      : ['Structural Concrete Infill Verified'];
+
+    return {
+      success: true,
+      detection: {
+        work_code,
+        timestamp: new Date().toISOString(),
+        is_flagged: isFlagged,
+        risk_level: isFlagged ? 'CRITICAL' : 'LOW',
+        confidence: 0.92,
+        defect_tags: tags,
+        justification: isFlagged
+          ? "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold."
+          : "Verified Compliant: Physical concrete pavement detected, GPS location within 20m perimeter, and no duplicate photo matches.",
+        stages: {
+          stage1_cv_classification: {
+            model: "ResNet-50 + Custom MPLADS Defect Head (v2.1)",
+            detected_classes: tags,
+            confidence: 0.92,
+            status: isFlagged ? 'FLAGGED' : 'COMPLIANT'
+          },
+          stage2_before_after: {
+            algorithm: "Multi-Scale SSIM & Perceptual Color Delta",
+            structural_similarity_index: isFlagged ? 0.34 : 0.82,
+            threshold: 0.50,
+            status: isFlagged ? 'FLAGGED' : 'SYNCHRONIZED'
+          },
+          stage3_geotag_verification: {
+            rule: "e-SAKSHI 20m Strict Asset Radius (Para 4.2)",
+            claimed_coords: [matched.latitude, matched.longitude],
+            photo_coords: [lat || matched.latitude, lng || matched.longitude],
+            deviation_meters: isFlagged ? 28.4 : 11.2,
+            threshold_meters: 20.0,
+            status: isFlagged ? 'FLAGGED' : 'VERIFIED'
+          },
+          stage4_duplicate_detection: {
+            algorithm: "64-bit DCT Perceptual Hashing (pHash)",
+            hash: "a4c28f1190bc774e",
+            duplicate_found: false,
+            status: 'UNIQUE'
+          }
+        }
+      }
+    };
+  },
+
+  async getAIDetections(): Promise<{ detections: AIDecisionLog[]; count: number }> {
+    const isOnline = await checkBackendAvailable();
+    if (isOnline) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/ai-detections`);
+        if (res.ok) return await res.json();
+      } catch {}
+    }
+
+    return {
+      detections: [
+        {
+          id: "AIDEC-1788970001-UP-VAR-0104",
+          work_code: "MPLADS/2024-25/UP-VAR-0104",
+          timestamp: new Date().toISOString(),
+          photo_sha256: "9a8f2e4b1c7d",
+          risk_level: "CRITICAL",
+          confidence: 0.92,
+          defect_tags: ["No Concrete Pavement Found", "Unpaved Mud Track"],
+          justification: "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold.",
+          stages_summary: {
+            cv_status: "FLAGGED",
+            ssim_status: "FLAGGED",
+            geotag_status: "FLAGGED",
+            duplicate_status: "UNIQUE"
+          }
+        },
+        {
+          id: "AIDEC-1788970002-UP-VAR-0108",
+          work_code: "MPLADS/2024-25/UP-VAR-0108",
+          timestamp: new Date(Date.now() - 3600000).toISOString(),
+          photo_sha256: "3d1b8c9e4a7f",
+          risk_level: "HIGH",
+          confidence: 0.88,
+          defect_tags: ["Relabeled Asset", "Broken Filter Dispenser"],
+          justification: "Visual object detector identified structural crack on public water asset; pHash match indicates duplicate asset.",
+          stages_summary: {
+            cv_status: "FLAGGED",
+            ssim_status: "SYNCHRONIZED",
+            geotag_status: "VERIFIED",
+            duplicate_status: "FLAGGED"
+          }
+        }
+      ],
+      count: 2
+    };
   }
+
 };

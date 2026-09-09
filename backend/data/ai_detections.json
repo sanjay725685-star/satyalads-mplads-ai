@@ -1,0 +1,23 @@
+[
+  {
+    "id": "AIDEC-1788970648-PATNA_SAHIB-W0080",
+    "work_code": "PATNA_SAHIB-W0080",
+    "timestamp": "2026-09-09T21:47:28.570426",
+    "photo_sha256": "none",
+    "risk_level": "CRITICAL",
+    "confidence": 0.92,
+    "defect_tags": [
+      "Location Boundary Deviation",
+      "Ground Reality Mismatch",
+      "Unpaved Mud Track",
+      "No Concrete Pavement Found"
+    ],
+    "justification": "Pavement surface spectral analysis matches 'mud/unpaved track' class with 92% confidence (claimed CC road missing). | Structural similarity index with baseline (SSIM: 0.34) is below the 0.50 threshold, indicating claimed physical asset is absent. | Photo GPS deviation (44.9m) exceeds the mandatory 20m e-SAKSHI perimeter threshold.",
+    "stages_summary": {
+      "cv_status": "FLAGGED",
+      "ssim_status": "FLAGGED",
+      "geotag_status": "FLAGGED",
+      "duplicate_status": "UNIQUE"
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "SATYALADS Mobile Sentinel",
+  "short_name": "SATYALADS",
+  "description": "Autonomous Ground-Truth Photo Capture PWA for MPLADS Schemes",
+  "start_url": "/?mode=capture",
+  "display": "standalone",
+  "background_color": "#003366",
+  "theme_color": "#003366",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

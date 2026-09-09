@@ -1,0 +1,48 @@
+[
+  {
+    "id": "CR-001",
+    "workId": "W001",
+    "workTitle": "Construction of CC Road from Rohania Canal to PHC",
+    "citizenName": "Manoj Kumar Maurya",
+    "phoneMasked": "+91 98390 XXXXX",
+    "submissionDate": "2024-10-18",
+    "lat": 25.2652,
+    "lng": 82.9124,
+    "distanceFromAssetMeters": 28,
+    "photoUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80",
+    "voiceNoteTranscript": "\u092f\u0939\u093e\u0902 \u0915\u094b\u0908 \u092a\u0915\u094d\u0915\u0940 \u0938\u0921\u093c\u0915 \u0928\u0939\u0940\u0902 \u092c\u0928\u0940 \u0939\u0948\u0964 \u0920\u0947\u0915\u0947\u0926\u093e\u0930 \u0928\u0947 \u092c\u0938 \u092c\u094b\u0930\u094d\u0921 \u0932\u0917\u093e\u092f\u093e \u0914\u0930 \u091a\u0932\u0947 \u0917\u090f\u0964 \u092c\u093e\u0930\u093f\u0936 \u092e\u0947\u0902 \u092a\u0942\u0930\u093e \u0915\u0940\u091a\u0921\u093c \u092d\u0930\u093e \u0939\u0948\u0964",
+    "language": "Hindi (Bhojpuri dialect)",
+    "aiDefectTags": [
+      "No Concrete Pavement Found",
+      "Unpaved Mud Track",
+      "Ghost Work Indicator"
+    ],
+    "aiExplanation": "Flagged: pavement texture matches 'mud track' class with 92% confidence; GPS deviation 28m exceeds 20m threshold.",
+    "aiConfidence": 0.92,
+    "citizenRating": 1,
+    "status": "INVESTIGATION_ORDERED"
+  },
+  {
+    "id": "CR-002",
+    "workId": "W002",
+    "workTitle": "Solar High-Mast Tube Well & Water Kiosk",
+    "citizenName": "Pooja Vishwakarma",
+    "phoneMasked": "+91 87652 XXXXX",
+    "submissionDate": "2024-11-24",
+    "lat": 25.3211,
+    "lng": 82.9813,
+    "distanceFromAssetMeters": 14,
+    "photoUrl": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80",
+    "voiceNoteTranscript": "\u092f\u0939 \u0928\u0932 \u0924\u094b \u092a\u0941\u0930\u093e\u0928\u093e \u0915\u0941\u0938\u0941\u092e \u092f\u094b\u091c\u0928\u093e \u0935\u093e\u0932\u093e \u0939\u0940 \u0939\u0948, \u0909\u0938\u092a\u0930 \u0928\u092f\u093e MPLADS \u0915\u093e \u0938\u094d\u091f\u0940\u0915\u0930 \u091a\u093f\u092a\u0915\u093e \u0926\u093f\u092f\u093e \u0939\u0948\u0964 \u092a\u093e\u0928\u0940 \u0915\u093e \u092b\u093f\u0932\u094d\u091f\u0930 \u092d\u0940 \u0916\u0930\u093e\u092c \u0939\u0948\u0964",
+    "language": "Hindi",
+    "aiDefectTags": [
+      "Relabeled Asset",
+      "Broken Filter Dispenser",
+      "Double-Dipping Evidence"
+    ],
+    "aiExplanation": "Visual object detector identified structural crack on public water asset; pHash match indicates duplicate asset.",
+    "aiConfidence": 0.88,
+    "citizenRating": 2,
+    "status": "INVESTIGATION_ORDERED"
+  }
+]

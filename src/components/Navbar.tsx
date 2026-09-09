@@ -17,7 +17,9 @@ import {
   Search,
   Check,
   X,
-  Volume2
+  Volume2,
+  QrCode,
+  Cpu
 } from 'lucide-react';
 import { Language, UserRole } from '../types';
 import { INDIAN_LANGUAGES, getNavTranslations } from '../utils/languages';
@@ -36,6 +38,8 @@ interface NavbarProps {
   isScanning: boolean;
   fontSize?: 'sm' | 'base' | 'lg';
   setFontSize?: (size: 'sm' | 'base' | 'lg') => void;
+  onOpenAIDetectionExplainer?: () => void;
+  onOpenQRHandoff?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -51,7 +55,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onTriggerScan,
   isScanning,
   fontSize = 'base',
-  setFontSize
+  setFontSize,
+  onOpenAIDetectionExplainer,
+  onOpenQRHandoff
 }) => {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [langSearch, setLangSearch] = useState('');
@@ -364,6 +370,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2 py-1.5 flex-shrink-0">
+            {/* QR Mobile Capture Handoff Button */}
+            {onOpenQRHandoff && (
+              <button
+                type="button"
+                onClick={onOpenQRHandoff}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#002244] hover:bg-[#0B3D91] border border-slate-600 text-slate-200 text-xs font-semibold transition-all cursor-pointer"
+                title="Scan QR to capture photo from phone"
+              >
+                <QrCode className="w-3.5 h-3.5 text-[#FF9933]" />
+                <span className="hidden md:inline">Mobile Capture</span>
+              </button>
+            )}
+
+            {/* How AI Works Button */}
+            {onOpenAIDetectionExplainer && (
+              <button
+                type="button"
+                onClick={onOpenAIDetectionExplainer}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#002244] hover:bg-[#0B3D91] border border-slate-600 text-slate-200 text-xs font-semibold transition-all cursor-pointer"
+                title="How AI Detection Works & Pipeline"
+              >
+                <Cpu className="w-3.5 h-3.5 text-[#FF9933]" />
+                <span className="hidden md:inline">How AI Works</span>
+              </button>
+            )}
+
             {/* Critical Notifications */}
             <button
               onClick={onOpenNotifications}
@@ -382,7 +414,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onTriggerScan}
               disabled={isScanning}
-              className="px-3.5 py-1.5 rounded bg-[#FF9933] hover:bg-[#ffaa4d] text-[#002244] font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap border border-amber-600"
+              className="px-3.5 py-1.5 rounded bg-[#FF9933] hover:bg-[#ffaa4d] text-[#003366] font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap border border-amber-600"
             >
               <Sparkles className={`w-3.5 h-3.5 ${isScanning ? 'animate-spin' : ''}`} />
               <span>{isScanning ? t.scanning : t.run_rescan}</span>

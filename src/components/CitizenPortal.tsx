@@ -1,5 +1,7 @@
+import { api } from '../services/api';
 import React, { useState, useRef, useEffect } from 'react';
 import { 
+  QrCode,
   MessageSquare, 
   Camera, 
   MapPin, 
@@ -20,7 +22,15 @@ import {
 import { CITIZEN_REPORTS } from '../data/mockData';
 import { CitizenReport } from '../types';
 
-export const CitizenPortal: React.FC = () => {
+interface CitizenPortalProps {
+  onOpenQRHandoff?: (workCode?: string) => void;
+  onOpenAIDetectionExplainer?: () => void;
+}
+
+export const CitizenPortal: React.FC<CitizenPortalProps> = ({
+  onOpenQRHandoff,
+  onOpenAIDetectionExplainer
+}) => {
   const [reports, setReports] = useState<CitizenReport[]>(CITIZEN_REPORTS);
   const [selectedReport, setSelectedReport] = useState<CitizenReport>(CITIZEN_REPORTS[0]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -44,6 +54,37 @@ export const CitizenPortal: React.FC = () => {
   useEffect(() => {
     return () => {
       stopCamera();
+    };
+  }, []);
+
+  // Real-time synchronization: poll backend and listen to broadcast channel
+  useEffect(() => {
+    api.getCitizenReports().then(res => setReports(res.reports));
+
+    const pollInterval = setInterval(() => {
+      api.getCitizenReports().then(res => {
+        if (res.reports && res.reports.length > 0) {
+          setReports(res.reports);
+        }
+      });
+    }, 3500);
+
+    let bc: BroadcastChannel | null = null;
+    try {
+      bc = new BroadcastChannel('satya_live_reports');
+      bc.onmessage = (event) => {
+        if (event.data && event.data.report) {
+          setReports(prev => {
+            if (prev.some(r => r.id === event.data.report.id)) return prev;
+            return [event.data.report, ...prev];
+          });
+        }
+      };
+    } catch {}
+
+    return () => {
+      clearInterval(pollInterval);
+      if (bc) bc.close();
     };
   }, []);
 
@@ -161,16 +202,27 @@ export const CitizenPortal: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-[#F8FAFC] border border-emerald-300 p-4 rounded-lg flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-100 text-emerald-800">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
-          <div>
-            <span className="text-[10px] uppercase font-mono font-bold text-slate-500 block">Anti-Spoofing Guard</span>
-            <span className="text-sm font-bold text-emerald-800 font-mono">
-              GPS Boundary Lock Active
-            </span>
-            <span className="text-[10px] text-slate-500 block">Within 50m of registered work site</span>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <button
+            type="button"
+            onClick={() => onOpenQRHandoff && onOpenQRHandoff(newWorkCode)}
+            className="px-4 py-2.5 rounded bg-[#003366] hover:bg-[#002244] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+          >
+            <QrCode className="w-4 h-4 text-[#FF9933]" />
+            <span>📱 Scan to Capture from Phone</span>
+          </button>
+
+          <div className="bg-[#F8FAFC] border border-emerald-300 p-3 rounded-lg flex items-center gap-3">
+            <div className="p-2 rounded bg-emerald-100 text-emerald-800">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-mono font-bold text-slate-500 block">Anti-Spoofing Guard</span>
+              <span className="text-xs font-bold text-emerald-800 font-mono">
+                GPS Boundary Lock Active
+              </span>
+              <span className="text-[9px] text-slate-500 block">Within 20m of registered site</span>
+            </div>
           </div>
         </div>
       </div>
@@ -184,9 +236,14 @@ export const CitizenPortal: React.FC = () => {
               <MessageSquare className="w-4 h-4 text-[#003366]" />
               <span>Simulate Citizen WhatsApp Grievance</span>
             </h2>
-            <span className="text-[10px] bg-[#003366]/10 text-[#003366] px-2 py-0.5 rounded font-mono font-bold">
-              AI Verification
-            </span>
+            <button
+              type="button"
+              onClick={onOpenAIDetectionExplainer}
+              className="text-[10px] bg-[#003366]/10 hover:bg-[#003366]/20 text-[#003366] px-2.5 py-1 rounded font-mono font-bold flex items-center gap-1 cursor-pointer transition-colors"
+            >
+              <Sparkles className="w-3 h-3 text-[#FF9933]" />
+              <span>How AI Verification Works</span>
+            </button>
           </div>
 
           <form onSubmit={handleSubmitNewReport} className="space-y-3 text-xs">
@@ -447,6 +504,12 @@ export const CitizenPortal: React.FC = () => {
                     <p className="text-slate-800 italic bg-white p-2.5 rounded border border-slate-200">
                       "{rep.voiceNoteTranscript}"
                     </p>
+                    {rep.aiExplanation && (
+                      <div className="bg-amber-50 border border-amber-200 p-2 rounded text-[11px] text-amber-900 font-medium">
+                        <strong className="font-mono text-[10px] uppercase block text-amber-800">AI Decision Justification:</strong>
+                        {rep.aiExplanation}
+                      </div>
+                    )}
                     
                     {/* AI Defect Tags */}
                     <div className="flex flex-wrap gap-1.5">

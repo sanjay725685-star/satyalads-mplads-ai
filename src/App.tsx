@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { MobileCaptureApp } from './components/MobileCaptureApp';
+import { QRCodeHandoffModal } from './components/QRCodeHandoffModal';
+import { AIDetectionExplainerModal } from './components/AIDetectionExplainerModal';
 import { LandingPage } from './components/LandingPage';
 import { LoginPage } from './components/LoginPage';
 import { OverviewDashboard } from './components/OverviewDashboard';
@@ -30,6 +33,45 @@ export const App: React.FC = () => {
     state_jurisdiction: 'Uttar Pradesh',
     token: ''
   });
+
+  // Check if direct mobile capture route requested (/capture/:workCode, #/capture/:workCode, or ?capture=...)
+  const parseDirectCaptureCode = (): string | null => {
+    if (typeof window === 'undefined') return null;
+    const path = window.location.pathname;
+    if (path.startsWith('/capture/')) {
+      return decodeURIComponent(path.replace('/capture/', ''));
+    }
+    const hash = window.location.hash;
+    if (hash.startsWith('#/capture/')) {
+      return decodeURIComponent(hash.replace('#/capture/', ''));
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('capture') || params.get('mode') === 'capture') {
+      return params.get('workCode') || params.get('capture') || 'MPLADS/2024-25/UP-VAR-0104';
+    }
+    return null;
+  };
+
+  const [directCaptureCode, setDirectCaptureCode] = useState<string | null>(parseDirectCaptureCode());
+
+  // Modals
+  const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
+  const [qrWorkCode, setQrWorkCode] = useState<string>('MPLADS/2024-25/UP-VAR-0104');
+  const [isAIExplainerOpen, setIsAIExplainerOpen] = useState<boolean>(false);
+  const [aiExplainerWorkCode, setAiExplainerWorkCode] = useState<string>('MPLADS/2024-25/UP-VAR-0104');
+
+  // Handle URL hash changes
+  useEffect(() => {
+    const handleUrlChange = () => {
+      setDirectCaptureCode(parseDirectCaptureCode());
+    };
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, []);
 
   // Localization & Accessibility
   const [lang, setLang] = useState<Language>('en');
@@ -105,6 +147,24 @@ export const App: React.FC = () => {
     setActiveTab('report');
   };
 
+  // Direct Mobile Capture View (Unauthenticated Standalone for On-Site Field Work)
+  if (directCaptureCode) {
+    return (
+      <div className="min-h-screen bg-[#F5F7FA]">
+        <MobileCaptureApp
+          workCode={directCaptureCode}
+          onBackToPortal={() => {
+            try {
+              window.history.pushState({}, '', '/');
+            } catch {}
+            setDirectCaptureCode(null);
+          }}
+          lang={lang}
+        />
+      </div>
+    );
+  }
+
   // If not authenticated, show Landing or Login
   if (!isAuthenticated) {
     if (authView === 'landing') {
@@ -162,6 +222,11 @@ export const App: React.FC = () => {
         isScanning={isScanning}
         fontSize={fontSize}
         setFontSize={setFontSize}
+        onOpenAIDetectionExplainer={() => setIsAIExplainerOpen(true)}
+        onOpenQRHandoff={() => {
+          setQrWorkCode(selectedProject ? selectedProject.work_code : 'MPLADS/2024-25/UP-VAR-0104');
+          setIsQRModalOpen(true);
+        }}
       />
 
       {/* Live AI Scan Notification Banner */}
@@ -258,7 +323,23 @@ export const App: React.FC = () => {
         )}
 
         {activeTab === 'capture_photo' && (
-          <CitizenPortal />
+          <CitizenPortal 
+            onOpenQRHandoff={(code) => {
+              setQrWorkCode(code || 'MPLADS/2024-25/UP-VAR-0104');
+              setIsQRModalOpen(true);
+            }}
+            onOpenAIDetectionExplainer={() => setIsAIExplainerOpen(true)}
+          />
+        )}
+
+        {activeTab === 'mobile_capture' && (
+          <div className="py-6 px-4 max-w-md mx-auto">
+            <MobileCaptureApp
+              workCode={qrWorkCode}
+              onBackToPortal={() => setActiveTab('capture_photo')}
+              lang={lang}
+            />
+          </div>
         )}
 
         {activeTab === 'before_after' && (
@@ -285,6 +366,24 @@ export const App: React.FC = () => {
           />
         )}
       </main>
+
+      {/* Desktop-to-Phone QR Handoff Modal */}
+      <QRCodeHandoffModal
+        isOpen={isQRModalOpen}
+        onClose={() => setIsQRModalOpen(false)}
+        initialWorkCode={qrWorkCode}
+        onOpenSimulator={(code) => {
+          setQrWorkCode(code);
+          setActiveTab('mobile_capture');
+        }}
+      />
+
+      {/* How AI Detection Works Explainer & Playground Modal */}
+      <AIDetectionExplainerModal
+        isOpen={isAIExplainerOpen}
+        onClose={() => setIsAIExplainerOpen(false)}
+        initialWorkCode={aiExplainerWorkCode}
+      />
 
       {/* Official Government of India GIGW Footer */}
       <Footer lang={lang} />
