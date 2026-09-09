@@ -158,34 +158,34 @@ export const CartelGraph: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-5 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-300 rounded-lg p-5 shadow-sm border-t-4 border-[#003366] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center space-x-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 uppercase tracking-wider">
-              Graph Neural Network (GNN) Engine
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-[#FF9933]/15 text-[#B85D00] border border-[#FF9933]/30 uppercase tracking-wider font-mono">
+              Graph Neural Network (GNN) Engine • Competition Act Enforcement
             </span>
-            <span className="text-xs text-slate-400 font-mono">Tender Collusion & Nexus Mining</span>
+            <span className="text-xs text-slate-500 font-mono">Tender Collusion & Nexus Mining</span>
           </div>
-          <h1 className="text-xl font-extrabold text-white flex items-center gap-2">
-            <Users className="w-5 h-5 text-amber-400" />
+          <h1 className="text-xl font-bold text-[#002244] font-serif flex items-center gap-2">
+            <Users className="w-5 h-5 text-[#003366]" />
             <span>Contractor Cartel & Beneficial Ownership Graph AI</span>
           </h1>
-          <p className="text-xs text-slate-300 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Uncovers covert bid-rigging rings, shell companies, shared directors, and common banking nodes across MPLADS tenders.
           </p>
         </div>
 
         {/* Ring Summary */}
-        <div className="bg-[#020C1B] border border-amber-500/40 p-4 rounded-xl flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-amber-500/20 text-amber-400">
+        <div className="bg-[#F8FAFC] border border-amber-300 p-4 rounded-lg flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-amber-100 text-amber-700">
             <ShieldAlert className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[10px] uppercase font-mono text-slate-400 block">Identified Ring</span>
-            <span className="text-lg font-extrabold text-amber-400 font-mono">
+            <span className="text-[10px] uppercase font-mono font-bold text-slate-500 block">Identified Cartel Ring</span>
+            <span className="text-base font-bold text-amber-900 font-mono">
               Purvanchal Cover-Bidding Nexus
             </span>
-            <span className="text-[10px] text-slate-400 block">₹25.4 Cr Monopolized across 30 works</span>
+            <span className="text-[10px] text-slate-600 font-medium block">₹25.4 Cr Monopolized across 30 works</span>
           </div>
         </div>
       </div>
@@ -193,24 +193,24 @@ export const CartelGraph: React.FC = () => {
       {/* Main Graph & Entity Dossier Split View */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Graph Canvas (7 Cols) */}
-        <div className="lg:col-span-7 bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-5 shadow-xl space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-sm text-white flex items-center gap-2">
+        <div className="lg:col-span-7 bg-white border border-slate-300 rounded-lg p-5 shadow-sm border-t-2 border-[#003366] space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h3 className="font-bold text-sm text-[#002244] font-serif flex items-center gap-2">
               <span>Interactive Knowledge Graph</span>
-              <span className="text-[10px] font-mono text-slate-400">(Click any node to inspect links)</span>
+              <span className="text-[10px] font-mono text-slate-500 font-normal">(Click any node to inspect links)</span>
             </h3>
             
             {/* Graph Legend */}
-            <div className="flex items-center gap-3 text-[10px] text-slate-300">
-              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Contractor</span>
+            <div className="flex items-center gap-3 text-[10px] text-slate-700 font-medium">
+              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-rose-600"></span> Contractor</span>
               <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Director</span>
-              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span> PAN/GSTIN</span>
-              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-sky-400"></span> IA Officer</span>
+              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-purple-600"></span> PAN/GSTIN</span>
+              <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-[#003366]"></span> IA Officer</span>
             </div>
           </div>
 
           {/* Interactive Canvas Container */}
-          <div className="bg-[#020C1B] rounded-xl border border-[#1E3A5F] flex items-center justify-center p-2 relative overflow-hidden radar-grid">
+          <div className="bg-slate-900 rounded-lg border border-slate-800 flex items-center justify-center p-2 relative overflow-hidden shadow-inner">
             <canvas
               ref={canvasRef}
               onClick={handleCanvasClick}
@@ -220,20 +220,20 @@ export const CartelGraph: React.FC = () => {
         </div>
 
         {/* Selected Entity Inspector (5 Cols) */}
-        <div className="lg:col-span-5 bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-5 shadow-xl space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white border border-slate-300 rounded-lg p-5 shadow-sm border-t-2 border-[#003366] space-y-4 flex flex-col justify-between">
           {selectedNode ? (
             <div className="space-y-4">
-              <div className="flex items-start justify-between border-b border-[#1E3A5F] pb-3">
+              <div className="flex items-start justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 font-mono">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-300 font-mono">
                     {selectedNode.type} NODE
                   </span>
-                  <h3 className="font-bold text-base text-white mt-1">{selectedNode.name}</h3>
+                  <h3 className="font-bold text-base text-slate-900 mt-1 font-serif">{selectedNode.name}</h3>
                 </div>
-                <span className={`px-2.5 py-1 rounded-lg font-mono font-extrabold text-sm border ${
+                <span className={`px-2.5 py-1 rounded font-mono font-bold text-xs border ${
                   selectedNode.riskScore > 75 
-                    ? 'bg-rose-500/20 text-rose-400 border-rose-500/40' 
-                    : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                    ? 'bg-rose-100 text-rose-800 border-rose-300' 
+                    : 'bg-emerald-100 text-emerald-800 border-emerald-300'
                 }`}>
                   Risk: {selectedNode.riskScore}/100
                 </span>
@@ -242,54 +242,54 @@ export const CartelGraph: React.FC = () => {
               {/* Node Stats */}
               {selectedNode.type === 'CONTRACTOR' && (
                 <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="bg-[#020C1B] p-3 rounded-lg border border-[#1E3A5F]">
-                    <span className="text-slate-400 block">Total Works Won:</span>
-                    <span className="text-lg font-bold text-white font-mono">{selectedNode.totalContractsWon}</span>
+                  <div className="bg-[#F8FAFC] p-3 rounded border border-slate-200">
+                    <span className="text-slate-500 block">Total Works Won:</span>
+                    <span className="text-lg font-bold text-slate-900 font-mono">{selectedNode.totalContractsWon}</span>
                   </div>
-                  <div className="bg-[#020C1B] p-3 rounded-lg border border-[#1E3A5F]">
-                    <span className="text-slate-400 block">Total Value:</span>
-                    <span className="text-lg font-bold text-amber-400 font-mono">₹{selectedNode.totalValueCrores} Cr</span>
+                  <div className="bg-[#F8FAFC] p-3 rounded border border-slate-200">
+                    <span className="text-slate-500 block">Total Value:</span>
+                    <span className="text-lg font-bold text-[#B85D00] font-mono">₹{selectedNode.totalValueCrores} Cr</span>
                   </div>
                 </div>
               )}
 
               {/* Cartel Evidence Details */}
-              <div className="space-y-2 bg-[#020C1B] p-3.5 rounded-xl border border-[#1E3A5F] text-xs">
-                <h4 className="font-bold text-slate-200 uppercase text-[10px] tracking-wider mb-2">
+              <div className="space-y-2 bg-[#F8FAFC] p-3.5 rounded border border-slate-200 text-xs">
+                <h4 className="font-bold text-slate-700 uppercase text-[10px] tracking-wider mb-2 font-mono">
                   Graph Neural Network Anomaly Signals
                 </h4>
                 
-                <div className="space-y-1.5 text-slate-300">
-                  <div className="flex items-center gap-2 text-rose-300 font-medium">
-                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                <div className="space-y-1.5 text-slate-700">
+                  <div className="flex items-center gap-2 text-rose-800 font-medium">
+                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0 text-rose-600" />
                     <span>Rotational Bidding: Co-bidded with Om Infra 18 times in 2 years.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-amber-300 font-medium">
-                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-amber-800 font-medium">
+                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0 text-amber-600" />
                     <span>Common Director: Rakesh Kumar Singh controls both entities.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-amber-300 font-medium">
-                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-slate-800 font-medium">
+                    <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0 text-slate-600" />
                     <span>Identical Registered Address: Office 402, Kashi Commercial Complex.</span>
                   </div>
                 </div>
               </div>
 
               {/* Action Box */}
-              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-xs space-y-2">
-                <span className="font-bold text-rose-300 block">Recommended Vigilance Action:</span>
-                <p className="text-slate-300 text-[11px]">
+              <div className="p-3.5 rounded bg-rose-50 border border-rose-200 text-xs space-y-2">
+                <span className="font-bold text-rose-900 block">Recommended Vigilance Action:</span>
+                <p className="text-slate-700 text-[11px] leading-relaxed">
                   Initiate Section 3 of Competition Act investigation for tender collusion. Freeze e-tendering vendor ID across district portal.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="text-center p-6 text-slate-400">
+            <div className="text-center p-6 text-slate-500">
               Select any graph node to inspect cartel connectivity.
             </div>
           )}
 
-          <div className="text-[10px] text-slate-500 pt-3 border-t border-[#1E3A5F]">
+          <div className="text-[10px] text-slate-500 pt-3 border-t border-slate-200 font-mono">
             Algorithm: Louvain Community Detection + GCN Subgraph Embedding on e-Procurement Portal Data.
           </div>
         </div>

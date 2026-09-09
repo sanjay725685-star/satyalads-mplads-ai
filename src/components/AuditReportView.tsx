@@ -13,23 +13,23 @@ export const AuditReportView: React.FC<AuditReportViewProps> = ({ project, onBac
   const nowStr = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 
   return (
-    <div className="min-h-screen bg-slate-900 py-8 px-4 sm:px-6">
+    <div className="min-h-screen bg-[#F5F7FA] py-8 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto space-y-4">
         {/* Navigation Bar (No Print) */}
-        <div className="flex items-center justify-between no-print bg-[#0F233D] p-4 rounded-xl border border-[#1E3A5F]">
+        <div className="flex items-center justify-between no-print bg-[#003366] text-white p-4 rounded border border-[#0B3D91] shadow-sm">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-white cursor-pointer"
+            className="flex items-center gap-2 text-xs font-mono text-white/90 hover:text-white cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to Project Detail</span>
           </button>
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg flex items-center gap-2 text-xs cursor-pointer shadow-md shadow-amber-500/20"
+            className="px-4 py-2 bg-[#FF9933] hover:bg-[#E68A2E] text-slate-950 font-bold rounded flex items-center gap-2 text-xs cursor-pointer shadow-sm"
           >
             <Printer className="w-4 h-4" />
-            <span>Print / Save as PDF</span>
+            <span>Print / Save Official PDF Dossier</span>
           </button>
         </div>
 

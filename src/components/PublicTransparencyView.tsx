@@ -27,66 +27,68 @@ export const PublicTransparencyView: React.FC<PublicTransparencyViewProps> = ({ 
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
-      {/* Banner */}
-      <div className="bg-[#0F233D] border border-emerald-500/40 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+      {/* Official Banner Card */}
+      <div className="bg-white border border-slate-300 rounded-lg p-6 shadow-sm border-t-4 border-[#003366] flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono uppercase">
-              Open Governance • Public Audit Loop
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-[#138808]/15 text-[#0F6806] border border-[#138808]/30 font-mono uppercase tracking-wider">
+              Open Governance • Public Audit Ledger
             </span>
-            <span className="text-xs text-slate-400 font-mono">e-SAKSHI Public Ledger</span>
+            <span className="text-xs text-slate-500 font-mono">e-SAKSHI Public Citizen Portal • Section 4 RTI Compliance</span>
           </div>
-          <h1 className="text-2xl font-extrabold text-white font-serif">
+          <h1 className="text-2xl font-bold text-[#002244] font-serif">
             {isHi ? "नागरिक पारदर्शिता एवं सार्वजनिक ऑडिट पोर्टल" : "Citizen Public Transparency & Accountability Portal"}
           </h1>
-          <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+          <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
             {isHi 
               ? "सार्वजनिक धन के उपयोग की खुली निगरानी। यह सार्वजनिक पृष्ठ बिना किसी संविदाकार व्यक्तिगत पहचान (PII) के केवल कुल राशि और कार्य की स्थिति प्रदर्शित करता है।"
-              : "Open citizen surveillance of MPLADS fund utilization. This view displays aggregated integrity statistics sanitized of contractor PII."}
+              : "Open citizen surveillance of MPLADS fund utilization. This official public view displays aggregated integrity statistics sanitized of contractor PII in accordance with the Digital Personal Data Protection (DPDP) Act, 2023."}
           </p>
         </div>
 
-        <div className="flex items-center gap-3 bg-[#020C1B] border border-[#1E3A5F] p-4 rounded-xl">
-          <Globe className="w-8 h-8 text-emerald-400" />
+        <div className="flex items-center gap-3 bg-[#F8FAFC] border border-slate-300 p-4 rounded-lg">
+          <div className="w-10 h-10 rounded-full bg-[#003366]/10 flex items-center justify-center text-[#003366]">
+            <Globe className="w-6 h-6" />
+          </div>
           <div className="font-mono text-xs">
-            <div className="text-slate-400 text-[10px] uppercase">Public Access</div>
-            <div className="text-emerald-400 font-bold">Unauthenticated Open Ledger</div>
+            <div className="text-slate-500 text-[10px] uppercase font-bold">Public Clearance</div>
+            <div className="text-[#003366] font-bold">Unauthenticated Open Ledger</div>
           </div>
         </div>
       </div>
 
       {/* Aggregate Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-[#0F233D] border border-[#1E3A5F] p-4 rounded-xl space-y-1">
-          <span className="text-[10px] text-slate-400 font-mono uppercase block">Total Funds Monitored</span>
-          <span className="text-2xl font-extrabold text-white font-mono">₹{summary?.total_funds_tracked_cr || '138.4'} Cr</span>
+        <div className="bg-white border border-slate-300 p-4 rounded-lg shadow-sm border-t-2 border-[#003366] space-y-1">
+          <span className="text-[10px] text-slate-500 font-mono uppercase font-bold block">Total Funds Monitored</span>
+          <span className="text-2xl font-bold text-[#002244] font-mono">₹{summary?.total_funds_tracked_cr || '138.4'} Cr</span>
           <span className="text-[10px] text-slate-500 block">Across 25 Lok Sabha Seats</span>
         </div>
-        <div className="bg-[#0F233D] border border-[#1E3A5F] p-4 rounded-xl space-y-1">
-          <span className="text-[10px] text-slate-400 font-mono uppercase block">Public Works Tracked</span>
-          <span className="text-2xl font-extrabold text-white font-mono">{summary?.total_projects_monitored || 320} Works</span>
+        <div className="bg-white border border-slate-300 p-4 rounded-lg shadow-sm border-t-2 border-[#FF9933] space-y-1">
+          <span className="text-[10px] text-slate-500 font-mono uppercase font-bold block">Public Works Tracked</span>
+          <span className="text-2xl font-bold text-[#002244] font-mono">{summary?.total_projects_monitored || 320} Works</span>
           <span className="text-[10px] text-slate-500 block">100% Geotag Inspected</span>
         </div>
-        <div className="bg-[#0F233D] border border-[#1E3A5F] p-4 rounded-xl space-y-1">
-          <span className="text-[10px] text-slate-400 font-mono uppercase block">Flagged for Re-Inspection</span>
-          <span className="text-2xl font-extrabold text-amber-400 font-mono">{summary?.flagged_irregularities_percentage || '26.5'}%</span>
+        <div className="bg-white border border-slate-300 p-4 rounded-lg shadow-sm border-t-2 border-amber-500 space-y-1">
+          <span className="text-[10px] text-slate-500 font-mono uppercase font-bold block">Flagged for Re-Inspection</span>
+          <span className="text-2xl font-bold text-[#B85D00] font-mono">{summary?.flagged_irregularities_percentage || '26.5'}%</span>
           <span className="text-[10px] text-slate-500 block">Automatic Discrepancies</span>
         </div>
-        <div className="bg-[#0F233D] border border-[#1E3A5F] p-4 rounded-xl space-y-1">
-          <span className="text-[10px] text-slate-400 font-mono uppercase block">Active States / UTs</span>
-          <span className="text-2xl font-extrabold text-emerald-400 font-mono">{summary?.active_states_monitored || 13} States</span>
+        <div className="bg-white border border-slate-300 p-4 rounded-lg shadow-sm border-t-2 border-[#138808] space-y-1">
+          <span className="text-[10px] text-slate-500 font-mono uppercase font-bold block">Active States / UTs</span>
+          <span className="text-2xl font-bold text-[#0F6806] font-mono">{summary?.active_states_monitored || 13} States</span>
           <span className="text-[10px] text-slate-500 block">Pan-India Geographic Reach</span>
         </div>
       </div>
 
       {/* Sanitized Public Project Directory */}
-      <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-5 shadow-xl space-y-4">
+      <div className="bg-white border border-slate-300 rounded-lg p-5 shadow-sm space-y-4 border-t-2 border-slate-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 className="font-bold text-sm text-white font-serif">
+            <h2 className="font-bold text-base text-[#002244] font-serif">
               {isHi ? "सार्वजनिक कार्य निर्देशिका (संविदाकार पहचान रहित)" : "Sanitized Public Project Directory (PII Redacted)"}
             </h2>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-500">
               Contractor PAN, GSTIN, and registration credentials are protected under Government Data Privacy Standards.
             </p>
           </div>
@@ -94,18 +96,18 @@ export const PublicTransparencyView: React.FC<PublicTransparencyViewProps> = ({ 
           <div className="relative w-full sm:w-72">
             <input
               type="text"
-              placeholder="Filter public records..."
+              placeholder="Search public records..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full bg-[#020C1B] border border-[#1E3A5F] rounded-lg pl-8 pr-3 py-1.5 text-xs text-white outline-none focus:border-emerald-400"
+              className="w-full bg-[#F8FAFC] border border-slate-300 rounded pl-8 pr-3 py-1.5 text-xs text-slate-900 outline-none focus:border-[#003366]"
             />
-            <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-[#020C1B] text-slate-400 uppercase font-mono text-[10px] border-b border-[#1E3A5F]">
+        <div className="overflow-x-auto border border-slate-200 rounded">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-[#003366] text-white uppercase font-mono text-[10px]">
               <tr>
                 <th className="p-3">Work Code</th>
                 <th className="p-3">Project Scope</th>
@@ -115,19 +117,19 @@ export const PublicTransparencyView: React.FC<PublicTransparencyViewProps> = ({ 
                 <th className="p-3 text-center">Audit Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E3A5F]/60">
-              {filteredProjects.map(p => (
-                <tr key={p.id} className="hover:bg-[#1E3A5F]/20">
-                  <td className="p-3 font-mono font-bold text-sky-400">{p.work_code}</td>
-                  <td className="p-3 font-semibold text-white max-w-sm truncate">{p.title}</td>
+            <tbody className="divide-y divide-slate-200">
+              {filteredProjects.map((p, idx) => (
+                <tr key={p.id} className={idx % 2 === 0 ? 'bg-white hover:bg-blue-50/40' : 'bg-[#F8FAFC] hover:bg-blue-50/40'}>
+                  <td className="p-3 font-mono font-bold text-[#003366]">{p.work_code}</td>
+                  <td className="p-3 font-semibold text-slate-900 max-w-sm truncate">{p.title}</td>
                   <td className="p-3">{p.constituency_name} ({p.state})</td>
                   <td className="p-3">{p.category}</td>
-                  <td className="p-3 text-right font-mono font-bold text-white">₹{p.sanctioned_cost_lakhs}L</td>
+                  <td className="p-3 text-right font-mono font-bold text-slate-900">₹{p.sanctioned_cost_lakhs}L</td>
                   <td className="p-3 text-center">
                     <span className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold ${
                       p.risk_score >= 45 
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' 
-                        : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                        ? 'bg-amber-100 text-amber-900 border border-amber-300' 
+                        : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                     }`}>
                       {p.risk_score >= 45 ? 'UNDER VIGILANCE AUDIT' : 'VERIFIED COMPLIANT'}
                     </span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ArrowRight, Eye, Satellite, FileText, Database, CheckCircle2, AlertTriangle, Scale, Award } from 'lucide-react';
+import { Shield, ArrowRight, Eye, Satellite, Scale, CheckCircle2, AlertTriangle, Building, Lock, FileText } from 'lucide-react';
 import { Language } from '../types';
 
 interface LandingPageProps {
@@ -11,105 +11,145 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
   const isHi = lang !== 'en';
 
   return (
-    <div className="min-h-screen bg-[#071326] text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-black">
-      {/* Top Gov Ribbon */}
-      <div className="bg-[#020C1B] border-b border-[#1E3A5F] px-6 py-2 flex items-center justify-between text-[11px] font-mono text-slate-400">
-        <div className="flex items-center gap-3">
-          <span className="text-amber-400 font-bold tracking-wider">सत्यमेव जयते</span>
-          <span>•</span>
-          <span>GOVERNMENT OF INDIA • MoSPI</span>
-          <span>•</span>
-          <span className="text-emerald-400 font-bold">SMART INDIA HACKATHON 2026 (PROBLEM 26102)</span>
+    <div className="flex-1 bg-[#F5F7FA] text-[#1A1A1A] flex flex-col justify-between">
+      {/* 1. Official Government Header Strip */}
+      <div className="bg-[#002244] text-white">
+        <div className="h-1 w-full flex">
+          <div className="h-full flex-1 bg-[#FF9933]" />
+          <div className="h-full flex-1 bg-white" />
+          <div className="h-full flex-1 bg-[#138808]" />
         </div>
-        <div className="flex items-center gap-2">
-          <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded text-[10px] font-bold">
-            TEAM: STACK ATTACK
-          </span>
-          <span>OFFICIAL VIGILANCE PRODUCT</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2">
+            <span>🏛️</span>
+            <span className="font-bold">भारत सरकार | GOVERNMENT OF INDIA</span>
+            <span className="text-slate-400 hidden sm:inline">•</span>
+            <span className="text-amber-300 hidden sm:inline">Ministry of Statistics & Programme Implementation (MoSPI)</span>
+          </div>
+          <div className="flex items-center gap-3 text-[11px] font-mono">
+            <span className="bg-[#003366] px-2 py-0.5 rounded border border-slate-600 text-amber-300 font-bold">
+              SIH 2026 PS 26102
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Hero Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16 flex-1 flex flex-col justify-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-6 w-fit">
-          <Shield className="w-3.5 h-3.5" />
-          <span>Autonomous Multi-Modal AI Sentinel for Scheme Integrity</span>
+      {/* 2. Official News / Announcement Banner */}
+      <div className="bg-amber-50 border-b border-amber-200 text-[#002244] px-4 py-1.5 text-xs">
+        <div className="max-w-7xl mx-auto flex items-center gap-2">
+          <span className="bg-[#FF9933] text-[#002244] font-black text-[10px] uppercase px-1.5 py-0.5 rounded">
+            ALERT
+          </span>
+          <p className="truncate text-[11px] font-medium">
+            {isHi 
+              ? 'एमपीलैड्स (MPLADS) ई-साक्षी 2026: सभी 25 संसदीय क्षेत्रों में स्वचालित एआई भू-स्थानिक और वित्तीय ऑडिट सक्रिय है।'
+              : 'Official Notice: Autonomous AI Spatial and Financial Vigilance active across 25 Lok Sabha Constituencies under GFR 2017.'}
+          </p>
+        </div>
+      </div>
+
+      {/* 3. Hero Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex-1 flex flex-col justify-center">
+        {/* National Emblem & Title */}
+        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
+          <div className="w-20 h-20 rounded bg-white border border-amber-300 p-2 shadow-sm flex flex-col items-center justify-center text-center">
+            <span className="text-3xl">🏛️</span>
+            <span className="text-[8px] font-serif font-bold text-[#002244] uppercase tracking-tighter mt-0.5">सत्यमेव जयते</span>
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-blue-50 border border-blue-200 text-[#0B3D91] text-xs font-semibold mb-2">
+              <Shield className="w-3.5 h-3.5 text-[#0B3D91]" />
+              <span>National Scheme Integrity Sentinel • e-SAKSHI Guidelines 2023</span>
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-black text-[#002244] tracking-tight font-serif">
+              SATYALADS <span className="text-[#FF9933] font-sans font-bold">(सत्य-LADS)</span>
+            </h1>
+            <p className="text-sm sm:text-lg text-slate-700 font-medium max-w-3xl mt-1">
+              {isHi 
+                ? 'संसद सदस्य स्थानीय क्षेत्र विकास योजना (MPLADS) में भ्रष्टाचार रोकथाम, कार्टेल डिटेक्शन एवं वास्तविक जियो-टैग सत्यापन का आधिकारिक एआई पोर्टल।'
+                : 'Official AI-powered vigilance and fraud detection portal for Member of Parliament Local Area Development Scheme project filings.'}
+            </p>
+          </div>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-serif">
-          SATYALADS <span className="text-amber-400 font-sans font-bold text-3xl sm:text-5xl">(सत्य-LADS)</span>
-        </h1>
-        <h2 className="text-lg sm:text-2xl font-medium text-slate-300 max-w-3xl mb-8 leading-relaxed">
-          {isHi 
-            ? "एमपीलैड्स (MPLADS) योजना में धोखाधड़ी, कार्टेल सिंडिकेट और गलत जियो-टैग्ड संपत्तियों को पकड़ने वाला वास्तविक एआई सतर्कता मंच।"
-            : "AI-powered vigilance and fraud detection platform for Member of Parliament Local Area Development Scheme project filings."}
-        </h2>
-
-        {/* Feature Cards Grid */}
+        {/* Feature Cards Grid (Official Government Portal Style) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-xl p-5 hover:border-sky-500 transition-all">
-            <div className="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center mb-3">
+          <div className="bg-white border border-slate-300 rounded-md p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-10 h-10 rounded bg-blue-50 border border-blue-200 text-[#0B3D91] flex items-center justify-center mb-3">
               <Eye className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-white text-base mb-1">
-              {isHi ? "वास्तविक एल्गोरिदम इंजन" : "Real Detection Algorithms"}
+            <h3 className="font-bold text-[#002244] text-base mb-1">
+              {isHi ? 'वास्तविक एल्गोरिदम इंजन' : 'Algorithmic Detection Engine'}
             </h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               {isHi 
-                ? "DBSCAN स्पेशल क्लस्टरिंग, Z-स्कोर लागत विसंगति, NetworkX कार्टेल ग्राफ और pHash घोस्ट फोटो डिटेक्शन।"
-                : "DBSCAN spatial clustering, Z-score cost distributions, NetworkX cartel graphs, and perceptual image hashing."}
+                ? 'DBSCAN स्पेशल क्लस्टरिंग, PWD दर अनुसूची Z-स्कोर लागत विसंगति, NetworkX कार्टेल ग्राफ और pHash घोस्ट फोटो डिटेक्शन।'
+                : 'Deploying DBSCAN spatial clustering (150m), Schedule of Rates Z-score & IQR outlier analysis, and NetworkX bidding cartel graphs.'}
             </p>
+            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center gap-1 text-[10px] text-[#0B3D91] font-bold">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <span>Zero-Heuristic Mathematical Checks</span>
+            </div>
           </div>
 
-          <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-xl p-5 hover:border-emerald-500 transition-all">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
+          <div className="bg-white border border-slate-300 rounded-md p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-10 h-10 rounded bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mb-3">
               <Satellite className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-white text-base mb-1">
-              {isHi ? "लाइव जियो-टैग सत्यापन" : "Live Geo-Tag Verification"}
+            <h3 className="font-bold text-[#002244] text-base mb-1">
+              {isHi ? 'लाइव जियो-टैग सत्यापन' : 'EXIF Geotag Verification'}
             </h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               {isHi 
-                ? "तस्वीरों से EXIF GPS और टाइमस्टैम्प निकालकर 500m से अधिक विचलन और फर्जी साक्ष्य को तुरंत फ्लैग करता है।"
-                : "Extracts EXIF GPS and timestamps from field photos to catch >500m location mismatches and stripped metadata."}
+                ? 'तस्वीरों से EXIF GPS और टाइमस्टैम्प निकालकर 500m से अधिक दूरी के फर्जीवाड़े और छेड़छाड़ किए गए साक्ष्यों को तुरंत पकड़ता है।'
+                : 'Binary extraction of camera EXIF GPS tags & timestamps with Haversine distance verification to flag >500m site discrepancies.'}
             </p>
+            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center gap-1 text-[10px] text-[#0B3D91] font-bold">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <span>Anti-Spoofing Camera Sentinel</span>
+            </div>
           </div>
 
-          <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-xl p-5 hover:border-amber-500 transition-all">
-            <div className="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+          <div className="bg-white border border-slate-300 rounded-md p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-10 h-10 rounded bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center mb-3">
               <Scale className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-white text-base mb-1">
-              {isHi ? "कानूनी व्याख्या और जीएफआर संदर्भ" : "Explainable GFR Citations"}
+            <h3 className="font-bold text-[#002244] text-base mb-1">
+              {isHi ? 'जीएफआर 2017 विधिक उद्धरण' : 'Statutory GFR 2017 Citations'}
             </h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               {isHi 
-                ? "प्रत्येक फ्लैग के साथ जीएफआर नियम 144/149/153 और सीवीसी दिशानिर्देशों का स्पष्ट सांख्यिकीय प्रमाण।"
-                : "Every anomaly cites the exact rule trigger, standard deviation, and General Financial Rules (GFR) clauses."}
+                ? 'हर संदिग्ध कार्य के साथ जनरल फाइनेंशियल रूल्स (GFR 2017) और केंद्रीय सतर्कता आयोग (CVC) के नियमों का स्पष्ट साक्ष्य पत्र।'
+                : 'Every automated flag links directly to General Financial Rules (GFR 2017 Rules 144, 149) and CVC vigilance mandates.'}
+            </p>
+            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center gap-1 text-[10px] text-[#0B3D91] font-bold">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <span>Court-Admissible Audit Dossiers</span>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="bg-white border border-slate-300 rounded-md p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h4 className="font-bold text-[#002244] text-base">
+              {isHi ? 'अधिकृत सतर्कता अधिकारी लॉगिन' : 'Authorized Vigilance Officer Portal'}
+            </h4>
+            <p className="text-xs text-slate-600">
+              {isHi 
+                ? 'जिला सतर्कता अधिकारी, राज्य नोडल अधिकारी एवं सीएजी/सीवीसी ऑडिटर हेतु सुरक्षित प्रवेश।'
+                : 'Secure portal for District Vigilance Auditors, State Nodal Officers, and Central Administrators.'}
             </p>
           </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          
           <button
             onClick={onEnterApp}
-            className="w-full sm:w-auto px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl flex items-center justify-center gap-3 shadow-xl shadow-amber-500/20 text-base transition-all cursor-pointer font-sans"
+            className="px-6 py-3 bg-[#0B3D91] hover:bg-[#003366] text-white font-bold rounded text-sm flex items-center gap-2 shadow-sm transition-all cursor-pointer whitespace-nowrap"
           >
-            <span>{isHi ? "सतर्कता ऑडिट पोर्टल में प्रवेश करें" : "Access Vigilance Audit System"}</span>
-            <ArrowRight className="w-5 h-5" />
+            <span>{isHi ? 'पोर्टल में प्रवेश करें (Officer Login)' : 'Access Officer Portal'}</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
-          
-          <div className="text-xs font-mono text-slate-400 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>320+ MPLADS Projects Active • 25 Lok Sabha Seats</span>
-          </div>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="bg-[#020C1B] border-t border-[#1E3A5F] px-6 py-4 text-center text-xs text-slate-500 font-mono">
-        SATYALADS — Ministry of Statistics & Programme Implementation (MoSPI) • Built for Smart India Hackathon 2026 by Team Stack Attack
       </div>
     </div>
   );

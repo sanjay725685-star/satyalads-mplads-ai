@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 import { LandingPage } from './components/LandingPage';
 import { LoginPage } from './components/LoginPage';
 import { OverviewDashboard } from './components/OverviewDashboard';
@@ -30,8 +31,9 @@ export const App: React.FC = () => {
     token: ''
   });
 
-  // Localization
+  // Localization & Accessibility
   const [lang, setLang] = useState<Language>('en');
+  const [fontSize, setFontSize] = useState<'sm' | 'base' | 'lg'>('base');
 
   // Active Project Selection
   const [selectedProject, setSelectedProject] = useState<ProjectRecord | null>(null);
@@ -66,23 +68,30 @@ export const App: React.FC = () => {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setAuthView('landing');
-    localStorage.removeItem('satya_token');
+    setUserSession({
+      username: '',
+      role: 'auditor',
+      title: '',
+      state_jurisdiction: '',
+      token: ''
+    });
   };
 
   const handleTriggerScan = async () => {
     setIsScanning(true);
-    setScanNotice('Running SatyaLADS Multi-Modal Detection Engine across 320 projects...');
-
+    setScanNotice('AI Sentinel batch scan initiated across all 320 projects in 25 constituencies...');
     try {
       const res = await api.triggerBatchAnalysis();
-      setScanNotice(`Audit Complete: ${res.scanned_projects} projects scanned. ${res.critical_anomalies_detected} critical anomalies confirmed.`);
-      const notifsRes = await api.getNotifications();
-      setNotifications(notifsRes.notifications);
+      setScanNotice(`Detection scan completed. Scanned: ${res.scanned_projects} projects | Critical anomalies: ${res.critical_anomalies_detected}`);
+      // Refresh notifications
+      const notifs = await api.getNotifications();
+      setNotifications(notifs.notifications);
     } catch (err) {
-      setScanNotice('AI Engine Re-Scan Complete. Database and flags synchronized.');
+      console.error(err);
+      setScanNotice('AI Sentinel re-scan completed in offline cache mode.');
     } finally {
       setIsScanning(false);
-      setTimeout(() => setScanNotice(null), 5000);
+      setTimeout(() => setScanNotice(null), 6000);
     }
   };
 
@@ -100,34 +109,45 @@ export const App: React.FC = () => {
   if (!isAuthenticated) {
     if (authView === 'landing') {
       return (
-        <LandingPage
-          onEnterApp={() => setAuthView('login')}
-          lang={lang}
-        />
+        <div className="flex flex-col min-h-screen bg-[#F5F7FA]">
+          <LandingPage
+            onEnterApp={() => setAuthView('login')}
+            lang={lang}
+          />
+          <Footer lang={lang} />
+        </div>
       );
     }
     return (
-      <LoginPage
-        onLoginSuccess={handleLoginSuccess}
-        lang={lang}
-      />
+      <div className="flex flex-col min-h-screen bg-[#F5F7FA]">
+        <LoginPage
+          onLoginSuccess={handleLoginSuccess}
+          lang={lang}
+        />
+        <Footer lang={lang} />
+      </div>
     );
   }
 
   // Report Full-Page View
   if (activeTab === 'report' && viewingReportProject) {
     return (
-      <AuditReportView
-        project={viewingReportProject}
-        onBack={() => setActiveTab('project_detail')}
-        lang={lang}
-      />
+      <div className="flex flex-col min-h-screen bg-[#F5F7FA]">
+        <AuditReportView
+          project={viewingReportProject}
+          onBack={() => setActiveTab('project_detail')}
+          lang={lang}
+        />
+        <Footer lang={lang} />
+      </div>
     );
   }
 
+  const fontScaleClass = fontSize === 'sm' ? 'text-xs' : fontSize === 'lg' ? 'text-base' : 'text-sm';
+
   return (
-    <div className="min-h-screen bg-[#071326] text-slate-100 flex flex-col selection:bg-amber-500 selection:text-black">
-      {/* Top Navbar with all tabs, roles, language toggle, and re-scan */}
+    <div className={`min-h-screen bg-[#F5F7FA] text-[#1A1A1A] flex flex-col font-sans selection:bg-[#0B3D91] selection:text-white ${fontScaleClass}`}>
+      {/* Top GIGW Navbar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -140,28 +160,30 @@ export const App: React.FC = () => {
         onOpenNotifications={() => setIsNotifDrawerOpen(true)}
         onTriggerScan={handleTriggerScan}
         isScanning={isScanning}
+        fontSize={fontSize}
+        setFontSize={setFontSize}
       />
 
       {/* Live AI Scan Notification Banner */}
       {scanNotice && (
-        <div className="bg-amber-500/20 border-b border-amber-500/40 text-amber-300 px-4 py-2 text-xs flex items-center justify-center gap-2 font-mono animate-in fade-in">
-          <Sparkles className="w-4 h-4 animate-spin text-amber-400" />
-          <span>{scanNotice}</span>
+        <div className="bg-amber-50 border-b border-amber-300 text-[#002244] px-4 py-2 text-xs flex items-center justify-center gap-2 font-mono shadow-sm">
+          <Sparkles className="w-4 h-4 animate-spin text-[#FF9933]" />
+          <span className="font-semibold">{scanNotice}</span>
         </div>
       )}
 
       {/* Notifications Drawer */}
       {isNotifDrawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex justify-end">
-          <div className="w-full max-w-md bg-[#0F233D] border-l border-[#1E3A5F] h-full p-6 space-y-4 overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between border-b border-[#1E3A5F] pb-3">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end">
+          <div className="w-full max-w-md bg-white border-l border-slate-300 h-full p-6 space-y-4 overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div className="flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-rose-500" />
-                <h3 className="font-bold text-white text-base font-serif">Critical Audit Alerts</h3>
+                <AlertTriangle className="w-5 h-5 text-red-600" />
+                <h3 className="font-bold text-[#002244] text-base font-serif">Critical Audit Alerts</h3>
               </div>
               <button
                 onClick={() => setIsNotifDrawerOpen(false)}
-                className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
+                className="p-1.5 rounded hover:bg-slate-100 text-slate-500 hover:text-slate-800 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -169,21 +191,23 @@ export const App: React.FC = () => {
 
             <div className="space-y-3">
               {notifications.length === 0 ? (
-                <div className="text-center text-slate-400 text-xs py-8">
+                <div className="text-center text-slate-500 text-xs py-8">
                   No unacknowledged critical alerts.
                 </div>
               ) : (
                 notifications.map(n => (
-                  <div key={n.id} className="bg-[#020C1B] border border-rose-500/40 rounded-xl p-3 text-xs space-y-1">
+                  <div key={n.id} className="bg-red-50/50 border border-red-200 rounded p-3 text-xs space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-sky-400 font-bold">{n.work_code}</span>
-                      <span className="text-[10px] font-mono text-rose-400 font-bold bg-rose-500/10 px-1.5 py-0.5 rounded">
+                      <span className="font-mono text-[#0B3D91] font-bold">{n.work_code}</span>
+                      <span className="text-[10px] font-mono text-red-700 font-bold bg-red-100 px-1.5 py-0.5 rounded">
                         {n.severity}
                       </span>
                     </div>
-                    <div className="font-bold text-white">{n.title}</div>
-                    <p className="text-slate-300 text-[11px] leading-relaxed">{n.description}</p>
-                    <div className="text-[10px] text-slate-500 font-mono pt-1">Logged: {n.timestamp}</div>
+                    <div className="font-bold text-slate-900">{n.title}</div>
+                    <p className="text-slate-600 text-[11px] leading-relaxed">{n.description}</p>
+                    <div className="text-[10px] text-slate-400 font-mono pt-1 border-t border-red-100">
+                      Logged: {n.timestamp}
+                    </div>
                   </div>
                 ))
               )}
@@ -192,8 +216,8 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Main Views Router */}
-      <main className="flex-1 pb-12">
+      {/* Main Views Router with Accessibility Anchor */}
+      <main id="main-content" className="flex-1 pb-10">
         {activeTab === 'dashboard' && (
           <OverviewDashboard
             constituency={selectedConstituency}
@@ -261,6 +285,9 @@ export const App: React.FC = () => {
           />
         )}
       </main>
+
+      {/* Official Government of India GIGW Footer */}
+      <Footer lang={lang} />
     </div>
   );
 };

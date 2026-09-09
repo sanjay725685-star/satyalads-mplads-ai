@@ -9,21 +9,26 @@ export default {
     extend: {
       colors: {
         gov: {
-          navy: '#0A192F',
-          dark: '#020C1B',
-          card: '#0F233D',
-          border: '#1E3A5F',
+          navy: '#0B3D91',
+          navyDark: '#002244',
+          navyLight: '#003366',
           saffron: '#FF9933',
           green: '#138808',
-          blue: '#000080',
-          accent: '#38BDF8',
-          danger: '#EF4444',
-          warning: '#F59E0B',
-          success: '#10B981',
+          ashokaBlue: '#000080',
+          gold: '#B8860B',
+          bg: '#F5F7FA',
+          card: '#FFFFFF',
+          border: '#CBD5E1',
+          borderLight: '#E2E8F0',
+          text: '#1A1A1A',
+          textMuted: '#475569',
+          danger: '#DC2626',
+          warning: '#D97706',
+          success: '#15803D',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Noto Sans"', 'Roboto', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

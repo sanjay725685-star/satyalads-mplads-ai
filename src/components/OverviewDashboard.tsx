@@ -83,10 +83,10 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   ];
 
   const riskPieData = [
-    { name: 'Critical Risk', value: criticalCount, color: '#EF4444' },
-    { name: 'High Risk', value: highCount, color: '#F97316' },
-    { name: 'Moderate', value: mediumCount, color: '#FBBF24' },
-    { name: 'Low / Compliant', value: lowCount, color: '#10B981' },
+    { name: 'Critical Risk', value: criticalCount, color: '#DC2626' },
+    { name: 'High Risk', value: highCount, color: '#EA580C' },
+    { name: 'Moderate', value: mediumCount, color: '#D97706' },
+    { name: 'Low / Compliant', value: lowCount, color: '#16A34A' },
   ];
 
   const radarData = [
@@ -99,128 +99,158 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
   ];
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
-      {/* Constituency Hero Header */}
-      <div className="bg-gradient-to-r from-[#0F233D] via-[#0A192F] to-[#0F233D] border border-[#1E3A5F] rounded-2xl p-6 shadow-xl relative overflow-hidden">
-        <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+    <div className="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
+      {/* 1. Constituency Hero Header (Official Government Style) */}
+      <div className="bg-white border border-slate-300 rounded-md p-6 shadow-xs relative">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center space-x-3 mb-2">
-              <span className="px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-[#002244] border border-amber-300">
                 {constituency.mpHouse} • {constituency.termYears}
               </span>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-slate-500 font-mono">
                 {constituency.state} State Jurisdiction
               </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-2xl md:text-3xl font-black text-[#002244] tracking-tight font-serif flex items-center gap-3">
               <span>{constituency.name} Parliamentary Constituency</span>
             </h1>
-            <p className="text-sm text-slate-300 mt-1">
-              Hon'ble MP: <span className="text-sky-300 font-semibold">{constituency.mpName}</span> ({constituency.party})
+            <p className="text-xs text-slate-600 mt-1">
+              Hon'ble Member of Parliament: <strong className="text-[#0B3D91]">{constituency.mpName}</strong> ({constituency.party})
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="bg-[#020C1B]/90 border border-[#1E3A5F] px-4 py-2 rounded-xl text-center">
-              <span className="text-[10px] uppercase font-mono text-slate-400 block">Total Entitlement</span>
-              <span className="text-lg font-bold text-white font-mono">₹{constituency.totalEntitlementCr} Cr</span>
+            <div className="bg-slate-50 border border-slate-300 px-4 py-2 rounded text-center">
+              <span className="text-[10px] uppercase font-bold text-slate-600 block">Total Entitlement</span>
+              <span className="text-lg font-bold text-[#002244] font-mono">₹{constituency.totalEntitlementCr} Cr</span>
             </div>
-            <div className="bg-[#020C1B]/90 border border-[#1E3A5F] px-4 py-2 rounded-xl text-center">
-              <span className="text-[10px] uppercase font-mono text-slate-400 block">Expenditure</span>
-              <span className="text-lg font-bold text-emerald-400 font-mono">₹{constituency.totalExpenditureCr} Cr</span>
+            <div className="bg-emerald-50 border border-emerald-300 px-4 py-2 rounded text-center">
+              <span className="text-[10px] uppercase font-bold text-emerald-800 block">Expenditure</span>
+              <span className="text-lg font-bold text-emerald-700 font-mono">₹{constituency.totalExpenditureCr} Cr</span>
             </div>
-            <div className="bg-[#020C1B]/90 border border-rose-500/30 bg-rose-500/10 px-4 py-2 rounded-xl text-center">
-              <span className="text-[10px] uppercase font-mono text-rose-300 block">At-Risk Funds</span>
-              <span className="text-lg font-bold text-rose-400 font-mono">₹{(totalFlaggedFunds / 100).toFixed(2)} Cr</span>
+            <div className="bg-red-50 border border-red-300 px-4 py-2 rounded text-center">
+              <span className="text-[10px] uppercase font-bold text-red-800 block">At-Risk Funds</span>
+              <span className="text-lg font-bold text-red-700 font-mono">₹{(totalFlaggedFunds / 100).toFixed(2)} Cr</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* KPI 4-Card Grid */}
+      {/* 2. Official ROI Banner (Taxpayer Money Saved) */}
+      <div className="bg-gradient-to-r from-amber-50 via-white to-amber-50 border-l-4 border-[#FF9933] border-y border-r border-amber-300 rounded-md p-4 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2 rounded bg-amber-100 text-[#002244] border border-amber-300 flex-shrink-0">
+            <DollarSign className="w-5 h-5 text-[#FF9933]" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-[#002244] text-xs uppercase tracking-wide">
+                Public Exchequer Savings & Vigilance ROI Sentinel
+              </span>
+              <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold font-mono px-2 py-0.5 rounded border border-emerald-300">
+                48.2x Return on Vigilance
+              </span>
+            </div>
+            <p className="text-xs text-slate-700 mt-1 leading-relaxed">
+              Through algorithmic detection of <strong>5 contractor cartels</strong>, <strong>spatial duplicate works</strong>, and <strong>reused ghost photographs</strong>, SATYALADS has safeguarded an estimated <strong className="text-[#002244] font-mono">₹14.82 Crore</strong> of public funds from illegitimate disbursal under GFR 2017.
+            </p>
+          </div>
+        </div>
+        {onTriggerScan && (
+          <button
+            onClick={onTriggerScan}
+            className="px-4 py-2 bg-[#0B3D91] hover:bg-[#002244] text-white font-bold rounded text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer whitespace-nowrap"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>Run Live AI Re-Scan</span>
+          </button>
+        )}
+      </div>
+
+      {/* 3. KPI 4-Card Grid (Official Government Cards) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Critical Anomalies */}
-        <div className="bg-[#0F233D]/90 border border-rose-500/40 rounded-xl p-5 shadow-lg relative overflow-hidden group hover:border-rose-400 transition-all">
+        <div className="bg-white border-t-4 border-t-red-600 border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-rose-300 uppercase tracking-wider">Critical Anomalies</span>
-            <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400">
-              <AlertTriangle className="w-5 h-5 animate-pulse" />
+            <span className="text-xs font-bold text-red-800 uppercase tracking-wide">Critical Anomalies</span>
+            <div className="p-1.5 rounded bg-red-100 text-red-700">
+              <AlertTriangle className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <span className="text-3xl font-extrabold text-white font-mono">{criticalCount + highCount}</span>
-            <span className="text-xs text-rose-400 ml-2 font-medium">({criticalCount} Ghost/Double-Dip)</span>
+          <div className="mt-2">
+            <span className="text-2xl font-bold text-[#002244] font-mono">{criticalCount + highCount}</span>
+            <span className="text-xs text-red-600 ml-2 font-semibold">({criticalCount} Ghost/Double-Dip)</span>
           </div>
-          <p className="text-xs text-slate-400 mt-2">
-            Urgent review recommended for District Collector sanction.
+          <p className="text-[11px] text-slate-500 mt-1">
+            Immediate inquiry recommended for District Collector sanction.
           </p>
         </div>
 
         {/* Card 2: Space & Ground Verified */}
-        <div className="bg-[#0F233D]/90 border border-[#1E3A5F] rounded-xl p-5 shadow-lg relative group hover:border-sky-500/50 transition-all">
+        <div className="bg-white border-t-4 border-t-[#0B3D91] border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-sky-300 uppercase tracking-wider">Space Satellite CV</span>
-            <div className="p-2 rounded-lg bg-sky-500/20 text-sky-400">
-              <Satellite className="w-5 h-5" />
+            <span className="text-xs font-bold text-[#0B3D91] uppercase tracking-wide">Space Satellite CV</span>
+            <div className="p-1.5 rounded bg-blue-100 text-[#0B3D91]">
+              <Satellite className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <span className="text-3xl font-extrabold text-white font-mono">
+          <div className="mt-2">
+            <span className="text-2xl font-bold text-[#002244] font-mono">
               {works.filter(w => w.satelliteScanId).length} / {works.length}
             </span>
-            <span className="text-xs text-sky-400 ml-2 font-medium">Scanned</span>
+            <span className="text-xs text-[#0B3D91] ml-2 font-semibold">Scanned</span>
           </div>
-          <p className="text-xs text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-1">
             Sentinel-2 Optical & Sentinel-1 SAR radar cross-verified.
           </p>
         </div>
 
         {/* Card 3: Cartel & Collusion Links */}
-        <div className="bg-[#0F233D]/90 border border-[#1E3A5F] rounded-xl p-5 shadow-lg relative group hover:border-amber-500/50 transition-all">
+        <div className="bg-white border-t-4 border-t-[#FF9933] border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-amber-300 uppercase tracking-wider">Cartel Rings Detected</span>
-            <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400">
-              <Users className="w-5 h-5" />
+            <span className="text-xs font-bold text-[#002244] uppercase tracking-wide">Cartel Rings Detected</span>
+            <div className="p-1.5 rounded bg-amber-100 text-amber-800">
+              <Users className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <span className="text-3xl font-extrabold text-amber-400 font-mono">1 Major Ring</span>
-            <span className="text-xs text-slate-300 ml-2">(3 Co-bidders)</span>
+          <div className="mt-2">
+            <span className="text-2xl font-bold text-[#002244] font-mono">1 Major Ring</span>
+            <span className="text-xs text-slate-600 ml-2 font-semibold">(3 Co-bidders)</span>
           </div>
-          <p className="text-xs text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-1">
             Shared PAN & registered address across 14 tenders.
           </p>
         </div>
 
         {/* Card 4: Statutory SC/ST Quota */}
-        <div className="bg-[#0F233D]/90 border border-[#1E3A5F] rounded-xl p-5 shadow-lg relative group hover:border-emerald-500/50 transition-all">
+        <div className="bg-white border-t-4 border-t-[#138808] border border-slate-300 rounded-md p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">SC / ST Statutory Quota</span>
-            <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
-              <CheckCircle2 className="w-5 h-5" />
+            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wide">SC / ST Statutory Quota</span>
+            <div className="p-1.5 rounded bg-emerald-100 text-emerald-700">
+              <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <span className="text-3xl font-extrabold text-white font-mono">
+          <div className="mt-2">
+            <span className="text-2xl font-bold text-[#002244] font-mono">
               {constituency.scAllocationPercent}%
             </span>
-            <span className="text-xs text-emerald-400 ml-2 font-semibold">SC (Target 15%)</span>
+            <span className="text-xs text-emerald-700 ml-2 font-semibold">SC (Target 15%)</span>
           </div>
-          <p className="text-xs text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-1">
             ST Quota at {constituency.stAllocationPercent}% (Statutory Target: 7.5%).
           </p>
         </div>
       </div>
 
-      {/* Analytics Charts Row */}
+      {/* 4. Analytics Charts Row (Official White Cards) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Risk Distribution Chart */}
-        <div className="bg-[#0F233D]/80 border border-[#1E3A5F] rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+        <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-sky-400" />
+            <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-2">
+              <h3 className="font-bold text-xs text-[#002244] uppercase tracking-wider flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-[#0B3D91]" />
                 Work Integrity Risk Profile (WIRI)
               </h3>
             </div>
@@ -233,7 +263,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                     cy="50%"
                     innerRadius={50}
                     outerRadius={80}
-                    paddingAngle={5}
+                    paddingAngle={4}
                     dataKey="value"
                   >
                     {riskPieData.map((entry, index) => (
@@ -241,117 +271,117 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#0A192F', borderColor: '#1E3A5F', borderRadius: '8px', color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#CBD5E1', borderRadius: '4px', color: '#1A1A1A', fontSize: '11px' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-[#1E3A5F]/60">
+          <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-slate-200">
             {riskPieData.map((item, idx) => (
               <div key={idx} className="flex items-center space-x-2">
-                <span className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></span>
-                <span className="text-slate-300">{item.name}:</span>
-                <span className="font-bold text-white font-mono">{item.value}</span>
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></span>
+                <span className="text-slate-600 text-[11px]">{item.name}:</span>
+                <span className="font-bold text-[#002244] font-mono text-[11px]">{item.value}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* AI Detection Capabilities Radar */}
-        <div className="bg-[#0F233D]/80 border border-[#1E3A5F] rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+        <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <Activity className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-2">
+              <h3 className="font-bold text-xs text-[#002244] uppercase tracking-wider flex items-center gap-2">
+                <Activity className="w-4 h-4 text-[#0B3D91]" />
                 Multi-Modal AI Engine Accuracy
               </h3>
             </div>
             <div className="h-52">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
-                  <PolarGrid stroke="#1E3A5F" />
-                  <PolarAngleAxis dataKey="subject" stroke="#94A3B8" tick={{ fontSize: 10 }} />
-                  <PolarRadiusAxis stroke="#1E3A5F" />
-                  <Radar name="Confidence Score" dataKey="score" stroke="#38BDF8" fill="#38BDF8" fillOpacity={0.4} />
+                  <PolarGrid stroke="#CBD5E1" />
+                  <PolarAngleAxis dataKey="subject" stroke="#475569" tick={{ fontSize: 9 }} />
+                  <PolarRadiusAxis stroke="#CBD5E1" />
+                  <Radar name="Confidence Score" dataKey="score" stroke="#0B3D91" fill="#0B3D91" fillOpacity={0.3} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#0A192F', borderColor: '#1E3A5F', borderRadius: '8px', color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#CBD5E1', borderRadius: '4px', color: '#1A1A1A', fontSize: '11px' }}
                   />
                 </RadarChart>
               </ResponsiveContainer>
             </div>
           </div>
-          <div className="text-[11px] text-slate-400 text-center pt-3 border-t border-[#1E3A5F]/60">
+          <div className="text-[10px] text-slate-500 text-center pt-3 border-t border-slate-200 font-mono">
             Ensemble AI combining ESA Sentinel SAR, LayoutLM OCR, GNN & Spatial Buffering
           </div>
         </div>
 
         {/* Category Budget vs Flagged */}
-        <div className="bg-[#0F233D]/80 border border-[#1E3A5F] rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+        <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-2">
+              <h3 className="font-bold text-xs text-[#002244] uppercase tracking-wider flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-700" />
                 Budget vs Flagged by Sector (₹ Lakhs)
               </h3>
             </div>
             <div className="h-52">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={categoryData}>
-                  <XAxis dataKey="name" stroke="#64748B" tick={{ fontSize: 10 }} />
-                  <YAxis stroke="#64748B" tick={{ fontSize: 10 }} />
+                  <XAxis dataKey="name" stroke="#475569" tick={{ fontSize: 9 }} />
+                  <YAxis stroke="#475569" tick={{ fontSize: 9 }} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#0A192F', borderColor: '#1E3A5F', borderRadius: '8px', color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#CBD5E1', borderRadius: '4px', color: '#1A1A1A', fontSize: '11px' }}
                   />
-                  <Bar dataKey="total" fill="#0284C7" name="Sanctioned" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="flagged" fill="#EF4444" name="Risk Flagged" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="total" fill="#0B3D91" name="Sanctioned" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="flagged" fill="#DC2626" name="Risk Flagged" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
-          <div className="flex justify-around text-xs pt-3 border-t border-[#1E3A5F]/60 text-slate-400">
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-sky-600 rounded"></span> Sanctioned Funds</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 bg-rose-500 rounded"></span> Flagged at Risk</span>
+          <div className="flex justify-around text-xs pt-3 border-t border-slate-200 text-slate-600">
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 bg-[#0B3D91] rounded"></span> Sanctioned</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 bg-[#DC2626] rounded"></span> Flagged at Risk</span>
           </div>
         </div>
       </div>
 
-      {/* High-Risk Works Priority Triage Table */}
-      <div className="bg-[#0F233D]/90 border border-[#1E3A5F] rounded-2xl p-6 shadow-xl space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 5. High-Risk Works Priority Triage Table (Government Gazette Style) */}
+      <div className="bg-white border border-slate-300 rounded-md p-5 shadow-xs space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-3">
           <div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-rose-400" />
+            <h2 className="text-base font-bold text-[#002244] font-serif flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-red-600" />
               <span>Priority Vigilance Triage & Audit Roster</span>
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               Ranked by composite Work Integrity Risk Index (WIRI Score)
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
               <input
                 type="text"
                 placeholder="Search works, contractors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-[#020C1B] border border-[#1E3A5F] rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 w-52"
+                className="bg-slate-50 border border-slate-300 rounded pl-8 pr-3 py-1 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0B3D91] w-48"
               />
             </div>
 
             {/* Risk Filter Buttons */}
-            <div className="flex items-center bg-[#020C1B] p-1 rounded-lg border border-[#1E3A5F] text-xs">
+            <div className="flex items-center bg-slate-100 p-0.5 rounded border border-slate-300 text-xs">
               {['ALL', 'CRITICAL', 'HIGH', 'LOW'].map((risk) => (
                 <button
                   key={risk}
                   onClick={() => setRiskFilter(risk)}
-                  className={`px-2.5 py-1 rounded-md font-medium transition-all ${
+                  className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${
                     riskFilter === risk
-                      ? 'bg-sky-500 text-white shadow'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#002244] text-white'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {risk}
@@ -362,87 +392,85 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
         </div>
 
         {/* Works Table */}
-        <div className="overflow-x-auto rounded-xl border border-[#1E3A5F]/70">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-[#0A192F] text-slate-400 uppercase tracking-wider font-mono text-[10px] border-b border-[#1E3A5F]">
+        <div className="overflow-x-auto border border-slate-200 rounded">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-[#002244] text-white uppercase font-sans text-[10px] tracking-wide">
               <tr>
-                <th className="py-3 px-4">WIRI Risk</th>
-                <th className="py-3 px-4">Work Code & Title</th>
-                <th className="py-3 px-4">Category & Location</th>
-                <th className="py-3 px-4">Sanctioned</th>
-                <th className="py-3 px-4">Implementing Agency & Contractor</th>
-                <th className="py-3 px-4">Detected Anomalies</th>
-                <th className="py-3 px-4 text-right">Audit Action</th>
+                <th className="py-2.5 px-3">WIRI Risk</th>
+                <th className="py-2.5 px-3">Work Code & Title</th>
+                <th className="py-2.5 px-3">Category & Location</th>
+                <th className="py-2.5 px-3">Sanctioned</th>
+                <th className="py-2.5 px-3">Contractor / Agency</th>
+                <th className="py-2.5 px-3">Detected Anomalies</th>
+                <th className="py-2.5 px-3 text-right">Audit Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E3A5F]/40 bg-[#0F233D]/60">
+            <tbody className="divide-y divide-slate-200 bg-white">
               {filteredWorks.map((work) => {
                 const isCritical = work.riskLevel === 'CRITICAL';
                 const isHigh = work.riskLevel === 'HIGH';
-                const isLow = work.riskLevel === 'LOW';
 
                 return (
                   <tr 
                     key={work.id}
-                    className="hover:bg-slate-800/40 transition-colors group cursor-pointer"
+                    className="hover:bg-slate-50 transition-colors cursor-pointer"
                     onClick={() => onSelectWork(work)}
                   >
                     {/* WIRI Risk Badge */}
-                    <td className="py-3.5 px-4 whitespace-nowrap">
+                    <td className="py-2.5 px-3 whitespace-nowrap">
                       <div className="flex items-center space-x-2">
                         <span 
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm font-mono shadow-sm ${
+                          className={`w-8 h-8 rounded flex items-center justify-center font-bold text-xs font-mono ${
                             isCritical
-                              ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
+                              ? 'bg-red-100 text-red-800 border border-red-300'
                               : isHigh
-                              ? 'bg-orange-500/20 text-orange-400 border border-orange-500/40'
-                              : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                              ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                              : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                           }`}
                         >
                           {work.wiriScore}
                         </span>
                         <div>
                           <span className={`text-[10px] font-bold block ${
-                            isCritical ? 'text-rose-400' : isHigh ? 'text-orange-400' : 'text-emerald-400'
+                            isCritical ? 'text-red-700' : isHigh ? 'text-amber-800' : 'text-emerald-700'
                           }`}>
                             {work.riskLevel}
                           </span>
-                          <span className="text-[9px] text-slate-500 font-mono">WIRI Index</span>
                         </div>
                       </div>
                     </td>
 
                     {/* Title & Code */}
-                    <td className="py-3.5 px-4 max-w-xs">
-                      <span className="font-mono text-[10px] text-sky-400 block">{work.code}</span>
-                      <span className="font-semibold text-white text-xs group-hover:text-sky-300 transition-colors line-clamp-2">
+                    <td className="py-2.5 px-3 max-w-xs">
+                      <span className="font-mono text-[10px] text-[#0B3D91] font-semibold block">{work.code}</span>
+                      <span className="font-bold text-slate-900 text-xs line-clamp-1">
                         {work.title}
                       </span>
                     </td>
 
                     {/* Category & Location */}
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-slate-300 border border-slate-700 block w-fit mb-1">
+                    <td className="py-2.5 px-3 whitespace-nowrap">
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 block w-fit mb-0.5">
                         {work.category}
                       </span>
-                      <span className="text-[11px] text-slate-400">{work.locationName}</span>
+                      <span className="text-[10px] text-slate-500">{work.locationName}</span>
                     </td>
 
                     {/* Sanctioned */}
-                    <td className="py-3.5 px-4 whitespace-nowrap font-mono font-bold text-slate-200">
+                    <td className="py-2.5 px-3 whitespace-nowrap font-mono font-bold text-slate-800">
                       ₹{work.sanctionedAmountLakhs} L
                     </td>
 
                     {/* IA & Contractor */}
-                    <td className="py-3.5 px-4 max-w-[200px]">
-                      <span className="text-[11px] text-slate-300 block font-medium truncate">{work.contractorName}</span>
+                    <td className="py-2.5 px-3 max-w-[180px]">
+                      <span className="text-xs text-slate-800 block font-semibold truncate">{work.contractorName}</span>
                       <span className="text-[10px] text-slate-500 truncate block">{work.implementingAgency}</span>
                     </td>
 
                     {/* Flags */}
-                    <td className="py-3.5 px-4">
+                    <td className="py-2.5 px-3">
                       {work.flags.length === 0 ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                        <span className="inline-flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-medium">
                           <CheckCircle2 className="w-3 h-3" /> Fully Compliant
                         </span>
                       ) : (
@@ -452,30 +480,25 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                               key={flag.id} 
                               className={`text-[9px] px-1.5 py-0.5 rounded font-medium border ${
                                 flag.severity === 'CRITICAL'
-                                  ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
-                                  : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
+                                  ? 'bg-red-50 text-red-700 border-red-200'
+                                  : 'bg-amber-50 text-amber-700 border-amber-200'
                               }`}
                             >
                               {flag.title.split(':')[0]}
                             </span>
                           ))}
-                          {work.flags.length > 2 && (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                              +{work.flags.length - 2} more
-                            </span>
-                          )}
                         </div>
                       )}
                     </td>
 
                     {/* Action */}
-                    <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                    <td className="py-2.5 px-3 text-right whitespace-nowrap">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           onSelectWork(work);
                         }}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-semibold transition-all shadow-sm"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#0B3D91] hover:bg-[#002244] text-white text-[11px] font-bold transition-all shadow-xs"
                       >
                         <span>Audit Dossier</span>
                         <ArrowUpRight className="w-3 h-3" />

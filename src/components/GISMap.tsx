@@ -68,7 +68,7 @@ export const GISMap: React.FC<GISMapProps> = ({
       });
 
       // Dark CartoDB Tiles
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         subdomains: 'abcd',
       }).addTo(map);
@@ -267,30 +267,35 @@ export const GISMap: React.FC<GISMapProps> = ({
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-4">
       {/* Top Map Toolbar */}
-      <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-4 shadow-lg flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-white border border-slate-300 rounded-lg p-4 shadow-sm border-t-4 border-[#003366] flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Layers className="w-5 h-5 text-sky-400" />
-            <span>3D Geospatial Intelligence & Spatial Collision Radar</span>
+          <div className="flex items-center space-x-2 mb-1">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-[#FF9933]/15 text-[#B85D00] border border-[#FF9933]/30 uppercase font-mono tracking-wider">
+              Geographic Information System • Survey of India Datum
+            </span>
+          </div>
+          <h2 className="text-lg font-bold text-[#002244] font-serif flex items-center gap-2">
+            <Layers className="w-5 h-5 text-[#003366]" />
+            <span>Geospatial Intelligence & Spatial Collision Radar</span>
           </h2>
-          <p className="text-xs text-slate-400">
-            Live geo-referenced MPLADS assets with spatial collision buffers and SC/ST demographic bounds
+          <p className="text-xs text-slate-600">
+            Live geo-referenced MPLADS assets with 50m spatial collision buffers and SC/ST demographic bounds
           </p>
         </div>
 
         {/* Controls */}
         <div className="flex flex-wrap items-center gap-3 text-xs">
           {/* Risk Filter */}
-          <div className="flex items-center space-x-1 bg-[#020C1B] p-1 rounded-lg border border-[#1E3A5F]">
-            <span className="text-[10px] text-slate-400 px-2 uppercase font-mono">Filter Risk:</span>
+          <div className="flex items-center space-x-1 bg-[#F8FAFC] p-1 rounded border border-slate-300">
+            <span className="text-[10px] text-slate-500 px-2 uppercase font-mono font-bold">Filter Risk:</span>
             {['ALL', 'CRITICAL', 'HIGH', 'LOW'].map((lvl) => (
               <button
                 key={lvl}
                 onClick={() => setFilterRisk(lvl)}
-                className={`px-2 py-1 rounded font-medium transition-all ${
+                className={`px-2.5 py-1 rounded font-bold font-mono transition-all cursor-pointer ${
                   filterRisk === lvl
-                    ? 'bg-sky-500 text-white shadow'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-[#003366] text-white shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 {lvl}
@@ -301,26 +306,26 @@ export const GISMap: React.FC<GISMapProps> = ({
           {/* Layer Toggles */}
           <button
             onClick={() => setShowCollisionBuffers(!showCollisionBuffers)}
-            className={`px-3 py-1.5 rounded-lg border font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded border font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               showCollisionBuffers
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                : 'bg-[#020C1B] text-slate-400 border-[#1E3A5F]'
+                ? 'bg-rose-100 text-rose-800 border-rose-300 font-bold'
+                : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
             }`}
           >
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>Collision Buffers</span>
+            <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
+            <span>Collision Buffers (50m)</span>
           </button>
 
           <button
             onClick={() => setShowScStZones(!showScStZones)}
-            className={`px-3 py-1.5 rounded-lg border font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded border font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               showScStZones
-                ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
-                : 'bg-[#020C1B] text-slate-400 border-[#1E3A5F]'
+                ? 'bg-purple-100 text-purple-800 border-purple-300 font-bold'
+                : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
             }`}
           >
-            <MapPin className="w-3.5 h-3.5" />
-            <span>SC/ST Zones</span>
+            <MapPin className="w-3.5 h-3.5 text-purple-600" />
+            <span>SC/ST Mandated Zones</span>
           </button>
         </div>
       </div>
@@ -328,14 +333,14 @@ export const GISMap: React.FC<GISMapProps> = ({
       {/* Main Map & Detail Split View */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map Canvas */}
-        <div className="lg:col-span-2 bg-[#0A192F] border border-[#1E3A5F] rounded-2xl overflow-hidden shadow-2xl relative h-[580px]">
+        <div className="lg:col-span-2 bg-slate-100 border border-slate-300 rounded-lg overflow-hidden shadow-sm relative h-[580px]">
           {mapError ? (
-            <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-rose-400 space-y-2">
-              <AlertTriangle className="w-10 h-10 text-rose-500" />
+            <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-rose-700 space-y-2">
+              <AlertTriangle className="w-10 h-10 text-rose-600" />
               <p className="text-sm font-bold">{mapError}</p>
               <button 
                 onClick={() => window.location.reload()}
-                className="px-3 py-1.5 bg-sky-500 text-white text-xs font-bold rounded-lg"
+                className="px-3 py-1.5 bg-[#003366] text-white text-xs font-bold rounded cursor-pointer"
               >
                 Reload Map
               </button>
@@ -345,43 +350,43 @@ export const GISMap: React.FC<GISMapProps> = ({
           )}
           
           {/* Map Legend Overlay */}
-          <div className="absolute bottom-4 left-4 bg-[#0A192F]/95 backdrop-blur-md border border-[#1E3A5F] p-3 rounded-xl z-[400] text-xs space-y-2 shadow-xl">
-            <span className="font-bold text-slate-300 text-[10px] uppercase font-mono block">Map Legend</span>
+          <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-slate-300 p-3 rounded shadow-md z-[400] text-xs space-y-2">
+            <span className="font-bold text-slate-800 text-[10px] uppercase font-mono block border-b border-slate-200 pb-1">Map Layer Legend</span>
             <div className="flex items-center space-x-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-rose-500 border border-white"></span>
-              <span className="text-slate-300 text-[11px]">WIRI 75-100 (Critical Ghost/Fraud)</span>
+              <span className="w-3.5 h-3.5 rounded-full bg-rose-600 border border-white shadow-xs"></span>
+              <span className="text-slate-700 text-[11px] font-medium">WIRI 75-100 (Critical Ghost/Fraud)</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-orange-500 border border-white"></span>
-              <span className="text-slate-300 text-[11px]">WIRI 50-74 (High Anomaly)</span>
+              <span className="w-3.5 h-3.5 rounded-full bg-amber-500 border border-white shadow-xs"></span>
+              <span className="text-slate-700 text-[11px] font-medium">WIRI 50-74 (High Anomaly)</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-emerald-500 border border-white"></span>
-              <span className="text-slate-300 text-[11px]">WIRI 0-49 (Compliant / Normal)</span>
+              <span className="w-3.5 h-3.5 rounded-full bg-emerald-600 border border-white shadow-xs"></span>
+              <span className="text-slate-700 text-[11px] font-medium">WIRI 0-49 (Compliant / Normal)</span>
             </div>
-            <div className="flex items-center space-x-2 pt-1 border-t border-[#1E3A5F]">
-              <span className="w-3.5 h-3.5 rounded-full border border-dashed border-rose-400 bg-rose-500/20"></span>
-              <span className="text-slate-300 text-[11px]">50m Duplicate Collision Buffer</span>
+            <div className="flex items-center space-x-2 pt-1 border-t border-slate-200">
+              <span className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-rose-500 bg-rose-100"></span>
+              <span className="text-slate-700 text-[11px] font-medium">50m Duplicate Collision Radius</span>
             </div>
           </div>
         </div>
 
         {/* Selected Project Inspector Card */}
-        <div className="bg-[#0F233D] border border-[#1E3A5F] rounded-2xl p-5 shadow-xl flex flex-col justify-between h-[580px] overflow-y-auto">
+        <div className="bg-white border border-slate-300 rounded-lg p-5 shadow-sm border-t-4 border-[#003366] flex flex-col justify-between h-[580px] overflow-y-auto">
           {selectedWork ? (
             <div className="space-y-4">
               {/* Header */}
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between border-b border-slate-200 pb-3">
                 <div>
-                  <span className="font-mono text-xs text-sky-400 font-bold block">{selectedWork.code}</span>
-                  <h3 className="font-bold text-white text-sm mt-1">{selectedWork.title}</h3>
+                  <span className="font-mono text-xs text-[#003366] font-bold block">{selectedWork.code}</span>
+                  <h3 className="font-bold text-slate-900 text-sm mt-1">{selectedWork.title}</h3>
                 </div>
-                <span className={`px-2.5 py-1 rounded-lg font-mono font-extrabold text-sm border ${
+                <span className={`px-2.5 py-1 rounded font-mono font-bold text-xs border ${
                   selectedWork.riskLevel === 'CRITICAL' 
-                    ? 'bg-rose-500/20 text-rose-400 border-rose-500/40'
+                    ? 'bg-rose-100 text-rose-800 border-rose-300'
                     : selectedWork.riskLevel === 'HIGH'
-                    ? 'bg-orange-500/20 text-orange-400 border-orange-500/40'
-                    : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                    : 'bg-emerald-100 text-emerald-800 border-emerald-300'
                 }`}>
                   WIRI: {selectedWork.wiriScore}
                 </span>
@@ -389,44 +394,44 @@ export const GISMap: React.FC<GISMapProps> = ({
 
               {/* Badges */}
               <div className="flex flex-wrap gap-2 text-xs">
-                <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300 font-medium">
                   {selectedWork.category}
                 </span>
-                <span className={`px-2 py-0.5 rounded border ${
+                <span className={`px-2 py-0.5 rounded border font-medium ${
                   selectedWork.demographicZone === 'SC_MANDATED' 
-                    ? 'bg-purple-500/20 text-purple-300 border-purple-500/30'
+                    ? 'bg-purple-100 text-purple-800 border-purple-300'
                     : selectedWork.demographicZone === 'ST_MANDATED'
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                    : 'bg-slate-800 text-slate-400 border-slate-700'
+                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                    : 'bg-slate-100 text-slate-700 border-slate-300'
                 }`}>
                   {selectedWork.demographicZone}
                 </span>
-                <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800 font-mono">
+                <span className="px-2 py-0.5 rounded bg-blue-50 text-[#003366] border border-blue-200 font-mono font-bold">
                   ₹{selectedWork.sanctionedAmountLakhs} Lakhs
                 </span>
               </div>
 
               {/* Key Details */}
-              <div className="space-y-2 bg-[#020C1B] p-3.5 rounded-xl border border-[#1E3A5F]/70 text-xs">
+              <div className="space-y-2 bg-[#F8FAFC] p-3.5 rounded border border-slate-200 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Location:</span>
-                  <span className="text-white font-medium">{selectedWork.locationName}</span>
+                  <span className="text-slate-500">Location:</span>
+                  <span className="text-slate-900 font-medium">{selectedWork.locationName}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Coordinates:</span>
-                  <span className="font-mono text-sky-300">{selectedWork.lat.toFixed(4)}, {selectedWork.lng.toFixed(4)}</span>
+                  <span className="text-slate-500">Coordinates:</span>
+                  <span className="font-mono text-[#003366] font-bold">{selectedWork.lat.toFixed(4)}, {selectedWork.lng.toFixed(4)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Implementing Agency:</span>
-                  <span className="text-slate-200 text-right max-w-[180px] truncate">{selectedWork.implementingAgency}</span>
+                  <span className="text-slate-500">Implementing Agency:</span>
+                  <span className="text-slate-900 text-right max-w-[180px] truncate">{selectedWork.implementingAgency}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Contractor:</span>
-                  <span className="text-amber-300 font-medium text-right max-w-[180px] truncate">{selectedWork.contractorName}</span>
+                  <span className="text-slate-500">Contractor:</span>
+                  <span className="text-slate-900 font-medium text-right max-w-[180px] truncate">{selectedWork.contractorName}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Status:</span>
-                  <span className={`font-bold ${selectedWork.status === 'COMPLETED' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                  <span className="text-slate-500">Status:</span>
+                  <span className={`font-bold ${selectedWork.status === 'COMPLETED' ? 'text-emerald-700' : 'text-amber-800'}`}>
                     {selectedWork.status}
                   </span>
                 </div>
@@ -434,12 +439,12 @@ export const GISMap: React.FC<GISMapProps> = ({
 
               {/* Active Flag List */}
               <div>
-                <h4 className="font-bold text-xs text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                <h4 className="font-bold text-xs text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5 font-mono">
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
                   <span>AI Risk Flags ({selectedWork.flags.length})</span>
                 </h4>
                 {selectedWork.flags.length === 0 ? (
-                  <p className="text-xs text-emerald-400 bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20">
+                  <p className="text-xs text-emerald-800 bg-emerald-50 p-3 rounded border border-emerald-200">
                     No anomalies found. Physical & financial verifications are synchronized.
                   </p>
                 ) : (
@@ -447,15 +452,15 @@ export const GISMap: React.FC<GISMapProps> = ({
                     {selectedWork.flags.map((flag) => (
                       <div 
                         key={flag.id}
-                        className="bg-rose-500/10 border border-rose-500/30 p-2.5 rounded-lg text-xs space-y-1"
+                        className="bg-rose-50 border border-rose-200 p-2.5 rounded text-xs space-y-1"
                       >
-                        <div className="font-bold text-rose-300 flex items-center justify-between">
+                        <div className="font-bold text-rose-900 flex items-center justify-between">
                           <span>{flag.title}</span>
-                          <span className="text-[10px] font-mono bg-rose-500/20 px-1 rounded text-rose-400">
+                          <span className="text-[10px] font-mono bg-rose-200/80 px-1 rounded text-rose-800 font-bold">
                             {Math.round(flag.confidence * 100)}% Conf
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-300">{flag.description}</p>
+                        <p className="text-[11px] text-slate-600">{flag.description}</p>
                       </div>
                     ))}
                   </div>
@@ -463,28 +468,28 @@ export const GISMap: React.FC<GISMapProps> = ({
               </div>
 
               {/* Action Buttons to deep-dive */}
-              <div className="pt-2 border-t border-[#1E3A5F] grid grid-cols-2 gap-2">
+              <div className="pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
                 {selectedWork.satelliteScanId && (
                   <button
                     onClick={() => onNavigateTab('satellite')}
-                    className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-semibold transition-all"
+                    className="flex items-center justify-center gap-1.5 py-2 px-3 rounded bg-[#003366] hover:bg-[#002244] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
                   >
-                    <Satellite className="w-3.5 h-3.5" />
+                    <Satellite className="w-3.5 h-3.5 text-[#FF9933]" />
                     <span>Satellite Scan</span>
                   </button>
                 )}
                 <button
                   onClick={() => onNavigateTab('double_dipping')}
-                  className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/40 text-xs font-semibold transition-all"
+                  className="flex items-center justify-center gap-1.5 py-2 px-3 rounded bg-white hover:bg-slate-100 text-[#003366] border border-slate-300 text-xs font-bold transition-all cursor-pointer shadow-sm"
                 >
-                  <ShieldAlert className="w-3.5 h-3.5" />
+                  <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
                   <span>Collision Radar</span>
                 </button>
               </div>
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-400 space-y-3">
-              <MapPin className="w-12 h-12 text-slate-600 animate-bounce" />
+            <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500 space-y-3">
+              <MapPin className="w-12 h-12 text-slate-400 animate-bounce" />
               <p className="text-sm font-medium">Select any project marker on the map to inspect spatial collision, satellite analysis, and WIRI score.</p>
             </div>
           )}
