@@ -11,6 +11,7 @@ import { ProjectListView } from './components/ProjectListView';
 import { ProjectDetailView } from './components/ProjectDetailView';
 import { AuditReportView } from './components/AuditReportView';
 import { GISMap } from './components/GISMap';
+import { GeoMapView } from './components/GeoMapView';
 import { CitizenPortal } from './components/CitizenPortal';
 import { BeforeAfterSliderView } from './components/BeforeAfterSliderView';
 import { PublicTransparencyView } from './components/PublicTransparencyView';
@@ -103,6 +104,7 @@ export const App: React.FC = () => {
   const [selectedConstituency, setSelectedConstituency] = useState<Constituency>(CONSTITUENCIES[0]);
   const [selectedWork, setSelectedWork] = useState<WorkItem | null>(WORK_ITEMS[0]);
   const [isAllIndiaView, setIsAllIndiaView] = useState<boolean>(false);
+  const [mapEngine, setMapEngine] = useState<'google' | 'leaflet'>('google');
 
   const activeWorks = React.useMemo(() => {
     if (isAllIndiaView) return ALL_320_WORK_ITEMS;
@@ -348,13 +350,25 @@ export const App: React.FC = () => {
           />
         )}
 
-        {activeTab === 'gis_map' && (
+        {activeTab === 'gis_map' && mapEngine === 'google' && (
+          <GeoMapView
+            constituency={selectedConstituency}
+            works={activeWorks.length > 0 ? activeWorks : WORK_ITEMS}
+            selectedWork={selectedWork}
+            onSelectWork={(w) => setSelectedWork(w)}
+            onNavigateTab={setActiveTab}
+            onSwitchToLeaflet={() => setMapEngine('leaflet')}
+          />
+        )}
+
+        {activeTab === 'gis_map' && mapEngine === 'leaflet' && (
           <GISMap
             constituency={selectedConstituency}
             works={activeWorks.length > 0 ? activeWorks : WORK_ITEMS}
             selectedWork={selectedWork}
             onSelectWork={(w) => setSelectedWork(w)}
             onNavigateTab={setActiveTab}
+            onSwitchToGoogle={() => setMapEngine('google')}
           />
         )}
 

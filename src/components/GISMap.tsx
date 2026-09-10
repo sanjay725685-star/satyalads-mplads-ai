@@ -18,6 +18,7 @@ interface GISMapProps {
   selectedWork: WorkItem | null;
   onSelectWork: (work: WorkItem) => void;
   onNavigateTab: (tab: string) => void;
+  onSwitchToGoogle?: () => void;
 }
 
 export const GISMap: React.FC<GISMapProps> = ({
@@ -25,7 +26,8 @@ export const GISMap: React.FC<GISMapProps> = ({
   works,
   selectedWork,
   onSelectWork,
-  onNavigateTab
+  onNavigateTab,
+  onSwitchToGoogle
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -327,6 +329,16 @@ export const GISMap: React.FC<GISMapProps> = ({
             <MapPin className="w-3.5 h-3.5 text-purple-600" />
             <span>SC/ST Mandated Zones</span>
           </button>
+
+          {onSwitchToGoogle && (
+            <button
+              onClick={onSwitchToGoogle}
+              className="px-3 py-1.5 rounded border border-blue-300 bg-blue-50 hover:bg-blue-100 text-[#0B3D91] font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Satellite className="w-3.5 h-3.5 text-[#0B3D91]" />
+              <span>Google Maps Engine</span>
+            </button>
+          )}
         </div>
       </div>
 

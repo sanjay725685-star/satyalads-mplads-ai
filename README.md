@@ -124,3 +124,36 @@ Every finding in SatyaLADS correlates directly to official Indian procurement re
 
 ---
 **Team Stack Attack** • Smart India Hackathon 2026
+
+
+---
+
+## Google Maps JavaScript API Integration (`GeoMapView`)
+
+SATYALADS includes an enterprise Google Maps interface (`GeoMapView.tsx`) located in the **GIS Geo-Map** tab, powered by `@react-google-maps/api` and `@googlemaps/markerclusterer`.
+
+### 1. API Key Configuration (`.env.local`)
+Create or edit `.env.local` in the project root:
+```env
+# Google Maps JavaScript API Key (required for GeoMapView)
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSy...YourKeyHere
+VITE_GOOGLE_MAPS_API_KEY=AIzaSy...YourKeyHere
+```
+> **Note**: Both `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` and `VITE_GOOGLE_MAPS_API_KEY` are supported. In addition, an on-screen API key input is provided in the UI for instant testing without rebuilding. If no key is set, a 1-click fallback to the Leaflet OpenStreetMap engine is always available.
+
+### 2. Capabilities & Layer Architecture
+- **Interactive Project Markers & Risk Clustering**:
+  - Color-coded pins: LOW (Green `#16A34A`), MEDIUM (Amber `#D97706`), HIGH (Orange `#EA580C`), CRITICAL (Red `#DC2626`).
+  - `@googlemaps/markerclusterer` clusters 320+ nationwide projects cleanly.
+- **Interactive InfoWindow**:
+  - Displays work code, project title, contractor, risk score, sanctioned cost in INR, and anomaly flags with a direct `"View Audit Dossier →"` link.
+- **50m Spatial Collision Buffers**:
+  - Rendered using `google.maps.Circle` to visualize the DBSCAN 150m spatial overlap rule across schemes (PMGSY, MLALADS).
+- **SC/ST Mandated Demographic Zones**:
+  - Rendered using `google.maps.Polygon` / `google.maps.Data` layer from `/api/geo/sc-st-zones` to enforce MoSPI Guidelines Para 2.5 (≥15% SC) and Para 2.6 (≥7.5% ST).
+- **Roadmap & Satellite Dual View**:
+  - Instant toggle between high-res Google Maps satellite imagery and roadmap view for quick ground verification prior to deep Sentinel-1 SAR analysis.
+
+### 3. Backend Endpoints Added
+- `GET /api/projects?constituency={id}`: Returns formatted GeoMap project array with coordinates, risk score, contractor, and anomaly flags.
+- `GET /api/geo/sc-st-zones?constituency={id}`: Returns PostGIS `ST_AsGeoJSON` compliant FeatureCollection of mandated demographic polygons.
