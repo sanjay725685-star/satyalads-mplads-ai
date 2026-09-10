@@ -350,25 +350,13 @@ export const App: React.FC = () => {
           />
         )}
 
-        {activeTab === 'gis_map' && mapEngine === 'google' && (
-          <GeoMapView
-            constituency={selectedConstituency}
-            works={activeWorks.length > 0 ? activeWorks : WORK_ITEMS}
-            selectedWork={selectedWork}
-            onSelectWork={(w) => setSelectedWork(w)}
-            onNavigateTab={setActiveTab}
-            onSwitchToLeaflet={() => setMapEngine('leaflet')}
-          />
-        )}
-
-        {activeTab === 'gis_map' && mapEngine === 'leaflet' && (
+        {activeTab === 'gis_map' && (
           <GISMap
             constituency={selectedConstituency}
             works={activeWorks.length > 0 ? activeWorks : WORK_ITEMS}
             selectedWork={selectedWork}
             onSelectWork={(w) => setSelectedWork(w)}
             onNavigateTab={setActiveTab}
-            onSwitchToGoogle={() => setMapEngine('google')}
           />
         )}
 
